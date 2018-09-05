@@ -1,5 +1,3 @@
-
-
 // http://www.emanueleferonato.com/2011/08/05/slicing-splitting-and-cutting-objects-with-box2d-part-4-using-real-graphics/
 
 const EPSILON = 0.1;
@@ -31,59 +29,44 @@ function pointInLine (point, a, b) {
 cc.Class({
     extends: cc.Component,
 
-   
+    onEnable: function () {
+        this.debugDrawFlags = cc.director.getPhysicsManager().debugDrawFlags;
+        cc.director.getPhysicsManager().debugDrawFlags = 
+            cc.PhysicsManager.DrawBits.e_jointBit |
+            cc.PhysicsManager.DrawBits.e_shapeBit
+            ;
+    },
+
+    onDisable: function () {
+        cc.director.getPhysicsManager().debugDrawFlags = this.debugDrawFlags;
+    },
+
     // use this for initialization
     onLoad: function () {
-        this.checkpointInit();
-      this.touchOpen();
+        var canvas = cc.find('Canvas');
+        canvas.on(cc.Node.EventType.TOUCH_START, this.onTouchStart, this);
+        canvas.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
+        canvas.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
 
         this.ctx = this.getComponent(cc.Graphics);
     },
 
-    touchOpen: function () {
-        //var canvas = cc.find('Canvas');
-        this.node.on("touchstart", this.onTouchStart, this);
-        this.node.on('touchmove', this.onTouchMove, this);
-        this.node.on('touchend', this.onTouchEnd, this);
-    },
-
-
-    checkpointInit: function () {
-        let self = this;
-        let pathOfPrefab = "Prefab/checkpoint" + cc.dataMgr.currentCheckPoint;
-        cc.loader.loadRes(pathOfPrefab, function (err, prefab) {
-            self.checkPointLoadSuccess(prefab, cc.v2(0, 0));
-        });
-
-    },
-
-    checkPointLoadSuccess: function (prefab, position) {
-        //生成关卡的NODE 将其加入gameLayer
-        let currentNode = cc.instantiate(prefab);
-
-        this.node.addChild(currentNode);
-        currentNode.zIndex = 1;
-        currentNode.setPosition(position);
-
-    },
-
-
     onTouchStart: function (event) {
         this.touching = true;
         this.r1 = this.r2 = this.results = null;
-        this.touchStartPoint = this.touchPoint = cc.v2( event.touch.getLocation() ).add(cc.v2(-360,-640));
+        this.touchStartPoint = this.touchPoint = cc.v2( event.touch.getLocation() );
     },
 
     onTouchMove: function (event) {
-        this.touchPoint = cc.v2( event.touch.getLocation() ).add(cc.v2(-360,-640));
+        this.touchPoint = cc.v2( event.touch.getLocation() );
     },
 
     onTouchEnd: function (event) {
-        this.touchPoint = cc.v2( event.touch.getLocation() ).add(cc.v2(-360,-640));
+        this.touchPoint = cc.v2( event.touch.getLocation() );
         this.recalcResults();
         this.touching = false;
 
-        let point = cc.v2( event.touch.getLocation() ).add(cc.v2(-360,-640));
+        let point = cc.v2( event.touch.getLocation() );
         if ( equals(this.touchStartPoint.sub(point).magSqr(), 0) ) return;
 
         // recalculate fraction, make fraction from one direction
@@ -328,7 +311,3 @@ cc.Class({
         this.recalcResults();
     },
 });
-
-
-
-
