@@ -169,10 +169,14 @@ cc.Class({
                 }
             }
 
+
             if (splitResults.length <= 0) {
                 continue;
             }
 
+            // console.log("splitResults");
+            // console.log(splitResults);
+            // return;
             let collider = pair[0].collider;
 
             let maxPointsResult;
@@ -194,6 +198,11 @@ cc.Class({
                 continue;
             }
 
+            
+            // console.log("maxPointsResult");
+            // console.log(maxPointsResult);
+            // return;
+
             // keep max length points to origin collider
             collider.points = maxPointsResult;
             collider.apply();
@@ -211,7 +220,7 @@ cc.Class({
                 node.position = body.getWorldPosition();
                 node.rotation = body.getWorldRotation();
                 node.parent = cc.director.getScene();
-
+               // node.parent = collider.node.parent;
                 node.addComponent(cc.RigidBody);
 
                 let newCollider = node.addComponent(cc.PhysicsPolygonCollider);
