@@ -222,7 +222,7 @@ cc.Class({
                 node.parent = cc.director.getScene();
                // node.parent = collider.node.parent;
                 node.addComponent(cc.RigidBody);
-
+                
                 let newCollider = node.addComponent(cc.PhysicsPolygonCollider);
                 newCollider.points = splitResult;
                 newCollider.apply();

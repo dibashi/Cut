@@ -7,13 +7,104 @@ export default class DataMgr extends cc.Component {
 
     //当前玩家选择的关卡 游戏中的关卡
     currentCheckPoint = "-1";
+
+    // OBJECT_COLOR = {
+    //     ELEMENT_NODE: 1,
+    //     ATTRIBUTE_NODE: 2,
+    //     TEXT_NODE: 3,
+    //     CDATA_SECTION_NODE: 4,
+    //     ENTITY_REFERENCE_NODE: 5,
+    //     ENTITY_NODE: 6,
+    //     PROCESSING_INSTRUCTION_NODE: 7,
+    //     COMMENT_NODE: 8,
+    //     DOCUMENT_NODE: 9,
+    //     DOCUMENT_TYPE_NODE: 10,
+    //     DOCUMENT_FRAGEMENT_NODE: 11,
+    //     NOTATION_NODE: 12
+    // }
     initData() {
         console.log("--- initData ---");
         let mc = cc.sys.localStorage.getItem("maxCheckpoint");
         if (!mc) {
             cc.sys.localStorage.setItem("maxCheckpoint", "001");
         }
-    }
+    };
+
+
+    // getRigidBodyColorByTag(tag) {
+
+    // };
+
+    // GlobalFun: [function (t, e, a) {
+    //     "use strict";
+    //     cc._RF.push(e, "76ab8RpFGlGcLg0xtMlBIOt", "GlobalFun"),
+    //     Object.defineProperty(a, "__esModule", {
+    //         value: !0
+    //     });
+    //     var o = t("../enum/GameEnum"),
+    //         n = function () {
+    //             function t() {}
+    //             return t.getRigidBodyColorByTag = function (t) {
+    //                 return t == o.colliderTag.cut || t == o.colliderTag.neglectBlue ? cc.color(110, 184, 255, 255) : t == o.colliderTag.neglect ? cc.color(40, 40, 40, 255) : t == o.colliderTag.star ? cc.color(110, 184, 255, 255) : t == o.colliderTag.jointPoint ? cc.color(255, 255, 255, 255) : t == o.colliderTag.neglectYellow || t == o.colliderTag.cutYellow ? cc.color(255, 214, 94, 255) : t == o.colliderTag.neglectblack ? cc.color(0, 0, 0, 255) : t == o.colliderTag.cuttGreen ? cc.color(186, 255, 203, 255) : t == o.colliderTag.nelectRed || t == o.colliderTag.cutRed ? cc.color(255, 107, 107, 255) : cc.color(110, 184, 255, 255)
+    //             },
+    //             t.getAngle = function (t, e) {
+    //                 var a = e.x - t.x,
+    //                     o = (t.y - e.y) / a,
+    //                     n = 180 / 3.1415926 * Math.atan(o);
+    //                 return e.x < t.x && (n -= 180),
+    //                 n
+    //             },
+    //             t.getDistance = function (t, e) {
+    //                 return Math.sqrt(Math.pow(t.x - e.x, 2) + Math.pow(t.y - e.y, 2))
+    //             },
+    //             t
+    //         }();
+    //     a.GlobalFun = n,
+    //     cc._RF.pop()
+    // },
+
+
+    // GameEnum: [function (t, e, a) {
+    //     "use strict";
+    //     var o, n, i, r;
+    //     cc._RF.push(e, "7b2c9A73OZGtLH3MpPoiR63", "GameEnum"),
+    //     Object.defineProperty(a, "__esModule", {
+    //         value: !0
+    //     }),
+    //     (o = a.oldObjectRules || (a.oldObjectRules = {}))[o.maxY = 1] = "maxY",
+    //     o[o.miniY = 2] = "miniY",
+    //     o[o.angleNum = 3] = "angleNum",
+    //     (n = a.colliderTag || (a.colliderTag = {}))[n.AntiGravity = 100] = "AntiGravity",
+    //     n[n.cutYellow = 10] = "cutYellow",
+    //     n[n.neglectYellow = 500] = "neglectYellow",
+    //     n[n.nelectRed = 530] = "nelectRed",
+    //     n[n.cuttGreen = 1] = "cuttGreen",
+    //     n[n.cutRed = 2] = "cutRed",
+    //     n[n.cut = 0] = "cut",
+    //     n[n.starGreen = 101] = "starGreen",
+    //     n[n.yellowStar = 501] = "yellowStar",
+    //     n[n.starRed = 531] = "starRed",
+    //     n[n.star = 8] = "star",
+    //     n[n.jointPoint = 1e3] = "jointPoint",
+    //     n[n.neglect = 200] = "neglect",
+    //     n[n.botton = 1e4] = "botton",
+    //     n[n.moveStar = 9] = "moveStar",
+    //     n[n.neglectblack = 510] = "neglectblack",
+    //     n[n.blackstar = 511] = "blackstar",
+    //     n[n.neglectBlue = 520] = "neglectBlue",
+    //     (i = a.passConditionType || (a.passConditionType = {}))[i.star = 1] = "star",
+    //     i[i.dropOut = 2] = "dropOut",
+    //     (r = a.btnTag || (a.btnTag = {})).demo = "0",
+    //     r.skip = "1",
+    //     r.reStart = "2",
+    //     r.back = "3",
+    //     r.next = "4",
+    //     r.play = "5",
+    //     r.seting = "6",
+    //     cc._RF.pop()
+    // },
+
+
     //玩家最高的关卡 此关卡不过的话 后续的关卡 都不可点击，前面的关卡或许有的没有完成，因为有跳跃关卡的道具
 
 
