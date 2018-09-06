@@ -270,9 +270,25 @@ cc.Class({
 
         let splitResult, indiceIndex1 = index1, indiceIndex2 = index2;
 
-        splitResult = points.map((p, i) => {
-            return i;
-        });
+        if (splitResults.length > 0) {
+            for (let i = 0; i < splitResults.length; i++) {
+                let indices = splitResults[i];
+                indiceIndex1 = indices.indexOf(index1);
+                indiceIndex2 = indices.indexOf(index2);
+
+                if (indiceIndex1 !== -1 && indiceIndex2 !== -1) {
+                    splitResult = splitResults.splice(i, 1)[0];
+                    break;
+                }
+            }
+        }
+
+        if (!splitResult) {
+            splitResult = points.map((p, i) => {
+                return i;
+            });
+        }
+
 
         for (let i = indiceIndex1 + 1; i !== (indiceIndex2 + 1); i++) {
             if (i >= splitResult.length) {
@@ -280,8 +296,8 @@ cc.Class({
             }
 
             let p = splitResult[i];
-            //p = typeof p === 'number' ? points[p] : p;
-            p = points[p];
+            p = typeof p === 'number' ? points[p] : p;
+           // p = points[p];
 
             if (p.sub(p1).magSqr() < POINT_SQR_EPSILON || p.sub(p2).magSqr() < POINT_SQR_EPSILON) {
                 continue;
@@ -296,7 +312,7 @@ cc.Class({
             }
 
             let p = splitResult[i];
-            p =points[p];
+            p = typeof p === 'number' ? points[p] : p;
 
             if (p.sub(p1).magSqr() < POINT_SQR_EPSILON || p.sub(p2).magSqr() < POINT_SQR_EPSILON) {
                 continue;
