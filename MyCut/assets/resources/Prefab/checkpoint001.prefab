@@ -225,7 +225,7 @@
     "_fixedRotation": false,
     "enabledContactListener": false,
     "bullet": false,
-    "_id": "73kLQpCRBE66wd4XLNbRV1"
+    "_id": "14BI/CJmhB755y1dxERWnd"
   },
   {
     "__type__": "cc.PhysicsPolygonCollider",
@@ -273,7 +273,7 @@
         "y": -498
       }
     ],
-    "_id": "65/88AOcNIRp2PiVhLI9hE"
+    "_id": "53Yz7uVsZDZJ3dldhN54oQ"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -384,7 +384,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "a9B6Il2BBIbJ7dZr1H6ykC"
+    "_id": "f9wdHKwY9BNKe80Bq0adFd"
   },
   {
     "__type__": "cc.PrefabInfo",
