@@ -31,6 +31,15 @@ function pointInLine(point, a, b) {
 cc.Class({
     extends: cc.Component,
 
+   
+    properties: {
+        
+        checkpoints:{
+            default:[],
+            type:cc.Prefab,
+        },
+    
+    },
 
     // use this for initialization
     onLoad: function () {
@@ -49,21 +58,28 @@ cc.Class({
 
 
     checkpointInit: function () {
-        let self = this;
-        let pathOfPrefab = "Prefab/checkpoint" + cc.dataMgr.currentCheckPoint;
-        cc.loader.loadRes(pathOfPrefab, function (err, prefab) {
-            self.checkPointLoadSuccess(prefab, cc.v2(360, 640));
-        });
+        let checkpointIndex = parseInt(cc.dataMgr.currentCheckPoint) - 1;
+
+        this.currentNode = cc.instantiate(this.checkpoints[checkpointIndex]);
+        this.node.addChild(this.currentNode);
+        console.log(this.currentNode);
+        this.currentNode.zIndex = 1;
+        this.currentNode.setPosition(cc.v2(0, 0));
+
+        // let pathOfPrefab = "Prefab/checkpoint" + cc.dataMgr.currentCheckPoint;
+        // cc.loader.loadRes(pathOfPrefab, function (err, prefab) {
+        //     self.checkPointLoadSuccess(prefab, cc.v2(360, 640));
+        // });
 
     },
 
-    checkPointLoadSuccess: function (prefab, position) {
-        //生成关卡的NODE 将其加入gameLayer
-        this.currentNode = cc.instantiate(prefab);
+    // checkPointLoadSuccess: function (prefab, position) {
+    //     //生成关卡的NODE 将其加入gameLayer
+    //     this.currentNode = cc.instantiate(prefab);
 
-        this.node.addChild(this.currentNode);
-        this.currentNode.zIndex = 1;
-        this.currentNode.setPosition(position);
+    //     this.node.addChild(this.currentNode);
+    //     this.currentNode.zIndex = 1;
+    //     this.currentNode.setPosition(position);
 
 
 
@@ -85,7 +101,7 @@ cc.Class({
         //     this.ctx.fill();
 
         // }
-    },
+   // },
 
 
     onTouchStart: function (event) {
@@ -205,7 +221,8 @@ cc.Class({
 
             // keep max length points to origin collider
             collider.points = maxPointsResult;
-            collider.node.getComponent("draw").draw();
+           collider.node.getComponent("draw").draw();
+           //collider.node.getComponent("draw").maskDraw();
             collider.apply();
 
             let body = collider.body;

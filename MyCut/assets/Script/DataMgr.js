@@ -4,7 +4,14 @@ const {
 } = cc._decorator;
 @ccclass
 export default class DataMgr extends cc.Component {
-
+    Mapping_Mode = {
+        COLOR: 0,
+        TEXTURE: 1,
+       
+    };
+    //着色模式
+    TEXTURE_OR_COLOR = this.Mapping_Mode.TEXTURE;//0
+    
     //当前玩家选择的关卡 游戏中的关卡
     currentCheckPoint = "-1";
 

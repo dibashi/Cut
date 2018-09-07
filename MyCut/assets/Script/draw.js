@@ -27,6 +27,8 @@ cc.Class({
         //         this._bar = value;
         //     }
         // },
+
+
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -38,6 +40,7 @@ cc.Class({
 
     start() {
         this.draw();
+        //this.maskDraw();
     },
 
     createGraphics() {
@@ -46,26 +49,50 @@ cc.Class({
     },
 
     draw() {
-        var t = this.node.getComponent(cc.PhysicsPolygonCollider);
-        // console.log("~~~~");
-        // console.log(t.points);
-        this.ctx.fillColor = cc.dataMgr.getRigidBodyColorByTag(t.tag);
-      //  this.ctx.fillColor = cc.color(110, 184, 255, 255);
-        this.drawPolygon(t.points);
-        // if (t) {
-        //     this.drawPolygon(t.points);
-        // }
-        // if (t = this.node.getComponent("cc.PhysicsCircleCollider")) {
-        //     if (t.tag == n.colliderTag.jointPoint) t.node.zIndex = 10;
-        //     else if (t.tag == n.colliderTag.neglectBlue) return this.ctx.lineWidth = 4,
-        //         this.ctx.strokeColor = cc.color(40, 40, 40, 255),
-        //         this.ctx.fillColor = o.GlobalFun.getRigidBodyColorByTag(t.tag),
-        //         void this.drawCircle(t.radius, cc.v2(0, 0), !0);
-        //     this.ctx.fillColor = o.GlobalFun.getRigidBodyColorByTag(t.tag),
-        //         this.drawCircle(t.radius, cc.v2(0, 0))
-        // }
+        if (cc.dataMgr.TEXTURE_OR_COLOR == cc.dataMgr.Mapping_Mode.TEXTURE) {
+            this.maskDraw()
+
+        } else if (cc.dataMgr.TEXTURE_OR_COLOR == cc.dataMgr.Mapping_Mode.COLOR) {
+            var t = this.node.getComponent(cc.PhysicsPolygonCollider);
+            // console.log("~~~~");
+            // console.log(t.points);
+            this.ctx.fillColor = cc.dataMgr.getRigidBodyColorByTag(t.tag);
+            //  this.ctx.fillColor = cc.color(110, 184, 255, 255);
+            this.drawPolygon(t.points);
+            // if (t) {
+            //     this.drawPolygon(t.points);
+            // }
+            // if (t = this.node.getComponent("cc.PhysicsCircleCollider")) {
+            //     if (t.tag == n.colliderTag.jointPoint) t.node.zIndex = 10;
+            //     else if (t.tag == n.colliderTag.neglectBlue) return this.ctx.lineWidth = 4,
+            //         this.ctx.strokeColor = cc.color(40, 40, 40, 255),
+            //         this.ctx.fillColor = o.GlobalFun.getRigidBodyColorByTag(t.tag),
+            //         void this.drawCircle(t.radius, cc.v2(0, 0), !0);
+            //     this.ctx.fillColor = o.GlobalFun.getRigidBodyColorByTag(t.tag),
+            //         this.drawCircle(t.radius, cc.v2(0, 0))
+            // }
+
+        }
 
     },
+
+    maskDraw() {
+        console.log("maskdraw!!!");
+        console.log(this.node.getComponent(cc.Mask));
+        this.node.getComponent(cc.Mask)._updateGraphics = function () {
+            console.log("_updateGraphics!!!");
+            let graphics = this._graphics;
+            graphics.clear(false);
+            var t = this.node.getComponent(cc.PhysicsPolygonCollider);
+            graphics.moveTo(points[0].x, points[0].y);
+            for (var e = 1; e < points.length; e++) {
+                graphics.lineTo(points[e].x, points[e].y);
+            }
+            graphics.fill();
+        };
+    },
+
+
 
     // outlinePolygon() {
     //     this.ctx.clear();
@@ -80,7 +107,7 @@ cc.Class({
 
     drawPolygon(points) {
         this.ctx.clear();
-        
+
         this.ctx.moveTo(points[0].x, points[0].y);
         for (var e = 1; e < points.length; e++) {
             this.ctx.lineTo(points[e].x, points[e].y);
