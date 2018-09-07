@@ -8,6 +8,18 @@
   },
   "collision-matrix": [
     [
+      true,
+      true,
+      true
+    ],
+    [
+      true,
+      false,
+      true
+    ],
+    [
+      true,
+      true,
       true
     ]
   ],
@@ -17,7 +29,9 @@
   "fit-height": false,
   "fit-width": true,
   "group-list": [
-    "default"
+    "floor",
+    "target",
+    "cutSquare"
   ],
   "simulator-orientation": false,
   "simulator-resolution": {
