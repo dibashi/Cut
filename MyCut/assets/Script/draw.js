@@ -49,7 +49,8 @@ cc.Class({
         var t = this.node.getComponent(cc.PhysicsPolygonCollider);
         // console.log("~~~~");
         // console.log(t.points);
-        this.ctx.fillColor = cc.color(110, 184, 255, 255);
+        this.ctx.fillColor = cc.dataMgr.getRigidBodyColorByTag(t.tag);
+      //  this.ctx.fillColor = cc.color(110, 184, 255, 255);
         this.drawPolygon(t.points);
         // if (t) {
         //     this.drawPolygon(t.points);

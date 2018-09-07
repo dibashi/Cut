@@ -1536,7 +1536,8 @@ require = function i(r, c, s) {
                         this.ctx.moveTo(this.touchStartPoint.x, this.touchStartPoint.y),
                         this.ctx.lineTo(this.touchPoint.x, this.touchPoint.y),
                         this.ctx.stroke();
-                        for (var t = cc.director.getPhysicsManager(), e = t.rayCast(this.touchStartPoint, this.touchPoint, cc.RayCastType.All), a = t.rayCast(this.touchPoint, this.touchStartPoint, cc.RayCastType.All), o = e.concat(a), n = 0, i = e;
+                        for (var t = cc.director.getPhysicsManager(), e = t.rayCast(this.touchStartPoint, this.touchPoint, cc.RayCastType.All), 
+                        a = t.rayCast(this.touchPoint, this.touchStartPoint, cc.RayCastType.All), o = e.concat(a), n = 0, i = e;
                         n < i.length;
                         n++) {
                             if (i[n].collider.tag == b.colliderTag.jointPoint) return this.r1 = null,

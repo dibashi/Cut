@@ -352,6 +352,19 @@ cc.Class({
 
         let r1 = manager.rayCast(this.touchStartPoint, point, cc.RayCastType.All);
         let r2 = manager.rayCast(point, this.touchStartPoint, cc.RayCastType.All);
+        for(let i = 0; i<r1.length;i++) {
+            //约定大于100的不可切
+            if(r1[i].collider.tag>100) {
+                r1.splice(i,1);
+            }
+        }
+        for(let i = 0; i<r2.length;i++) {
+            if(r2[i].collider.tag>100) {
+                r2.splice(i,1);
+            }
+        }
+
+
         let results = r1.concat(r2);
 
         for (let i = 0; i < results.length; i++) {
