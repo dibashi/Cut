@@ -205,27 +205,39 @@ cc.Class({
 
             // keep max length points to origin collider
             collider.points = maxPointsResult;
+            collider.node.getComponent("draw").draw();
             collider.apply();
 
             let body = collider.body;
-
+            
+            
             for (let j = 0; j < splitResults.length; j++) {
                 let splitResult = splitResults[j];
 
                 if (splitResult.length < 3) continue;
                 if (splitResult == maxPointsResult) continue;
 
+                let tempParent = body.node.parent;
                 // create new body
                 let node = new cc.Node();
-                node.position = body.getWorldPosition();
+                node.group = body.node.group;
+                node.position = tempParent.convertToNodeSpaceAR(body.getWorldPosition());
                 node.rotation = body.getWorldRotation();
-                node.parent = cc.director.getScene();
-               // node.parent = collider.node.parent;
-                node.addComponent(cc.RigidBody);
-                
-                let newCollider = node.addComponent(cc.PhysicsPolygonCollider);
-                newCollider.points = splitResult;
-                newCollider.apply();
+                //node.parent = cc.director.getScene();
+                node.parent = tempParent;
+                node.addComponent("draw");
+                let nodeBody = node.addComponent(cc.RigidBody);
+                nodeBody.gravityScale = body.gravityScale;
+                nodeBody.linearVelocity = body.linearVelocity;
+                nodeBody.linearDamping = body.linearDamping;
+
+                let nodeCol = node.addComponent(cc.PhysicsPolygonCollider);
+                nodeCol.points = splitResult;
+                nodeCol.tag = collider.tag;
+                nodeCol.density = collider.density;
+                nodeCol.friction = collider.friction;
+
+                nodeCol.apply();
             }
 
         }
