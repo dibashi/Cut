@@ -109,7 +109,7 @@ cc.Class({
         this.r1 = this.r2 = this.results = null;
         this.touchStartPoint = this.touchPoint = cc.v2(event.touch.getLocation());
 
-        console.log(this.touchStartPoint);
+        //console.log(this.touchStartPoint);
     },
 
     onTouchMove: function (event) {
