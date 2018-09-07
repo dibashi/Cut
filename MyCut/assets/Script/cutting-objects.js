@@ -1,5 +1,3 @@
-
-
 // http://www.emanueleferonato.com/2011/08/05/slicing-splitting-and-cutting-objects-with-box2d-part-4-using-real-graphics/
 
 const EPSILON = 0.1;
@@ -15,98 +13,61 @@ function compare(a, b) {
     return 0;
 }
 
-function equals(a, b, epsilon) {
+function equals (a, b, epsilon) {
     epsilon = epsilon === undefined ? EPSILON : epsilon;
-    return Math.abs(a - b) < epsilon;
+    return Math.abs(a-b) < epsilon;
 }
 
-function equalsVec2(a, b, epsilon) {
+function equalsVec2(a,b, epsilon) {
     return equals(a.x, b.x, epsilon) && equals(a.y, b.y, epsilon);
 }
 
-function pointInLine(point, a, b) {
+function pointInLine (point, a, b) {
     return cc.Intersection.pointLineDistance(point, a, b, true) < 1;
 }
 
 cc.Class({
     extends: cc.Component,
 
+    onEnable: function () {
+        this.debugDrawFlags = cc.director.getPhysicsManager().debugDrawFlags;
+        cc.director.getPhysicsManager().debugDrawFlags = 
+            cc.PhysicsManager.DrawBits.e_jointBit |
+            cc.PhysicsManager.DrawBits.e_shapeBit
+            ;
+    },
+
+    onDisable: function () {
+        cc.director.getPhysicsManager().debugDrawFlags = this.debugDrawFlags;
+    },
 
     // use this for initialization
     onLoad: function () {
-        this.checkpointInit();
-        this.touchOpen();
+        var canvas = cc.find('Canvas');
+        canvas.on(cc.Node.EventType.TOUCH_START, this.onTouchStart, this);
+        canvas.on(cc.Node.EventType.TOUCH_END, this.onTouchEnd, this);
+        canvas.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMove, this);
 
         this.ctx = this.getComponent(cc.Graphics);
     },
 
-    touchOpen: function () {
-        //var canvas = cc.find('Canvas');
-        this.node.on("touchstart", this.onTouchStart, this);
-        this.node.on('touchmove', this.onTouchMove, this);
-        this.node.on('touchend', this.onTouchEnd, this);
-    },
-
-
-    checkpointInit: function () {
-        let self = this;
-        let pathOfPrefab = "Prefab/checkpoint" + cc.dataMgr.currentCheckPoint;
-        cc.loader.loadRes(pathOfPrefab, function (err, prefab) {
-            self.checkPointLoadSuccess(prefab, cc.v2(360, 640));
-        });
-
-    },
-
-    checkPointLoadSuccess: function (prefab, position) {
-        //生成关卡的NODE 将其加入gameLayer
-        this.currentNode = cc.instantiate(prefab);
-
-        this.node.addChild(this.currentNode);
-        this.currentNode.zIndex = 1;
-        this.currentNode.setPosition(position);
-
-
-
-
-        // let cuttableNodes = this.currentNode.getChildByName("cuttable");
-        // for (let i = 0; i < cuttableNodes.children.length; i++) {
-        //     let ploygonPoints = cuttableNodes.children[i].getComponent(cc.PhysicsPolygonCollider).points;
-        //     let worldX = cuttableNodes.children[i].x;
-        //     let worldY = cuttableNodes.children[i].y;
-        //     console.log("ploygonPoints");
-        //     console.log(ploygonPoints);
-        //     this.ctx.clear();
-        //     this.ctx.fillColor = cc.Color.GREEN;
-        //     this.ctx.moveTo(ploygonPoints[0].x + worldX, ploygonPoints[0].y + worldY);
-        //     for (let i = 1; i < ploygonPoints.length; i++) {
-        //         this.ctx.lineTo(ploygonPoints[i].x + worldX, ploygonPoints[i].y +worldY);
-        //     }
-
-        //     this.ctx.fill();
-
-        // }
-    },
-
-
     onTouchStart: function (event) {
         this.touching = true;
         this.r1 = this.r2 = this.results = null;
-        this.touchStartPoint = this.touchPoint = cc.v2(event.touch.getLocation());
-
-        console.log(this.touchStartPoint);
+        this.touchStartPoint = this.touchPoint = cc.v2( event.touch.getLocation() );
     },
 
     onTouchMove: function (event) {
-        this.touchPoint = cc.v2(event.touch.getLocation());
+        this.touchPoint = cc.v2( event.touch.getLocation() );
     },
 
     onTouchEnd: function (event) {
-        this.touchPoint = cc.v2(event.touch.getLocation());
+        this.touchPoint = cc.v2( event.touch.getLocation() );
         this.recalcResults();
         this.touching = false;
 
-        let point = cc.v2(event.touch.getLocation());
-        if (equals(this.touchStartPoint.sub(point).magSqr(), 0)) return;
+        let point = cc.v2( event.touch.getLocation() );
+        if ( equals(this.touchStartPoint.sub(point).magSqr(), 0) ) return;
 
         // recalculate fraction, make fraction from one direction
         this.r2.forEach(r => {
@@ -116,7 +77,7 @@ cc.Class({
         let results = this.results;
 
         let pairs = [];
-
+        
         for (let i = 0; i < results.length; i++) {
             let find = false;
             let result = results[i];
@@ -135,7 +96,7 @@ cc.Class({
                     if (r) {
                         pair.splice(pair.indexOf(r), 1);
                     }
-                    else {
+                    else { 
                         pair.push(result);
                     }
 
@@ -160,23 +121,19 @@ cc.Class({
             let splitResults = [];
 
             // first calculate all results, not split collider right now
-            for (let j = 0; j < (pair.length - 1); j += 2) {
+            for (let j = 0; j < (pair.length - 1); j +=2) {
                 let r1 = pair[j];
-                let r2 = pair[j + 1];
+                let r2 = pair[j+1];
 
                 if (r1 && r2) {
                     this.split(r1.collider, r1.point, r2.point, splitResults);
                 }
             }
 
-
             if (splitResults.length <= 0) {
                 continue;
             }
 
-            // console.log("splitResults");
-            // console.log(splitResults);
-            // return;
             let collider = pair[0].collider;
 
             let maxPointsResult;
@@ -198,51 +155,32 @@ cc.Class({
                 continue;
             }
 
-            
-            // console.log("maxPointsResult");
-            // console.log(maxPointsResult);
-            // return;
-
             // keep max length points to origin collider
             collider.points = maxPointsResult;
-            collider.node.getComponent("draw").draw();
             collider.apply();
 
             let body = collider.body;
-            
-            
+
             for (let j = 0; j < splitResults.length; j++) {
                 let splitResult = splitResults[j];
 
                 if (splitResult.length < 3) continue;
                 if (splitResult == maxPointsResult) continue;
 
-                let tempParent = body.node.parent;
                 // create new body
                 let node = new cc.Node();
-                node.group = body.node.group;
-                node.position = tempParent.convertToNodeSpaceAR(body.getWorldPosition());
+                node.position = body.getWorldPosition();
                 node.rotation = body.getWorldRotation();
-                //node.parent = cc.director.getScene();
-                node.parent = tempParent;
-                node.addComponent("draw");
-                let nodeBody = node.addComponent(cc.RigidBody);
-                nodeBody.gravityScale = body.gravityScale;
-                nodeBody.linearVelocity = body.linearVelocity;
-                nodeBody.linearDamping = body.linearDamping;
-
-                let nodeCol = node.addComponent(cc.PhysicsPolygonCollider);
-                nodeCol.points = splitResult;
-                nodeCol.tag = collider.tag;
-                nodeCol.density = collider.density;
-                nodeCol.friction = collider.friction;
-
-                nodeCol.apply();
+                node.parent = cc.director.getScene();
+                
+                node.addComponent(cc.RigidBody);
+                
+                let newCollider = node.addComponent(cc.PhysicsPolygonCollider);
+                newCollider.points = splitResult;
+                newCollider.apply();
             }
-
+            
         }
-
-        this.ctx.clear();
     },
 
     split: function (collider, p1, p2, splitResults) {
@@ -261,8 +199,8 @@ cc.Class({
         let index1, index2;
         for (let i = 0; i < points.length; i++) {
             let pp1 = points[i];
-            let pp2 = i === points.length - 1 ? points[0] : points[i + 1];
-
+            let pp2 = i === points.length - 1 ? points[0] : points[i+1];
+          
             if (index1 === undefined && pointInLine(p1, pp1, pp2)) {
                 index1 = i;
             }
@@ -275,13 +213,14 @@ cc.Class({
             }
         }
 
+        // console.log(index1 + ' : ' + index2);
+
         if (index1 === undefined || index2 === undefined) {
             debugger
             return;
         }
 
         let splitResult, indiceIndex1 = index1, indiceIndex2 = index2;
-
         if (splitResults.length > 0) {
             for (let i = 0; i < splitResults.length; i++) {
                 let indices = splitResults[i];
@@ -301,16 +240,14 @@ cc.Class({
             });
         }
 
-
-        for (let i = indiceIndex1 + 1; i !== (indiceIndex2 + 1); i++) {
+        for (let i = indiceIndex1 + 1; i !== (indiceIndex2+1); i++) {
             if (i >= splitResult.length) {
                 i = 0;
             }
 
             let p = splitResult[i];
             p = typeof p === 'number' ? points[p] : p;
-           // p = points[p];
-
+            
             if (p.sub(p1).magSqr() < POINT_SQR_EPSILON || p.sub(p2).magSqr() < POINT_SQR_EPSILON) {
                 continue;
             }
@@ -318,14 +255,14 @@ cc.Class({
             newSplitResult2.push(splitResult[i]);
         }
 
-        for (let i = indiceIndex2 + 1; i !== indiceIndex1 + 1; i++) {
+        for (let i = indiceIndex2 + 1; i !== indiceIndex1+1; i++) {
             if (i >= splitResult.length) {
                 i = 0;
             }
 
             let p = splitResult[i];
             p = typeof p === 'number' ? points[p] : p;
-
+            
             if (p.sub(p1).magSqr() < POINT_SQR_EPSILON || p.sub(p2).magSqr() < POINT_SQR_EPSILON) {
                 continue;
             }
@@ -344,33 +281,23 @@ cc.Class({
         let point = this.touchPoint;
 
         this.ctx.clear();
-        this.ctx.moveTo(this.touchStartPoint.x - 360, this.touchStartPoint.y - 640);
-        this.ctx.lineTo(point.x - 360, point.y - 640);
+        this.ctx.moveTo(this.touchStartPoint.x, this.touchStartPoint.y);
+        this.ctx.lineTo(point.x, point.y);
         this.ctx.stroke();
 
         let manager = cc.director.getPhysicsManager();
 
+        // manager.rayCast() method calls this function only when it sees that a given line gets into the body - it doesnt see when the line gets out of it.
+        // I must have 2 intersection points with a body so that it can be sliced, thats why I use manager.rayCast() again, but this time from B to A - that way the point, at which BA enters the body is the point at which AB leaves it!
         let r1 = manager.rayCast(this.touchStartPoint, point, cc.RayCastType.All);
         let r2 = manager.rayCast(point, this.touchStartPoint, cc.RayCastType.All);
-        for(let i = 0; i<r1.length;i++) {
-            //约定大于100的不可切
-            if(r1[i].collider.tag>100) {
-                r1.splice(i,1);
-            }
-        }
-        for(let i = 0; i<r2.length;i++) {
-            if(r2[i].collider.tag>100) {
-                r2.splice(i,1);
-            }
-        }
-
 
         let results = r1.concat(r2);
 
         for (let i = 0; i < results.length; i++) {
             let p = results[i].point;
-            this.ctx.circle(p.x - 360, p.y - 640, 5);
-        }
+            this.ctx.circle(p.x, p.y, 5);
+        }  
         this.ctx.fill();
 
         this.r1 = r1;
@@ -384,7 +311,3 @@ cc.Class({
         this.recalcResults();
     },
 });
-
-
-
-
