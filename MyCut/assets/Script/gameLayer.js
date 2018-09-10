@@ -73,35 +73,9 @@ cc.Class({
 
     },
 
-    // checkPointLoadSuccess: function (prefab, position) {
-    //     //生成关卡的NODE 将其加入gameLayer
-    //     this.currentNode = cc.instantiate(prefab);
-
-    //     this.node.addChild(this.currentNode);
-    //     this.currentNode.zIndex = 1;
-    //     this.currentNode.setPosition(position);
-
-
-
-
-        // let cuttableNodes = this.currentNode.getChildByName("cuttable");
-        // for (let i = 0; i < cuttableNodes.children.length; i++) {
-        //     let ploygonPoints = cuttableNodes.children[i].getComponent(cc.PhysicsPolygonCollider).points;
-        //     let worldX = cuttableNodes.children[i].x;
-        //     let worldY = cuttableNodes.children[i].y;
-        //     console.log("ploygonPoints");
-        //     console.log(ploygonPoints);
-        //     this.ctx.clear();
-        //     this.ctx.fillColor = cc.Color.GREEN;
-        //     this.ctx.moveTo(ploygonPoints[0].x + worldX, ploygonPoints[0].y + worldY);
-        //     for (let i = 1; i < ploygonPoints.length; i++) {
-        //         this.ctx.lineTo(ploygonPoints[i].x + worldX, ploygonPoints[i].y +worldY);
-        //     }
-
-        //     this.ctx.fill();
-
-        // }
-   // },
+   hittedTarget:function() {
+    console.log("目标被击中");
+   },
 
 
     onTouchStart: function (event) {

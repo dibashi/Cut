@@ -30,10 +30,22 @@ export default class DataMgr extends cc.Component {
     };
     initData() {
         console.log("--- initData ---");
+        //标记着当前玩到哪个关卡，意味着 之前的关卡未必都过关了，当前的关卡之后的关卡都没有玩，当前关卡可以玩
         let mc = cc.sys.localStorage.getItem("maxCheckpoint");
-        if (!mc) {
-            cc.sys.localStorage.setItem("maxCheckpoint", "001");
-        }
+       // if (!mc) {
+            cc.sys.localStorage.setItem("maxCheckpoint", 1);
+            var checkPointJsonData = [];
+            var j = {};
+            checkPointJsonData.push({crownCount:"0"});
+            for (var i = 1; i < 1; i++) {
+                j.crownCount = "0";
+                
+                checkPointJsonData.push(j);
+            }
+            var a = JSON.stringify(checkPointJsonData);
+            //console.log(a);
+            cc.sys.localStorage.setItem("checkPointJsonData",a);
+       // }
     };
 
 
