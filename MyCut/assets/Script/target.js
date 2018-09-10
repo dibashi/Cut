@@ -57,8 +57,8 @@ cc.Class({
         if (otherCollider.node.group === "cutSquare" && this.isDeadFlag == false) {
             this.isDeadFlag = true;
 
-            console.log("碰到了！");
-            this.node.parent.parent.getComponent("gameLayer").hittedTarget();
+            //console.log("碰到了！");
+            this.node.parent.getComponent("checkPointTouchLogic").hittedTarget();
             this.node.removeFromParent(false);
             //this.dead();
             //先用这个，将来用上面那个

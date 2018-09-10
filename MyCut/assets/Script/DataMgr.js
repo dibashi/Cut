@@ -9,6 +9,7 @@ export default class DataMgr extends cc.Component {
     currentCheckPoint = "-1";
 
     //根据tag设置颜色,还要根据tag来确定哪些可切，哪些不可切， 约定！！可切的tag<100 不可切的 100< tag <200
+    //target tag = 102； 
     OBJECT_COLOR = {
         CUTTABLE_BLUE: 1,
         NAN_SEPARABLE_BLACK: 101,
@@ -17,7 +18,7 @@ export default class DataMgr extends cc.Component {
 
     //关卡信息，是碰撞 还是面积，以及达到多少  todo：将来还需加入 提示信息
     CHECKPOINT_DATAS = [
-        {"class":"collision","target":2},
+        {"class":"collision","targetCount":1,"optimalCount":1},
         {"class":"area","target":0.75}
     ];
 

@@ -31,14 +31,14 @@ function pointInLine(point, a, b) {
 cc.Class({
     extends: cc.Component,
 
-   
+
     properties: {
-        
-        checkpoints:{
-            default:[],
-            type:cc.Prefab,
+
+        checkpoints: {
+            default: [],
+            type: cc.Prefab,
         },
-    
+
     },
 
     // use this for initialization
@@ -73,12 +73,20 @@ cc.Class({
 
     },
 
-   hittedTarget:function() {
-    console.log("目标被击中");
-   },
+    reNew:function() {
+        //console.log("re new");
+        this.currentNode.removeFromParent();
+        this.checkpointInit();
+    },
+
+    // hittedTarget: function () {
+    //     console.log("目标被击中");
+
+    // },
 
 
     onTouchStart: function (event) {
+        //this.ctx.clear();
         this.touching = true;
         this.r1 = this.r2 = this.results = null;
         this.touchStartPoint = this.touchPoint = cc.v2(event.touch.getLocation());
@@ -188,22 +196,22 @@ cc.Class({
                 continue;
             }
 
-            
+
             // console.log("maxPointsResult");
             // console.log(maxPointsResult);
             // return;
 
             // keep max length points to origin collider
             collider.points = maxPointsResult;
-           collider.node.getComponent("draw").draw();
-           //collider.node.getComponent("draw").maskDraw();
+            collider.node.getComponent("draw").draw();
+            //collider.node.getComponent("draw").maskDraw();
             collider.apply();
 
             let body = collider.body;
 
             //todo
-            
-            
+
+
             for (let j = 0; j < splitResults.length; j++) {
                 let splitResult = splitResults[j];
 
@@ -302,7 +310,7 @@ cc.Class({
 
             let p = splitResult[i];
             p = typeof p === 'number' ? points[p] : p;
-           // p = points[p];
+            // p = points[p];
 
             if (p.sub(p1).magSqr() < POINT_SQR_EPSILON || p.sub(p2).magSqr() < POINT_SQR_EPSILON) {
                 continue;
@@ -345,15 +353,15 @@ cc.Class({
 
         let r1 = manager.rayCast(this.touchStartPoint, point, cc.RayCastType.All);
         let r2 = manager.rayCast(point, this.touchStartPoint, cc.RayCastType.All);
-        for(let i = 0; i<r1.length;i++) {
+        for (let i = 0; i < r1.length; i++) {
             //约定大于100的不可切
-            if(r1[i].collider.tag>100) {
-                r1.splice(i,1);
+            if (r1[i].collider.tag > 100) {
+                r1.splice(i, 1);
             }
         }
-        for(let i = 0; i<r2.length;i++) {
-            if(r2[i].collider.tag>100) {
-                r2.splice(i,1);
+        for (let i = 0; i < r2.length; i++) {
+            if (r2[i].collider.tag > 100) {
+                r2.splice(i, 1);
             }
         }
 
