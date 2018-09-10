@@ -19,7 +19,12 @@ cc.Class({
         gameLayer:{
             default:null,
             type:cc.Node,
-        }
+        },
+
+        mainCamera:{
+            default:null,
+            type:cc.Node,
+        },
 
     },
 
@@ -34,12 +39,16 @@ cc.Class({
         this.openLayerActive(this.gameLayer);
 
         this.gameLayerRunIn();
+
+       
     },
 
     gameLayerRunIn:function() {
         this.gameLayer.getChildByName("game").getComponent("game").init();
-        this.startLayer.runAction(cc.moveBy(1,cc.v2(0,1280)).easing(cc.easeOut(3.0)));
-        this.gameLayer.runAction(cc.moveBy(1,cc.v2(0,1280)).easing(cc.easeOut(3.0)));
+      
+        // cc.eventManager.pauseTarget( this.startLayer, true);
+        // this.mainCamera.runAction(cc.moveBy(1,cc.v2(0,-1280)).easing(cc.easeOut(3.0)));
+        
     },
 
     closeAllLayersActive:function() {
@@ -54,18 +63,45 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
+
+        console.log("game scene on load");
+
+        cc.director.getPhysicsManager().enabled = true; //开启物理系统，否则在编辑器里做的一切都没有任何效果
+        //cc.director.getPhysicsManager().debugDrawFlags = //cc.PhysicsManager.DrawBits.e_aabbBit |
+        //cc.PhysicsManager.DrawBits.e_pairBit |
+        // cc.PhysicsManager.DrawBits.e_centerOfMassBit |
+        //  cc.PhysicsManager.DrawBits.e_jointBit |
+        //   cc.PhysicsManager.DrawBits.e_shapeBit; //开启物理调试信息
+        // cc.director.getPhysicsManager().debugDrawFlags = 0; //-设置为0则关闭调试
+        cc.director.getPhysicsManager().gravity = cc.v2(0, -320);//-320像素/秒的平方，这个是默认值，为了以后调试先放在这
+
         if (!cc.dataMgr) {
           
             cc.dataMgr = new DataMgr();
             cc.dataMgr.initData();
+
+            cc.dataMgr.currentCheckPoint  = 1;
+          
+            this.gameLayerRunIn();
+            
         }
-        this.closeAllLayersActive();
-        this.openLayerActive(this.startLayer);
-        //console.log("执行到 onload  selectCheckPoint!~~");
-        //cc.sys.localStorage.setItem("dangQianGuanKa",1); //测试用
-        // this.refreshCheckPoint();
-        // this.diamondLabel.string = cc.sys.localStorage.getItem("diamondCount");
+        // this.gameLayer.runAction(cc.moveBy(10,cc.v2(0,400)).easing(cc.easeOut(3.0)));
+
+        // this.scheduleOnce(this.openPhy,3);
+    //    this.closeAllLayersActive();
+      //  this.openLayerActive(this.gameLayer);
+
     },
+
+    start:function() {
+       // cc.director.getPhysicsManager().enabled = false;
+    },
+
+    // openPhy:function() {
+    //     console.log("开启物理");
+    //     cc.director.getPhysicsManager().enabled = true;
+      
+    // },
 
     refreshCheckPoint: function () {
 
