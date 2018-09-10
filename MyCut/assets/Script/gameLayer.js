@@ -107,6 +107,12 @@ cc.Class({
         this.currentNode.getComponent("checkPointTouchLogic").checkIsOver();
     },
 
+    hittedMassTrigger: function (mass) {
+        this.currentNode.getComponent("checkPointTouchLogic").hittedMassTrigger(mass);
+        this.uiLayer.getComponent("uiLayer").refreash();
+        this.currentNode.getComponent("checkPointTouchLogic").checkIsOver();
+    },
+
 
     onTouchStart: function (event) {
         this.ctx.clear();
@@ -114,14 +120,14 @@ cc.Class({
         this.r1 = this.r2 = this.results = null;
         this.touchStartPoint = this.touchPoint = cc.v2(event.touch.getLocation());
 
-            console.log("touchStart");
-             console.log(this.touchStartPoint);
+            // console.log("touchStart");
+            //  console.log(this.touchStartPoint);
     },
 
     onTouchMove: function (event) {
         this.touchPoint = cc.v2(event.touch.getLocation());
-         console.log("touchMove");
-     console.log(this.touchPoint);
+    //      console.log("touchMove");
+    //  console.log(this.touchPoint);
     },
 
     onTouchEnd: function (event) {

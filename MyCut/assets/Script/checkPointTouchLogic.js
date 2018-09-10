@@ -35,49 +35,96 @@ cc.Class({
             type: cc.Vec2,
         },
 
-        //0，击中目标，1掉落面积
+        //0，击中目标，1掉落质量
         checkpointClass: 0,
+
+        //被切割物体的总质量
+        totalMass: 0,
+        currentMass:0.0,
     },
 
     onLoad: function () {
-        
+
+
     },
 
     start: function () {
+        if (this.checkpointClass == 1) {
+            console.log("执行到了mass");
+            console.log(this.node.children);
+            let childs = this.node.children;
+            let count = childs.length;
+            for (let i = 0; i < count; i++) {
+                console.log("执行到了mass1");
+                let ppc = childs[i].getComponent(cc.PhysicsPolygonCollider);
+                if (ppc && ppc.tag == 2) {
+                    console.log("执行到了mass11");
+                    console.log(childs[i].getComponent(cc.RigidBody));
+                    console.log(childs[i].getComponent(cc.RigidBody).getMass());
+                    this.totalMass += childs[i].getComponent(cc.RigidBody).getMass();
+                }
+            }
+        }
 
+        console.log("mass--->  " + this.totalMass);
     },
 
-    
-    checkIsOver:function() {
+
+    checkIsOver: function () {
         console.log("check is over");
 
-        if(this.currentResultCount>=this.resultCount) {
+        if (this.currentResultCount >= this.resultCount) {
             //皇冠数量储存 
-            let crownCount = 3-(this.currentTouchCount - this.touchCount);
-            if(crownCount>3) {
+            let crownCount = 3 - (this.currentTouchCount - this.touchCount);
+            if (crownCount > 3) {
                 crownCount = 3;
-            } else if(crownCount<1) {
+            } else if (crownCount < 1) {
                 crownCount = 1;
             }
             //获取当前关卡索引 往json对象数组插入数据
             let checkpointIndex = parseInt(cc.dataMgr.currentCheckPoint) - 1;
             let stringOfJSON = cc.sys.localStorage.getItem("checkPointJsonData");
             let jsonObj = JSON.parse(stringOfJSON);
-            if(crownCount> jsonObj[checkpointIndex].crownCount) {
+            if (crownCount > jsonObj[checkpointIndex].crownCount) {
                 jsonObj[checkpointIndex].crownCount = crownCount;
                 var a = JSON.stringify(jsonObj);
-                cc.sys.localStorage.setItem("checkPointJsonData",a);
+                cc.sys.localStorage.setItem("checkPointJsonData", a);
             }
-            console.log(checkpointIndex+1);
+            console.log(checkpointIndex + 1);
             console.log(cc.sys.localStorage.getItem("maxCheckpoint"));
-            if(checkpointIndex+1 == parseInt(cc.sys.localStorage.getItem("maxCheckpoint"))) {
+            if (checkpointIndex + 1 == parseInt(cc.sys.localStorage.getItem("maxCheckpoint"))) {
                 console.log("执行到了");
                 cc.sys.localStorage.setItem("maxCheckpoint", checkpointIndex + 2);
             }
-           
+
         }
     },
 
+    hittedMassTrigger:function(mass) {
+        this.currentMass += mass;
+        console.log(this.currentMass);
+        
+        this.currentResultCount = Math.round(this.currentMass/this.totalMass * 100);
+    },
 
+    update() {
+        //突然想到用质量触发器，来获取刚体质量 然后计算
+        // if (this.checkpointClass == 1) {
+        //     let childs = this.node.children;
+        //     let count = childs.length;
+        //     for (let i = 0; i < count; i++) {
+        //         let ppc = childs[i].getComponent(cc.PhysicsPolygonCollider);
+        //         if (ppc && ppc.tag == 2) {
+        //             console.log("执行到了mass11");
+        //             console.log(childs[i].getComponent(cc.RigidBody).getWorldPosition().y);
+        //             console.log(childs[i].getComponent(cc.RigidBody).getMass());
+        //             if(childs[i].getComponent(cc.RigidBody).getWorldPosition().y<-50){
+
+        //             }
+        //             this.totalMass += childs[i].getComponent(cc.RigidBody).getMass();
+        //         }
+        //     }
+        // }
+    }
 
 });

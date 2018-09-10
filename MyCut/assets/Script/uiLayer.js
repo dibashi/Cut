@@ -28,7 +28,7 @@ cc.Class({
         },
         targetSprite:{
             default:null,
-            type:cc.Node,
+            type:cc.Sprite,
         }
     },
 
@@ -44,11 +44,19 @@ cc.Class({
         this.checkpointClass = this.checkPointJS.checkpointClass;
         //击中完成关卡
         if(this.checkpointClass == 0) {
-            this.targetSprite = this.touchImg.spriteFrame;
+            this.targetSprite.spriteFrame = this.touchImg.spriteFrame;
             
         } else if(this.checkpointClass == 1) {
             console.log("执行到了 area img");
-            this.targetSprite = this.areaImg.spriteFrame;
+            
+            let w = this.targetSprite.node.width;
+            let h = this.targetSprite.node.height;
+            this.targetSprite.spriteFrame = this.areaImg.spriteFrame;
+         
+            this.targetSprite.node.width = w;
+            this.targetSprite.node.height =h;
+           
+            this.targetSprite.node.color = cc.dataMgr.getRigidBodyColorByTag(2);
         }
         this.refreash();
     },

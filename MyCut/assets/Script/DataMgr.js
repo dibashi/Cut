@@ -12,8 +12,9 @@ export default class DataMgr extends cc.Component {
     //target tag = 102； 
     OBJECT_COLOR = {
         CUTTABLE_BLUE: 1,
+        CUTTABLE_AREA_GREEN:2,
         NAN_SEPARABLE_BLACK: 101,
-      
+        NAN_TRIGGER_MASS:102,//用于检测掉落质量的触发器
     };
 
     //关卡信息，是碰撞 还是面积，以及达到多少  todo：将来还需加入 提示信息
@@ -25,6 +26,8 @@ export default class DataMgr extends cc.Component {
     getRigidBodyColorByTag(tag) {
         if(tag == this.OBJECT_COLOR.CUTTABLE_BLUE) {
             return cc.color(110, 184, 255, 255);
+        }else if(tag == this.OBJECT_COLOR.CUTTABLE_AREA_GREEN) {
+            return cc.color(139, 209, 63, 255);
         } else if(tag == this.OBJECT_COLOR.NAN_SEPARABLE_BLACK) {
             return cc.color(40, 40, 40, 255);
         }
