@@ -40,7 +40,7 @@ cc.Class({
     },
 
     onLoad: function () {
-        console.log("触碰逻辑关卡 onload!");
+        
     },
 
     start: function () {
@@ -50,6 +50,32 @@ cc.Class({
     
     checkIsOver:function() {
         console.log("check is over");
+
+        if(this.currentResultCount>=this.resultCount) {
+            //皇冠数量储存 
+            let crownCount = 3-(this.currentTouchCount - this.touchCount);
+            if(crownCount>3) {
+                crownCount = 3;
+            } else if(crownCount<1) {
+                crownCount = 1;
+            }
+            //获取当前关卡索引 往json对象数组插入数据
+            let checkpointIndex = parseInt(cc.dataMgr.currentCheckPoint) - 1;
+            let stringOfJSON = cc.sys.localStorage.getItem("checkPointJsonData");
+            let jsonObj = JSON.parse(stringOfJSON);
+            if(crownCount> jsonObj[checkpointIndex].crownCount) {
+                jsonObj[checkpointIndex].crownCount = crownCount;
+                var a = JSON.stringify(jsonObj);
+                cc.sys.localStorage.setItem("checkPointJsonData",a);
+            }
+            console.log(checkpointIndex+1);
+            console.log(cc.sys.localStorage.getItem("maxCheckpoint"));
+            if(checkpointIndex+1 == parseInt(cc.sys.localStorage.getItem("maxCheckpoint"))) {
+                console.log("执行到了");
+                cc.sys.localStorage.setItem("maxCheckpoint", checkpointIndex + 2);
+            }
+           
+        }
     },
 
 

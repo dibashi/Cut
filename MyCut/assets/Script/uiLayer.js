@@ -47,6 +47,7 @@ cc.Class({
             this.targetSprite = this.touchImg.spriteFrame;
             
         } else if(this.checkpointClass == 1) {
+            console.log("执行到了 area img");
             this.targetSprite = this.areaImg.spriteFrame;
         }
         this.refreash();
@@ -55,7 +56,7 @@ cc.Class({
     refreash:function() {
       //  console.log("看下进度");
         this.cutProgressLabel.string = this.checkPointJS.currentTouchCount + "/" +this.checkPointJS.touchCount;
-        console.log(this.checkpointClass);
+        //console.log(this.checkpointClass);
         if(this.checkpointClass == 0) {
             this.targetProgressLabel.string = this.checkPointJS.currentResultCount + "/" + this.checkPointJS.resultCount
             // console.log("看下进度");

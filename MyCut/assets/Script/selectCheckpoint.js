@@ -72,6 +72,7 @@ cc.Class({
         // }
 
         let maxCheckpoint =  parseInt(cc.sys.localStorage.getItem("maxCheckpoint"));
+        console.log(maxCheckpoint);
         let jsons = cc.sys.localStorage.getItem("checkPointJsonData");
         //console.log(jsons);
         let jsonObj = JSON.parse(jsons);

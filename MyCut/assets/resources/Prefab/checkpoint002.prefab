@@ -25,9 +25,13 @@
     ],
     "_active": true,
     "_level": 1,
-    "_components": [],
+    "_components": [
+      {
+        "__id__": 12
+      }
+    ],
     "_prefab": {
-      "__id__": 12
+      "__id__": 13
     },
     "_opacity": 255,
     "_color": {
@@ -165,7 +169,7 @@
     "_fixedRotation": false,
     "enabledContactListener": false,
     "bullet": false,
-    "_id": "cfhEoEFLtN3bEsCM+EI2vE"
+    "_id": "3fFj8kklxItZlHoBzXiuFm"
   },
   {
     "__type__": "cc.PhysicsPolygonCollider",
@@ -208,7 +212,7 @@
         "y": -400
       }
     ],
-    "_id": "ff8lPN8sZOV4zeVXGwF9M4"
+    "_id": "64SjGYRHlJ3qobIq3kCYT9"
   },
   {
     "__type__": "44ebeIDGjBGiYlQFJBgKLFw",
@@ -218,7 +222,7 @@
       "__id__": 2
     },
     "_enabled": true,
-    "_id": "f5Jyi3QgNKJZIIW2odkuXX"
+    "_id": "824buGbKlMta0+3NoJdpkI"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -322,7 +326,7 @@
     "_fixedRotation": false,
     "enabledContactListener": false,
     "bullet": false,
-    "_id": "22SuVDmiBDd7Ynj5F3pZUK"
+    "_id": "b8GcH7CmRPn5noHW6b+ePs"
   },
   {
     "__type__": "cc.PhysicsPolygonCollider",
@@ -346,12 +350,12 @@
     "points": [
       {
         "__type__": "cc.Vec2",
-        "x": -200,
+        "x": -50,
         "y": 0
       },
       {
         "__type__": "cc.Vec2",
-        "x": 200,
+        "x": 50,
         "y": 0
       },
       {
@@ -365,7 +369,7 @@
         "y": -100
       }
     ],
-    "_id": "66NQu8vupGULdvoHSFRI4d"
+    "_id": "03+V5H+9JNmIFMA1TbN3Fr"
   },
   {
     "__type__": "44ebeIDGjBGiYlQFJBgKLFw",
@@ -375,7 +379,7 @@
       "__id__": 7
     },
     "_enabled": true,
-    "_id": "29OJYsLaZMMLv2ZnomzKY/"
+    "_id": "f1xGabxLdCyqHPkiF5jbmI"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -387,6 +391,23 @@
     },
     "fileId": "90p3Qcm5JCLbCs65nQXX/z",
     "sync": false
+  },
+  {
+    "__type__": "e5633PC8AVKMqzsNED3PAEg",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "touchCount": 1,
+    "resultCount": 100,
+    "currentTouchCount": 0,
+    "currentResultCount": 0,
+    "helpTouchBegin": null,
+    "helpTouchEnd": null,
+    "checkpointClass": 1,
+    "_id": "b55YkBSONBqI7fXPt8vHP2"
   },
   {
     "__type__": "cc.PrefabInfo",

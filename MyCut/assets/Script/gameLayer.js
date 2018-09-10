@@ -66,7 +66,7 @@ cc.Class({
 
         this.currentNode = cc.instantiate(this.checkpoints[checkpointIndex]);
         this.node.addChild(this.currentNode);
-        console.log(this.currentNode);
+       
         this.currentNode.zIndex = 1;
         this.currentNode.setPosition(cc.v2(0, 0));
 
@@ -107,14 +107,14 @@ cc.Class({
         this.r1 = this.r2 = this.results = null;
         this.touchStartPoint = this.touchPoint = cc.v2(event.touch.getLocation());
 
-        //    console.log("touchStart");
-        //     console.log(this.touchStartPoint);
+            console.log("touchStart");
+             console.log(this.touchStartPoint);
     },
 
     onTouchMove: function (event) {
         this.touchPoint = cc.v2(event.touch.getLocation());
-        // console.log("touchMove");
-        // console.log(this.touchPoint);
+         console.log("touchMove");
+     console.log(this.touchPoint);
     },
 
     onTouchEnd: function (event) {
