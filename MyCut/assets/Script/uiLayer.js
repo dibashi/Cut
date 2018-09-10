@@ -53,13 +53,13 @@ cc.Class({
     },
 
     refreash:function() {
-        console.log("看下进度");
+      //  console.log("看下进度");
         this.cutProgressLabel.string = this.checkPointJS.currentTouchCount + "/" +this.checkPointJS.touchCount;
         console.log(this.checkpointClass);
         if(this.checkpointClass == 0) {
             this.targetProgressLabel.string = this.checkPointJS.currentResultCount + "/" + this.checkPointJS.resultCount
-            console.log("看下进度");
-            console.log(this.targetProgressLabel.string);
+            // console.log("看下进度");
+            // console.log(this.targetProgressLabel.string);
         } else if(this.checkpointClass == 1) {
             this.targetProgressLabel.string = this.checkPointJS.currentResultCount + "/" + this.checkPointJS.resultCount +"%";
         }

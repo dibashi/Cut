@@ -21,9 +21,9 @@ cc.Class({
         //
         touchCount: 1,
         resultCount: 1,
-        
-        currentTouchCount:0,
-        currentResultCount:0,
+
+        currentTouchCount: 0,
+        currentResultCount: 0,
 
         helpTouchBegin: {
             default: null,
@@ -36,20 +36,20 @@ cc.Class({
         },
 
         //0，击中目标，1掉落面积
-        checkpointClass:0,
+        checkpointClass: 0,
     },
 
     onLoad: function () {
-         console.log("触碰逻辑关卡 onload!");
+        console.log("触碰逻辑关卡 onload!");
     },
 
-    start:function() {
+    start: function () {
 
     },
 
-
-    hittedTarget: function () {
-        //console.log("触碰到target");
+    
+    checkIsOver:function() {
+        console.log("check is over");
     },
 
 

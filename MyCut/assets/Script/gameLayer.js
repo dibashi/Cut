@@ -39,6 +39,10 @@ cc.Class({
             type: cc.Prefab,
         },
 
+        uiLayer: {
+            default: null,
+            type: cc.Node,
+        },
     },
 
     // use this for initialization
@@ -66,7 +70,7 @@ cc.Class({
         this.currentNode.zIndex = 1;
         this.currentNode.setPosition(cc.v2(0, 0));
 
-      
+
 
         // let pathOfPrefab = "Prefab/checkpoint" + cc.dataMgr.currentCheckPoint;
         // cc.loader.loadRes(pathOfPrefab, function (err, prefab) {
@@ -75,13 +79,13 @@ cc.Class({
 
     },
 
-    reNew:function() {
+    reNew: function () {
         //console.log("re new");
         this.currentNode.removeFromParent();
         this.checkpointInit();
     },
 
-    readerHelpLine:function() {
+    readerHelpLine: function () {
         this.reNew();
         let pointBegin = this.currentNode.getComponent("checkPointTouchLogic").helpTouchBegin;
         let pointEnd = this.currentNode.getComponent("checkPointTouchLogic").helpTouchEnd;
@@ -90,10 +94,11 @@ cc.Class({
         this.ctx.stroke();
     },
 
-    // hittedTarget: function () {
-    //     console.log("目标被击中");
-
-    // },
+    hittedTarget: function () {
+        this.currentNode.getComponent("checkPointTouchLogic").currentResultCount += 1;
+        this.uiLayer.getComponent("uiLayer").refreash();
+        this.currentNode.getComponent("checkPointTouchLogic").checkIsOver();
+    },
 
 
     onTouchStart: function (event) {
@@ -102,8 +107,8 @@ cc.Class({
         this.r1 = this.r2 = this.results = null;
         this.touchStartPoint = this.touchPoint = cc.v2(event.touch.getLocation());
 
-    //    console.log("touchStart");
-    //     console.log(this.touchStartPoint);
+        //    console.log("touchStart");
+        //     console.log(this.touchStartPoint);
     },
 
     onTouchMove: function (event) {
@@ -126,6 +131,12 @@ cc.Class({
         });
 
         let results = this.results;
+        if(results.length>=2) {
+            this.currentNode.getComponent("checkPointTouchLogic").currentTouchCount += 1;
+            this.uiLayer.getComponent("uiLayer").refreash();
+        } else {
+            console.log("无效的切割");
+        }
 
         let pairs = [];
 
