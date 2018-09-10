@@ -66,6 +66,8 @@ cc.Class({
         this.currentNode.zIndex = 1;
         this.currentNode.setPosition(cc.v2(0, 0));
 
+      
+
         // let pathOfPrefab = "Prefab/checkpoint" + cc.dataMgr.currentCheckPoint;
         // cc.loader.loadRes(pathOfPrefab, function (err, prefab) {
         //     self.checkPointLoadSuccess(prefab, cc.v2(360, 640));
@@ -79,6 +81,15 @@ cc.Class({
         this.checkpointInit();
     },
 
+    readerHelpLine:function() {
+        this.reNew();
+        let pointBegin = this.currentNode.getComponent("checkPointTouchLogic").helpTouchBegin;
+        let pointEnd = this.currentNode.getComponent("checkPointTouchLogic").helpTouchEnd;
+        this.ctx.moveTo(pointBegin.x, pointBegin.y);
+        this.ctx.lineTo(pointEnd.x, pointEnd.y);
+        this.ctx.stroke();
+    },
+
     // hittedTarget: function () {
     //     console.log("目标被击中");
 
@@ -86,16 +97,19 @@ cc.Class({
 
 
     onTouchStart: function (event) {
-        //this.ctx.clear();
+        this.ctx.clear();
         this.touching = true;
         this.r1 = this.r2 = this.results = null;
         this.touchStartPoint = this.touchPoint = cc.v2(event.touch.getLocation());
 
-        //console.log(this.touchStartPoint);
+    //    console.log("touchStart");
+    //     console.log(this.touchStartPoint);
     },
 
     onTouchMove: function (event) {
         this.touchPoint = cc.v2(event.touch.getLocation());
+        // console.log("touchMove");
+        // console.log(this.touchPoint);
     },
 
     onTouchEnd: function (event) {

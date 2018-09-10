@@ -14,22 +14,44 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-       
 
 
-      
 
-       targetCount:1,
-       optimalCount:1,
+
+        //
+        touchCount: 1,
+        resultCount: 1,
+        
+        currentTouchCount:0,
+        currentResultCount:0,
+
+        helpTouchBegin: {
+            default: null,
+            type: cc.Vec2,
+        },
+
+        helpTouchEnd: {
+            default: null,
+            type: cc.Vec2,
+        },
+
+        //0，击中目标，1掉落面积
+        checkpointClass:0,
     },
 
-    onLoad:function() {
-       // console.log("触碰逻辑关卡 onload!");
+    onLoad: function () {
+         console.log("触碰逻辑关卡 onload!");
     },
-    hittedTarget:function() {
+
+    start:function() {
+
+    },
+
+
+    hittedTarget: function () {
         //console.log("触碰到target");
     },
-    
+
 
 
 });

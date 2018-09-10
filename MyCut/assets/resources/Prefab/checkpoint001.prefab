@@ -172,7 +172,7 @@
     "_fixedRotation": false,
     "enabledContactListener": false,
     "bullet": false,
-    "_id": "8c2UE8DvpPyY7mJzngv0Fx"
+    "_id": "c0KcetCLZGKL4VEzyVgAiI"
   },
   {
     "__type__": "cc.PhysicsPolygonCollider",
@@ -215,7 +215,7 @@
         "y": -50
       }
     ],
-    "_id": "52ilZh2FRDTb6mQrACTQq/"
+    "_id": "f2iIPjyNVHeZzMP9he3XVD"
   },
   {
     "__type__": "44ebeIDGjBGiYlQFJBgKLFw",
@@ -225,7 +225,7 @@
       "__id__": 2
     },
     "_enabled": true,
-    "_id": "f9Xl/6LHNPnq3K2FVjxzDX"
+    "_id": "02l8AfRSxDCa84D+Kvrh1P"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -329,7 +329,7 @@
     "_fixedRotation": false,
     "enabledContactListener": false,
     "bullet": false,
-    "_id": "b1gNmE3jBBcLcFeTdrW++c"
+    "_id": "c5Dr/l1ExAc5DMmitZjXWn"
   },
   {
     "__type__": "cc.PhysicsPolygonCollider",
@@ -372,7 +372,7 @@
         "y": -100
       }
     ],
-    "_id": "268L/Xg0ZG7LlnCRikS1C9"
+    "_id": "31IA1LC0tPco207quvJRT2"
   },
   {
     "__type__": "44ebeIDGjBGiYlQFJBgKLFw",
@@ -382,7 +382,7 @@
       "__id__": 7
     },
     "_enabled": true,
-    "_id": "fez6RPZpZKj5vrRGvDYo2n"
+    "_id": "d6sHgWZMxN/qqbmcqfVa8e"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -493,7 +493,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "dcj7hNxYFB6JMePfXCaGW8"
+    "_id": "e3Op9HqMRF7Yu4kkWB1kRm"
   },
   {
     "__type__": "cc.RigidBody",
@@ -517,7 +517,7 @@
     "_fixedRotation": false,
     "enabledContactListener": true,
     "bullet": false,
-    "_id": "dcSc9oFSxPYoMYMWEhbZaC"
+    "_id": "c3EbasYoVAYKQDKANENBUi"
   },
   {
     "__type__": "cc.PhysicsCircleCollider",
@@ -539,7 +539,7 @@
       "y": 0
     },
     "_radius": 18,
-    "_id": "2fCKcZGzRCPK9LulLTDHaZ"
+    "_id": "83XOqQKAFCbbAPgLFUTWjc"
   },
   {
     "__type__": "e4fd7MPrOxIyoGO4+5E/8MA",
@@ -550,7 +550,7 @@
     },
     "_enabled": true,
     "isDeadFlag": false,
-    "_id": "28F6Ql1LBM4aw4Ax64otoC"
+    "_id": "bbzoDaOW1PkZyRTKCQePMO"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -571,9 +571,22 @@
       "__id__": 1
     },
     "_enabled": true,
-    "targetCount": 1,
-    "optimalCount": 1,
-    "_id": "79qe5mFnpMlJfvmJDcvGHp"
+    "touchCount": 1,
+    "resultCount": 1,
+    "currentTouchCount": 0,
+    "currentResultCount": 0,
+    "helpTouchBegin": {
+      "__type__": "cc.Vec2",
+      "x": -147,
+      "y": 346
+    },
+    "helpTouchEnd": {
+      "__type__": "cc.Vec2",
+      "x": 13,
+      "y": 116
+    },
+    "checkpointClass": 0,
+    "_id": "f6EFtNByROqZ/CJUJzCfmM"
   },
   {
     "__type__": "cc.PrefabInfo",
