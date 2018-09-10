@@ -43,6 +43,11 @@ cc.Class({
             default: null,
             type: cc.Node,
         },
+
+        graphicsLayer: {
+            default: null,
+            type: cc.Node,
+        },
     },
 
     // use this for initialization
@@ -50,7 +55,8 @@ cc.Class({
         this.checkpointInit();
         this.touchOpen();
 
-        this.ctx = this.getComponent(cc.Graphics);
+        this.ctx = this.graphicsLayer.getComponent(cc.Graphics);
+        this.graphicsLayer.zIndex =2;
     },
 
     touchOpen: function () {
@@ -65,9 +71,10 @@ cc.Class({
         let checkpointIndex = parseInt(cc.dataMgr.currentCheckPoint) - 1;
 
         this.currentNode = cc.instantiate(this.checkpoints[checkpointIndex]);
+        
         this.node.addChild(this.currentNode);
-       
         this.currentNode.zIndex = 1;
+ 
         this.currentNode.setPosition(cc.v2(0, 0));
 
 
