@@ -172,7 +172,7 @@
     "_fixedRotation": false,
     "enabledContactListener": false,
     "bullet": false,
-    "_id": "b3gXWLB89Ia7j3WREIJp16"
+    "_id": "6c+YNfdBNHOLrkHJv0/+tM"
   },
   {
     "__type__": "cc.PhysicsPolygonCollider",
@@ -215,7 +215,7 @@
         "y": -400
       }
     ],
-    "_id": "2duX3pksZDN6JchLDNFWrV"
+    "_id": "8an2WeKB1MBrm6oBUQkD1C"
   },
   {
     "__type__": "44ebeIDGjBGiYlQFJBgKLFw",
@@ -225,7 +225,7 @@
       "__id__": 2
     },
     "_enabled": true,
-    "_id": "57gbryZxJElJRTktl6uaRP"
+    "_id": "70TXi4SFRA9buQNJJ80Nho"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -329,7 +329,7 @@
     "_fixedRotation": false,
     "enabledContactListener": false,
     "bullet": false,
-    "_id": "42ISP0RLhCdqRbQ4VqLQ/O"
+    "_id": "a68YQeEfpOP5n5eL+qhkPU"
   },
   {
     "__type__": "cc.PhysicsPolygonCollider",
@@ -372,7 +372,7 @@
         "y": -100
       }
     ],
-    "_id": "bdEWVkpsZEabDEsk4wIJ36"
+    "_id": "14a9b3dxROmob5aEkPeZTm"
   },
   {
     "__type__": "44ebeIDGjBGiYlQFJBgKLFw",
@@ -382,7 +382,7 @@
       "__id__": 7
     },
     "_enabled": true,
-    "_id": "873Oe4BxlHU6EPfaxV97P/"
+    "_id": "efym4ioiBCUJprxFgjvf9E"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -486,7 +486,7 @@
     "_fixedRotation": false,
     "enabledContactListener": true,
     "bullet": false,
-    "_id": "32pFfgG0xGc6AJTD/HZmz3"
+    "_id": "35aYK56VZJsrNHX5FxuZXr"
   },
   {
     "__type__": "cc.PhysicsBoxCollider",
@@ -498,7 +498,7 @@
     "_enabled": true,
     "tag": 0,
     "_density": 1,
-    "_sensor": false,
+    "_sensor": true,
     "_friction": 0.2,
     "_restitution": 0,
     "body": null,
@@ -512,7 +512,7 @@
       "width": 7000,
       "height": 50
     },
-    "_id": "b3bVzu0h1KWIRyzdwlf6D6"
+    "_id": "34j1DISNNMtY00MpWr0sdV"
   },
   {
     "__type__": "61880L7F5ZHD5/f4h1tVdy6",
@@ -522,7 +522,7 @@
       "__id__": 12
     },
     "_enabled": true,
-    "_id": "76xPurlLdL/ooav/fnJE0x"
+    "_id": "e8eZS32tlEdobkeENcm5Ig"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -552,7 +552,7 @@
     "checkpointClass": 1,
     "totalMass": 0,
     "currentMass": 0,
-    "_id": "94TdN/YGBIX7FWkT/MQTiZ"
+    "_id": "51D/FB+5pBUY2hBZpgQhH8"
   },
   {
     "__type__": "cc.PrefabInfo",
