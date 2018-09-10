@@ -43,9 +43,9 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
-        
-        
+        this.checkpointInit();
         this.touchOpen();
+
         this.ctx = this.getComponent(cc.Graphics);
     },
 
@@ -54,20 +54,6 @@ cc.Class({
         this.node.on("touchstart", this.onTouchStart, this);
         this.node.on('touchmove', this.onTouchMove, this);
         this.node.on('touchend', this.onTouchEnd, this);
-    },
-
-    init:function() {
-        console.log("game scene on load");
-
-        cc.director.getPhysicsManager().enabled = true; //开启物理系统，否则在编辑器里做的一切都没有任何效果
-        //cc.director.getPhysicsManager().debugDrawFlags = //cc.PhysicsManager.DrawBits.e_aabbBit |
-        //cc.PhysicsManager.DrawBits.e_pairBit |
-        // cc.PhysicsManager.DrawBits.e_centerOfMassBit |
-        //  cc.PhysicsManager.DrawBits.e_jointBit |
-        //   cc.PhysicsManager.DrawBits.e_shapeBit; //开启物理调试信息
-        // cc.director.getPhysicsManager().debugDrawFlags = 0; //-设置为0则关闭调试
-        cc.director.getPhysicsManager().gravity = cc.v2(0, -320);//-320像素/秒的平方，这个是默认值，为了以后调试先放在这
-        this.checkpointInit();
     },
 
 
@@ -87,6 +73,35 @@ cc.Class({
 
     },
 
+    // checkPointLoadSuccess: function (prefab, position) {
+    //     //生成关卡的NODE 将其加入gameLayer
+    //     this.currentNode = cc.instantiate(prefab);
+
+    //     this.node.addChild(this.currentNode);
+    //     this.currentNode.zIndex = 1;
+    //     this.currentNode.setPosition(position);
+
+
+
+
+        // let cuttableNodes = this.currentNode.getChildByName("cuttable");
+        // for (let i = 0; i < cuttableNodes.children.length; i++) {
+        //     let ploygonPoints = cuttableNodes.children[i].getComponent(cc.PhysicsPolygonCollider).points;
+        //     let worldX = cuttableNodes.children[i].x;
+        //     let worldY = cuttableNodes.children[i].y;
+        //     console.log("ploygonPoints");
+        //     console.log(ploygonPoints);
+        //     this.ctx.clear();
+        //     this.ctx.fillColor = cc.Color.GREEN;
+        //     this.ctx.moveTo(ploygonPoints[0].x + worldX, ploygonPoints[0].y + worldY);
+        //     for (let i = 1; i < ploygonPoints.length; i++) {
+        //         this.ctx.lineTo(ploygonPoints[i].x + worldX, ploygonPoints[i].y +worldY);
+        //     }
+
+        //     this.ctx.fill();
+
+        // }
+   // },
 
 
     onTouchStart: function (event) {

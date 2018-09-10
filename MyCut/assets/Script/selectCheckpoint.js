@@ -11,45 +11,14 @@ cc.Class({
             type: cc.Node,
         },
 
-        startLayer:{
-            default:null,
-            type:cc.Node,
-        },
-
-        gameLayer:{
-            default:null,
-            type:cc.Node,
-        }
-
     },
 
     goCheckpoint: function (event, eventData) {
        
 
-       
-
         console.log(eventData);
         cc.dataMgr.currentCheckPoint = eventData;
-        //cc.director.loadScene('gameScene');
-        this.openLayerActive(this.gameLayer);
-
-        this.gameLayerRunIn();
-    },
-
-    gameLayerRunIn:function() {
-        this.gameLayer.getChildByName("game").getComponent("game").init();
-        this.startLayer.runAction(cc.moveBy(1,cc.v2(0,1280)).easing(cc.easeOut(3.0)));
-        this.gameLayer.runAction(cc.moveBy(1,cc.v2(0,1280)).easing(cc.easeOut(3.0)));
-    },
-
-    closeAllLayersActive:function() {
-        this.startLayer.active = false;
-        this.gameLayer.active = false;
-    },
-
-    openLayerActive:function(layer) {
-       
-       layer.active = true;
+        cc.director.loadScene('gameScene');
     },
 
     // use this for initialization
@@ -59,8 +28,6 @@ cc.Class({
             cc.dataMgr = new DataMgr();
             cc.dataMgr.initData();
         }
-        this.closeAllLayersActive();
-        this.openLayerActive(this.startLayer);
         //console.log("执行到 onload  selectCheckPoint!~~");
         //cc.sys.localStorage.setItem("dangQianGuanKa",1); //测试用
         // this.refreshCheckPoint();
