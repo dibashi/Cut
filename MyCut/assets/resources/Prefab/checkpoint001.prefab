@@ -121,8 +121,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 69,
-      "y": -379,
+      "x": 0,
+      "y": 234,
       "z": 0
     },
     "_scale": {
@@ -168,7 +168,7 @@
     "_fixedRotation": false,
     "enabledContactListener": false,
     "bullet": false,
-    "_id": "95+j/tXg5ACIvlbuEJ2GAP"
+    "_id": "f90ED+aBtHRpbyRYlRNMY+"
   },
   {
     "__type__": "cc.PhysicsPolygonCollider",
@@ -211,7 +211,7 @@
         "y": -50
       }
     ],
-    "_id": "fd+ZQXQwVH2pj2oknTtMu3"
+    "_id": "6eyn4XRodCsblYtzruNu9f"
   },
   {
     "__type__": "44ebeIDGjBGiYlQFJBgKLFw",
@@ -221,7 +221,7 @@
       "__id__": 2
     },
     "_enabled": true,
-    "_id": "8ckpeZY/xP2YRX5ygkWvYY"
+    "_id": "8370CxtXRI/JfDiZi0edcY"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -278,8 +278,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 44,
-      "y": 339,
+      "x": 7,
+      "y": 85,
       "z": 0
     },
     "_scale": {
@@ -325,7 +325,7 @@
     "_fixedRotation": false,
     "enabledContactListener": false,
     "bullet": false,
-    "_id": "f9LzPfY0BPy5mw9sVYoNEu"
+    "_id": "21lp4YINdDDLrt/6ZI8pVJ"
   },
   {
     "__type__": "cc.PhysicsPolygonCollider",
@@ -388,7 +388,7 @@
         "y": -60
       }
     ],
-    "_id": "2bgLQBIHFIbqQe9dPgyJLZ"
+    "_id": "9auZ0bJNdH5YiRUN+g1x4g"
   },
   {
     "__type__": "44ebeIDGjBGiYlQFJBgKLFw",
@@ -398,7 +398,7 @@
       "__id__": 7
     },
     "_enabled": true,
-    "_id": "f9dSExan9O87hApWwtPwzP"
+    "_id": "75hfMdhgdHl6+dv14VXBVq"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -455,8 +455,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -243,
-      "y": 239,
+      "x": -280,
+      "y": -15,
       "z": 0
     },
     "_scale": {
@@ -506,7 +506,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "7fhH7g9dFF9YBBu/YcbiJf"
+    "_id": "admr8AtsBGYrtrdWI+J2za"
   },
   {
     "__type__": "cc.RigidBody",
@@ -530,7 +530,7 @@
     "_fixedRotation": false,
     "enabledContactListener": false,
     "bullet": false,
-    "_id": "87loOq3dJPvLYIilZOMt6P"
+    "_id": "44S1XUnjRDdI7Wp/tom9fk"
   },
   {
     "__type__": "cc.PhysicsCircleCollider",
@@ -552,7 +552,7 @@
       "y": 0
     },
     "_radius": 18,
-    "_id": "70SDHF9D9ChrPGd8SKehZt"
+    "_id": "97gkVBmgpF27T8mnJF3v0c"
   },
   {
     "__type__": "cc.PrefabInfo",
