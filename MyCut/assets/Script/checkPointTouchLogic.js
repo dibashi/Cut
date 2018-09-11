@@ -18,11 +18,13 @@ cc.Class({
 
 
 
-        //
+        //最优触摸数量
         touchCount: 1,
+        //目标任务
         resultCount: 1,
-
+        //当前触摸数量
         currentTouchCount: 0,
+        //当前任务进度
         currentResultCount: 0,
 
         helpTouchBegin: {
