@@ -129,8 +129,8 @@ cc.Class({
 
     showLock:function(checkPointNode,index,maxCheckpoint) {
         if(index>=maxCheckpoint) {
-            checkPointNode.getComponent(cc.Button).interactable = false;
-            checkPointNode.getChildByName("lock").active = true;
+            // checkPointNode.getComponent(cc.Button).interactable = false;
+            // checkPointNode.getChildByName("lock").active = true;
         } else {
             checkPointNode.getComponent(cc.Button).interactable = true;
             checkPointNode.getChildByName("lock").active = false;
