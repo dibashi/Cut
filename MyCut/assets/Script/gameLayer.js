@@ -251,8 +251,10 @@ cc.Class({
             //collider.node.getComponent("draw").maskDraw();
             collider.apply();
 
-            
+            console.log("开始检测最大定点数多边形 是否包含 关节");
             let joints = this.checkJoint(collider);
+            console.log(collider);
+            console.log(joints);
             this.dynamicConnectJoint(joints,collider);
 
             let body = collider.body;
