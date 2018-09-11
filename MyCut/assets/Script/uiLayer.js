@@ -62,6 +62,8 @@ cc.Class({
     },
 
     refreash:function() {
+        this.checkPointJS = this.gameLayer.getComponent("gameLayer").currentNode.getComponent("checkPointTouchLogic");
+        this.checkpointClass = this.checkPointJS.checkpointClass;
       //  console.log("看下进度");
         this.cutProgressLabel.string = this.checkPointJS.currentTouchCount + "/" +this.checkPointJS.touchCount;
         //console.log(this.checkpointClass);
@@ -88,8 +90,7 @@ cc.Class({
 
     reNewClick: function () {
         this.gameLayer.getComponent("gameLayer").reNew();
-        this.checkPointJS.currentTouchCount = 0;
-        this.checkPointJS.currentResultCount = 0;
+       
         this.refreash();
     },
 

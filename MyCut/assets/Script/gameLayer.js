@@ -120,14 +120,14 @@ cc.Class({
         this.r1 = this.r2 = this.results = null;
         this.touchStartPoint = this.touchPoint = cc.v2(event.touch.getLocation());
 
-            // console.log("touchStart");
-            //  console.log(this.touchStartPoint);
+            console.log("touchStart");
+             console.log(this.touchStartPoint);
     },
 
     onTouchMove: function (event) {
         this.touchPoint = cc.v2(event.touch.getLocation());
-    //      console.log("touchMove");
-    //  console.log(this.touchPoint);
+         console.log("touchMove");
+     console.log(this.touchPoint);
     },
 
     onTouchEnd: function (event) {
@@ -145,6 +145,7 @@ cc.Class({
 
         let results = this.results;
         if(results.length>=2) {
+            //console.log(this.currentNode.getComponent("checkPointTouchLogic").currentTouchCount);
             this.currentNode.getComponent("checkPointTouchLogic").currentTouchCount += 1;
             this.uiLayer.getComponent("uiLayer").refreash();
         } else {

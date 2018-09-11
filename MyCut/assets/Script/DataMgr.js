@@ -41,7 +41,7 @@ export default class DataMgr extends cc.Component {
             var checkPointJsonData = [];
             var j = {};
             checkPointJsonData.push({crownCount:"0"});
-            for (var i = 1; i < 2; i++) {
+            for (var i = 1; i < 3; i++) {
                 j.crownCount = "0";
                 
                 checkPointJsonData.push(j);
