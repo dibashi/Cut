@@ -147,7 +147,7 @@
     "_skewX": 0,
     "_skewY": 0,
     "_zIndex": 0,
-    "groupIndex": 0,
+    "groupIndex": 2,
     "_id": ""
   },
   {
@@ -172,7 +172,7 @@
     "_fixedRotation": false,
     "enabledContactListener": false,
     "bullet": false,
-    "_id": "6c+YNfdBNHOLrkHJv0/+tM"
+    "_id": "efRhoTTDhL051sXWxBUhej"
   },
   {
     "__type__": "cc.PhysicsPolygonCollider",
@@ -215,7 +215,7 @@
         "y": -400
       }
     ],
-    "_id": "8an2WeKB1MBrm6oBUQkD1C"
+    "_id": "27Tg6qY9xE2KoN5QbrzT/a"
   },
   {
     "__type__": "44ebeIDGjBGiYlQFJBgKLFw",
@@ -225,7 +225,7 @@
       "__id__": 2
     },
     "_enabled": true,
-    "_id": "70TXi4SFRA9buQNJJ80Nho"
+    "_id": "88OhjW/4NJYYlb0UxmyrPP"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -304,7 +304,7 @@
     "_skewX": 0,
     "_skewY": 0,
     "_zIndex": 0,
-    "groupIndex": 0,
+    "groupIndex": 3,
     "_id": ""
   },
   {
@@ -329,7 +329,7 @@
     "_fixedRotation": false,
     "enabledContactListener": false,
     "bullet": false,
-    "_id": "a68YQeEfpOP5n5eL+qhkPU"
+    "_id": "82yDHXsuVMPb2XblQ9b63h"
   },
   {
     "__type__": "cc.PhysicsPolygonCollider",
@@ -372,7 +372,7 @@
         "y": -100
       }
     ],
-    "_id": "14a9b3dxROmob5aEkPeZTm"
+    "_id": "40sXuptKtMsbDabu53o3T+"
   },
   {
     "__type__": "44ebeIDGjBGiYlQFJBgKLFw",
@@ -382,7 +382,7 @@
       "__id__": 7
     },
     "_enabled": true,
-    "_id": "efym4ioiBCUJprxFgjvf9E"
+    "_id": "9bI08xfbVDBZTK6T7ftfEn"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -486,7 +486,7 @@
     "_fixedRotation": false,
     "enabledContactListener": true,
     "bullet": false,
-    "_id": "35aYK56VZJsrNHX5FxuZXr"
+    "_id": "25p56YV1FIA6Erch4jrwHL"
   },
   {
     "__type__": "cc.PhysicsBoxCollider",
@@ -512,7 +512,7 @@
       "width": 7000,
       "height": 50
     },
-    "_id": "34j1DISNNMtY00MpWr0sdV"
+    "_id": "0fm9V+WkBCw6ly3OHEAZGK"
   },
   {
     "__type__": "61880L7F5ZHD5/f4h1tVdy6",
@@ -522,7 +522,7 @@
       "__id__": 12
     },
     "_enabled": true,
-    "_id": "e8eZS32tlEdobkeENcm5Ig"
+    "_id": "c9GUiyQFxEdKIfQK0VKJew"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -552,7 +552,7 @@
     "checkpointClass": 1,
     "totalMass": 0,
     "currentMass": 0,
-    "_id": "51D/FB+5pBUY2hBZpgQhH8"
+    "_id": "58zdeE7xhF9JOl5HOwfWrf"
   },
   {
     "__type__": "cc.PrefabInfo",
