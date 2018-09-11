@@ -135,6 +135,11 @@ cc.Class({
         this.recalcResults();
         this.touching = false;
 
+        if(this.r1 == null || this.r2 == null || this.results == null){
+            this.ctx.clear();
+            return;
+        }
+
         let point = cc.v2(event.touch.getLocation());
         if (equals(this.touchStartPoint.sub(point).magSqr(), 0)) return;
 
@@ -392,6 +397,18 @@ cc.Class({
 
         let r1 = manager.rayCast(this.touchStartPoint, point, cc.RayCastType.All);
         let r2 = manager.rayCast(point, this.touchStartPoint, cc.RayCastType.All);
+        
+        for(let i = 0; i<r1.length;i++) {
+            //触碰到铰链关节
+            if(r1[i].collider.tag == cc.dataMgr.OBJECT_COLOR.JOINT) {
+                this.r1 = null;
+                this.r2 = null;
+                this.results = null;
+                return;
+            }
+        }
+
+        
         for (let i = 0; i < r1.length; i++) {
             //约定大于100的不可切
             if (r1[i].collider.tag > 100) {

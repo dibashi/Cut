@@ -102,3 +102,31 @@ t.prototype.splitRigidBody = function () {
     }
     2 <= e && this.splitData.setIsSplitFinish(!0)
 },
+
+
+t.prototype.recalcResults = function () {
+    if (this.touching) {
+        this.ctx.clear(),
+        this.ctx.moveTo(this.touchStartPoint.x, this.touchStartPoint.y),
+        this.ctx.lineTo(this.touchPoint.x, this.touchPoint.y),
+        this.ctx.stroke();
+        for (var t = cc.director.getPhysicsManager(), e = t.rayCast(this.touchStartPoint, this.touchPoint, cc.RayCastType.All), 
+        a = t.rayCast(this.touchPoint, this.touchStartPoint, cc.RayCastType.All), o = e.concat(a), n = 0, i = e;
+        n < i.length;
+        n++) {
+            if (i[n].collider.tag == b.colliderTag.jointPoint) return this.r1 = null,
+            this.r2 = null,
+            void(this.results = null)
+        }
+        for (var r = 0;
+        r < o.length;
+        r++) {
+            var c = o[r].point;
+            this.ctx.circle(c.x, c.y, 5)
+        }
+        this.ctx.fill(),
+        this.r1 = e,
+        this.r2 = a,
+        this.results = o
+    }
+},
