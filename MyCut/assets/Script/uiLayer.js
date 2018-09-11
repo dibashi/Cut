@@ -88,6 +88,9 @@ cc.Class({
 
     reNewClick: function () {
         this.gameLayer.getComponent("gameLayer").reNew();
+        this.checkPointJS.currentTouchCount = 0;
+        this.checkPointJS.currentResultCount = 0;
+        this.refreash();
     },
 
     helpClick: function () {
