@@ -29,6 +29,13 @@
       false,
       true,
       true
+    ],
+    [
+      false,
+      false,
+      false,
+      false,
+      false
     ]
   ],
   "design-resolution-height": 1280,
@@ -40,7 +47,8 @@
     "UI",
     "target",
     "cutSquare",
-    "floor"
+    "floor",
+    "joint"
   ],
   "simulator-orientation": false,
   "simulator-resolution": {
