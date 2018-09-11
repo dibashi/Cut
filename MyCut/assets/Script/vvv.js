@@ -130,3 +130,46 @@ t.prototype.recalcResults = function () {
         this.results = o
     }
 },
+
+
+
+t.prototype.handleSplit = function () {
+    for (var t = 0, e = this.splitData.getSplitColliders();
+    t < e.length;
+    t++) {
+        var a = e[t];
+        a.body && (a.body.enabledContactListener = !0),
+        a.node.addComponent("Crumb");
+        for (var o = 0, n = this.check(a);
+        o < n.length;
+        o++) {
+            var i = n[o].getComponent(cc.RevoluteJoint);
+            i.connectedBody = a.body;
+            var r = i.getComponent(cc.RigidBody).getWorldPosition(null),
+                c = a.body.getLocalPoint(r, null);
+            i.connectedAnchor = c,
+            i.apply()
+        }
+        a.apply(),
+        a.body.type = cc.RigidBodyType.Dynamic
+    }
+    this.splitData.clearSplit();
+    for (var s = 0, p = this.OthenNode;
+    s < p.length;
+    s++) {
+        p[s].active = !1
+    }
+},
+
+
+t.prototype.check = function (t) {
+    for (var e = t.points, a = [], o = 0, n = this.jointNode;
+    o < n.length;
+    o++) {
+        var i = n[o],
+            r = i.getComponent(cc.RigidBody).getWorldPosition(null),
+            c = t.body.getLocalPoint(r, null);
+        cc.Intersection.pointInPolygon(c, e) && (a[a.length] = i)
+    }
+    return a
+},

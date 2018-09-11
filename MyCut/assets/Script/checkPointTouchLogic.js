@@ -43,11 +43,19 @@ cc.Class({
         //被切割物体的总质量
         totalMass: 0,
         currentMass:0.0,
+
+        //旋转关节的节点集合，用于在gameLayer中检测 分配新生成的刚体
+        revoluteJointNodeArr: {
+            default: [],
+            type: cc.Node,
+        },
     },
 
     onLoad: function () {
 
-
+        for(let i = 0; i<this.revoluteJointNodeArr.length;i++) {
+            this.revoluteJointNodeArr[i].zIndex = 3;
+        }
     },
 
     start: function () {

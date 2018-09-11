@@ -251,6 +251,10 @@ cc.Class({
             //collider.node.getComponent("draw").maskDraw();
             collider.apply();
 
+            
+            let joints = this.checkJoint(collider);
+            this.dynamicConnectJoint(joints,collider);
+
             let body = collider.body;
 
             //todo
@@ -283,11 +287,45 @@ cc.Class({
                 nodeCol.friction = collider.friction;
 
                 nodeCol.apply();
+
+                let joints = this.checkJoint(nodeCol);
+                this.dynamicConnectJoint(joints,nodeCol);
+               
             }
 
         }
 
         this.ctx.clear();
+    },
+
+    dynamicConnectJoint:function(joints,collider) {
+        for(let i =0; i<joints.length; i++) {
+            let jt = joints[i].getComponent(cc.RevoluteJoint);
+            jt.connectedBody = collider.body;//nodeBody其实就行
+            let worldPos = jt.getComponent(cc.RigidBody).getWorldPosition();
+            let nodePos = collider.body.getLocalPoint(worldPos);
+            jt.connectedAnchor = nodePos;
+            jt.apply();
+        }
+
+        collider.apply();
+    },
+
+    checkJoint:function(collider) {
+        let ps = collider.points;
+        let resultsOfJoints = [];
+        //这个N是将来关卡数据中的jointNode节点的集合
+        let jointsArr = this.currentNode.getComponent("checkPointTouchLogic").revoluteJointNodeArr;
+        for(let i = 0; i<jointsArr.length; i++) {
+            let jt = jointsArr[i];
+            let jtPos = jt.getComponent(cc.RigidBody).getWorldPosition();
+            let jtPosInCollider = collider.body.getLocalPoint(jtPos);
+            if(cc.Intersection.pointInPolygon(jtPosInCollider,ps)) {
+                resultsOfJoints[resultsOfJoints.length] = jt;
+            }
+        }
+
+        return resultsOfJoints;
     },
 
     split: function (collider, p1, p2, splitResults) {
