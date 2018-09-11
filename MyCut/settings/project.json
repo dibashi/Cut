@@ -24,6 +24,8 @@
       true,
       true,
       null,
+      true,
+      null,
       true
     ],
     [
@@ -31,6 +33,8 @@
       false,
       true,
       false,
+      null,
+      true,
       null,
       true
     ],
@@ -47,6 +51,28 @@
       true,
       true,
       false,
+      false,
+      null,
+      true
+    ],
+    [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      true
+    ],
+    [
+      false,
+      false,
+      true,
+      true,
+      false,
+      true,
+      true,
       false
     ]
   ],
@@ -61,7 +87,9 @@
     "cutSquare",
     "floor",
     "joint",
-    "floor1"
+    "floor1",
+    "indirectTarget",
+    "indirectCol"
   ],
   "simulator-orientation": false,
   "simulator-resolution": {

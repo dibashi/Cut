@@ -14,9 +14,10 @@ export default class DataMgr extends cc.Component {
         CUTTABLE_BLUE: 1,
         CUTTABLE_AREA_GREEN:2,
         NAN_SEPARABLE_BLACK: 101,
-        NAN_TRIGGER_MASS:102,//用于检测掉落质量的触发器
-
+        NAN_TRIGGER_MASS:102,//用于检测掉落质量的触发器 
+       
         JOINT:201,
+        INDIRECT_Col:301,
     };
 
     //关卡信息，是碰撞 还是面积，以及达到多少  todo：将来还需加入 提示信息
@@ -44,7 +45,7 @@ export default class DataMgr extends cc.Component {
             var j = {};
             checkPointJsonData.push({crownCount:"0"});
             for (var i = 1; i < 7; i++) {
-                j.crownCount = "0";
+                j.crownCount = "0"; 
                 
                 checkPointJsonData.push(j);
             }

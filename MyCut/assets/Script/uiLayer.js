@@ -57,6 +57,12 @@ cc.Class({
             this.targetSprite.node.height =h;
            
             this.targetSprite.node.color = cc.dataMgr.getRigidBodyColorByTag(2);
+        } else if(this.checkpointClass == 2) {
+            let w = this.targetSprite.node.width;
+            let h = this.targetSprite.node.height;
+            this.targetSprite.spriteFrame = this.checkPointJS.targetSprite.spriteFrame;
+            this.targetSprite.node.width = w;
+            this.targetSprite.node.height =h;
         }
         this.refreash();
     },
@@ -68,12 +74,16 @@ cc.Class({
         this.cutProgressLabel.string = this.checkPointJS.currentTouchCount + "/" +this.checkPointJS.touchCount;
         //console.log(this.checkpointClass);
         if(this.checkpointClass == 0) {
-            this.targetProgressLabel.string = this.checkPointJS.currentResultCount + "/" + this.checkPointJS.resultCount
+            this.targetProgressLabel.string = this.checkPointJS.currentResultCount + "/" + this.checkPointJS.resultCount;
             // console.log("看下进度");
             // console.log(this.targetProgressLabel.string);
         } else if(this.checkpointClass == 1) {
             this.targetProgressLabel.string = this.checkPointJS.currentResultCount + "/" + this.checkPointJS.resultCount +"%";
-        }
+        } if(this.checkpointClass == 2) {
+            this.targetProgressLabel.string = this.checkPointJS.currentResultCount + "/" + this.checkPointJS.resultCount;
+            // console.log("看下进度");
+            // console.log(this.targetProgressLabel.string);
+        } 
     },
 
     initUI:function() {

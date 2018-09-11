@@ -56,7 +56,7 @@ cc.Class({
         this.touchOpen();
 
         this.ctx = this.graphicsLayer.getComponent(cc.Graphics);
-        this.graphicsLayer.zIndex =2;
+        this.graphicsLayer.zIndex = 2;
     },
 
     touchOpen: function () {
@@ -71,10 +71,10 @@ cc.Class({
         let checkpointIndex = parseInt(cc.dataMgr.currentCheckPoint) - 1;
 
         this.currentNode = cc.instantiate(this.checkpoints[checkpointIndex]);
-        
+
         this.node.addChild(this.currentNode);
         this.currentNode.zIndex = 1;
- 
+
         this.currentNode.setPosition(cc.v2(0, 0));
 
 
@@ -120,14 +120,14 @@ cc.Class({
         this.r1 = this.r2 = this.results = null;
         this.touchStartPoint = this.touchPoint = cc.v2(event.touch.getLocation());
 
-            console.log("touchStart");
-             console.log(this.touchStartPoint);
+        // console.log("touchStart");
+        //  console.log(this.touchStartPoint);
     },
 
     onTouchMove: function (event) {
         this.touchPoint = cc.v2(event.touch.getLocation());
-         console.log("touchMove");
-     console.log(this.touchPoint);
+        //      console.log("touchMove");
+        //  console.log(this.touchPoint);
     },
 
     onTouchEnd: function (event) {
@@ -135,7 +135,7 @@ cc.Class({
         this.recalcResults();
         this.touching = false;
 
-        if(this.r1 == null || this.r2 == null || this.results == null){
+        if (this.r1 == null || this.r2 == null || this.results == null) {
             this.ctx.clear();
             return;
         }
@@ -149,7 +149,7 @@ cc.Class({
         });
 
         let results = this.results;
-        if(results.length>=2) {
+        if (results.length >= 2) {
             //console.log(this.currentNode.getComponent("checkPointTouchLogic").currentTouchCount);
             this.currentNode.getComponent("checkPointTouchLogic").currentTouchCount += 1;
             this.uiLayer.getComponent("uiLayer").refreash();
@@ -251,11 +251,11 @@ cc.Class({
             //collider.node.getComponent("draw").maskDraw();
             collider.apply();
 
-            console.log("开始检测最大定点数多边形 是否包含 关节");
+            //console.log("开始检测最大定点数多边形 是否包含 关节");
             let joints = this.checkJoint(collider);
-            console.log(collider);
-            console.log(joints);
-            this.dynamicConnectJoint(joints,collider);
+            //console.log(collider);
+            //console.log(joints);
+            this.dynamicConnectJoint(joints, collider);
 
             let body = collider.body;
 
@@ -291,8 +291,8 @@ cc.Class({
                 nodeCol.apply();
 
                 let joints = this.checkJoint(nodeCol);
-                this.dynamicConnectJoint(joints,nodeCol);
-               
+                this.dynamicConnectJoint(joints, nodeCol);
+
             }
 
         }
@@ -300,8 +300,8 @@ cc.Class({
         this.ctx.clear();
     },
 
-    dynamicConnectJoint:function(joints,collider) {
-        for(let i =0; i<joints.length; i++) {
+    dynamicConnectJoint: function (joints, collider) {
+        for (let i = 0; i < joints.length; i++) {
             let jt = joints[i].getComponent(cc.RevoluteJoint);
             jt.connectedBody = collider.body;//nodeBody其实就行
             let worldPos = jt.getComponent(cc.RigidBody).getWorldPosition();
@@ -313,16 +313,16 @@ cc.Class({
         collider.apply();
     },
 
-    checkJoint:function(collider) {
+    checkJoint: function (collider) {
         let ps = collider.points;
         let resultsOfJoints = [];
         //这个N是将来关卡数据中的jointNode节点的集合
         let jointsArr = this.currentNode.getComponent("checkPointTouchLogic").revoluteJointNodeArr;
-        for(let i = 0; i<jointsArr.length; i++) {
+        for (let i = 0; i < jointsArr.length; i++) {
             let jt = jointsArr[i];
             let jtPos = jt.getComponent(cc.RigidBody).getWorldPosition();
             let jtPosInCollider = collider.body.getLocalPoint(jtPos);
-            if(cc.Intersection.pointInPolygon(jtPosInCollider,ps)) {
+            if (cc.Intersection.pointInPolygon(jtPosInCollider, ps)) {
                 resultsOfJoints[resultsOfJoints.length] = jt;
             }
         }
@@ -437,10 +437,10 @@ cc.Class({
 
         let r1 = manager.rayCast(this.touchStartPoint, point, cc.RayCastType.All);
         let r2 = manager.rayCast(point, this.touchStartPoint, cc.RayCastType.All);
-        
-        for(let i = 0; i<r1.length;i++) {
+
+        for (let i = 0; i < r1.length; i++) {
             //触碰到铰链关节
-            if(r1[i].collider.tag == cc.dataMgr.OBJECT_COLOR.JOINT) {
+            if (r1[i].collider.tag == cc.dataMgr.OBJECT_COLOR.JOINT) {
                 this.r1 = null;
                 this.r2 = null;
                 this.results = null;
@@ -448,20 +448,30 @@ cc.Class({
             }
         }
 
-        
+
         for (let i = 0; i < r1.length; i++) {
             //约定大于100的不可切
             if (r1[i].collider.tag > 100) {
+
                 r1.splice(i, 1);
+                i -= 1;
+            } else {
+                console.log("看这里");
+                console.log(r1[i].collider.tag);
             }
         }
         for (let i = 0; i < r2.length; i++) {
             if (r2[i].collider.tag > 100) {
                 r2.splice(i, 1);
+                i -= 1;
+            } else {
+                console.log("zai看这里");
+                console.log(r2[i].collider.tag);
             }
         }
 
-
+        console.log(r1);
+        console.log(r2);
         let results = r1.concat(r2);
 
         for (let i = 0; i < results.length; i++) {
@@ -473,6 +483,7 @@ cc.Class({
         this.r1 = r1;
         this.r2 = r2;
         this.results = results;
+        console.log(results);
     },
 
     // called every frame, uncomment this function to activate update callback

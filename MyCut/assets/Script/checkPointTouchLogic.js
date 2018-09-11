@@ -37,7 +37,7 @@ cc.Class({
             type: cc.Vec2,
         },
 
-        //0，击中目标，1掉落质量
+        //0，击中目标，1掉落质量,2间接碰撞
         checkpointClass: 0,
 
         //被切割物体的总质量
@@ -48,6 +48,12 @@ cc.Class({
         revoluteJointNodeArr: {
             default: [],
             type: cc.Node,
+        },
+
+        //用于给ui界面一个目标显示
+        targetSprite:{
+            default:null,
+            type: cc.Sprite,
         },
     },
 
