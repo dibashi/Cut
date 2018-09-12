@@ -455,23 +455,25 @@ cc.Class({
 
                 r1.splice(i, 1);
                 i -= 1;
-            } else {
-                console.log("看这里");
-                console.log(r1[i].collider.tag);
-            }
+            } 
+            // else {
+            //     console.log("看这里");
+            //     console.log(r1[i].collider.tag);
+            // }
         }
         for (let i = 0; i < r2.length; i++) {
             if (r2[i].collider.tag > 100) {
                 r2.splice(i, 1);
                 i -= 1;
-            } else {
-                console.log("zai看这里");
-                console.log(r2[i].collider.tag);
-            }
+            } 
+            // else {
+            //     console.log("zai看这里");
+            //     console.log(r2[i].collider.tag);
+            // }
         }
 
-        console.log(r1);
-        console.log(r2);
+        // console.log(r1);
+        // console.log(r2);
         let results = r1.concat(r2);
 
         for (let i = 0; i < results.length; i++) {
@@ -483,7 +485,7 @@ cc.Class({
         this.r1 = r1;
         this.r2 = r2;
         this.results = results;
-        console.log(results);
+        //console.log(results);
     },
 
     // called every frame, uncomment this function to activate update callback
