@@ -60,7 +60,8 @@ cc.Class({
     },
 
     touchOpen: function () {
-        //var canvas = cc.find('Canvas');
+        this.halfWinWidth = cc.find('Canvas').width*0.5;
+        this.halfWinHeight = cc.find('Canvas').height*0.5;
         this.node.on("touchstart", this.onTouchStart, this);
         this.node.on('touchmove', this.onTouchMove, this);
         this.node.on('touchend', this.onTouchEnd, this);
@@ -78,11 +79,6 @@ cc.Class({
         this.currentNode.setPosition(cc.v2(0, 0));
 
 
-
-        // let pathOfPrefab = "Prefab/checkpoint" + cc.dataMgr.currentCheckPoint;
-        // cc.loader.loadRes(pathOfPrefab, function (err, prefab) {
-        //     self.checkPointLoadSuccess(prefab, cc.v2(360, 640));
-        // });
 
     },
 
@@ -429,8 +425,8 @@ cc.Class({
         let point = this.touchPoint;
 
         this.ctx.clear();
-        this.ctx.moveTo(this.touchStartPoint.x - 360, this.touchStartPoint.y - 640);
-        this.ctx.lineTo(point.x - 360, point.y - 640);
+        this.ctx.moveTo(this.touchStartPoint.x - this.halfWinWidth, this.touchStartPoint.y - this.halfWinHeight);
+        this.ctx.lineTo(point.x - this.halfWinWidth, point.y - this.halfWinHeight);
         this.ctx.stroke();
 
         let manager = cc.director.getPhysicsManager();
@@ -478,7 +474,7 @@ cc.Class({
 
         for (let i = 0; i < results.length; i++) {
             let p = results[i].point;
-            this.ctx.circle(p.x - 360, p.y - 640, 5);
+            this.ctx.circle(p.x - this.halfWinWidth, p.y - this.halfWinHeight, 5);
         }
         this.ctx.fill();
 
