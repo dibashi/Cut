@@ -6,8 +6,8 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        diamondLabel: cc.Label,
-
+        crownLabel: cc.Label,
+        progressLabel:cc.Label,
         checkPoints: {
             default: null,
             type: cc.Node,
@@ -107,6 +107,8 @@ cc.Class({
         //console.log(jsonObj);
         let checkPoints = this.checkPoints.children;
 
+        this.label_crownCount = 0;
+        this.label_progressCount = 0;
         for(let i = 0; i<checkPoints.length;i++) {
             let crownCount = parseInt(jsonObj[i].crownCount);
             //显示皇冠数量
@@ -115,9 +117,15 @@ cc.Class({
             this.showPanel(checkPoints[i],crownCount);
             //是否枷锁 //是否可玩
             this.showLock(checkPoints[i],i,maxCheckpoint);
+
+            this.label_crownCount += crownCount;
+            if(crownCount>0) {
+                this.label_progressCount += 1;
+            }
         }
 
-
+        this.crownLabel.string = "X" + this.label_crownCount;
+        this.progressLabel.string = this.label_progressCount + "/" + checkPoints.length;
         //给所有关卡 添加星数，有星数的 过关，过关的方块碎了，否则完好，max后的关卡 要锁上
     },
 
@@ -157,8 +165,8 @@ cc.Class({
 
     showLock:function(checkPointNode,index,maxCheckpoint) {
         if(index>=maxCheckpoint) {
-            // checkPointNode.getComponent(cc.Button).interactable = false;
-            // checkPointNode.getChildByName("lock").active = true;
+            checkPointNode.getComponent(cc.Button).interactable = false;
+            checkPointNode.getChildByName("lock").active = true;
         } else {
             checkPointNode.getComponent(cc.Button).interactable = true;
             checkPointNode.getChildByName("lock").active = false;
