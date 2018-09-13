@@ -7,6 +7,8 @@ export default class DataMgr extends cc.Component {
 
     //当前玩家选择的关卡 游戏中的关卡
     currentCheckPoint = -1;
+    //一共关卡数
+    MAX_CHECKPOINT_COUNT =20;
 
     //根据tag设置颜色,还要根据tag来确定哪些可切，哪些不可切， 约定！！可切的tag<100 不可切的 100< tag <200
     //target tag = 102； 
@@ -44,7 +46,7 @@ export default class DataMgr extends cc.Component {
             var checkPointJsonData = [];
             var j = {};
             checkPointJsonData.push({crownCount:"0"});
-            for (var i = 1; i < 20; i++) {
+            for (var i = 1; i < this.MAX_CHECKPOINT_COUNT; i++) {
                 j.crownCount = "0"; 
                 
                 checkPointJsonData.push(j);

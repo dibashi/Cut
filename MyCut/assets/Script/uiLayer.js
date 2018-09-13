@@ -114,7 +114,7 @@ cc.Class({
     reNewClick: function () {
         this.gameLayer.getComponent("gameLayer").reNew();
         //this.nextNode.getComponent(cc.Animation).play("nextNodeBackAni");
-        this.nextNode.runAction(cc.moveTo(0.3,cc.v2(0,-1000)));
+        this.nextNode.runAction(cc.moveTo(0.3, cc.v2(0, -1000)));
         this.refreash();
     },
 
@@ -124,9 +124,11 @@ cc.Class({
 
     nextCheckpointClick: function () {
         //todo 这里没有检测是否越界！！！
+
+
         cc.dataMgr.currentCheckPoint += 1;
 
-        
+
 
         this.reNewClick();
     },
@@ -135,14 +137,17 @@ cc.Class({
 
         console.log(event);
         for (let i = 0; i < this.honors.children.length; i++) {
-            this.honors.children[i].color = cc.color(65,50, 50, 255);
+            this.honors.children[i].color = cc.color(65, 50, 50, 255);
         }
 
         for (let i = 0; i < event.detail.crownCount; i++) {
-            this.honors.children[i].color = cc.color(255,255, 255, 255);
+            this.honors.children[i].color = cc.color(255, 255, 255, 255);
+        }
+        
+        if (cc.dataMgr.currentCheckPoint < cc.dataMgr.MAX_CHECKPOINT_COUNT) {
+            this.nextNode.getComponent(cc.Animation).play("nextNodeAni");
         }
 
-        this.nextNode.getComponent(cc.Animation).play("nextNodeAni");
     }
 
 });
