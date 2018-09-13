@@ -10,6 +10,7 @@ export default class AudioMgr extends cc.Component {
         bg: null,
         eatStar:null,
     };
+    isPlay = true;
 
     _jumpID = null;
 
@@ -29,6 +30,7 @@ export default class AudioMgr extends cc.Component {
             if (!err) {
                 self._audioSource_o.bgm = clip;
                 self.playBg();
+                
             }
         });
         cc.loader.loadRes("sound/eatStar", cc.AudioClip, function (err, clip) {
@@ -43,14 +45,27 @@ export default class AudioMgr extends cc.Component {
 
     //type_s 为这个音乐的名称
     playEffect(type_s) {
-        let source = this._audioSource_o[type_s];
-        cc.audioEngine.setEffectsVolume(1.0);
-        cc.audioEngine.playEffect(source, false);
+        if(this.isPlay) {
+            let source = this._audioSource_o[type_s];
+            cc.audioEngine.setEffectsVolume(1.0);
+            cc.audioEngine.playEffect(source, false);
+        }
+     
       
     }
 
     stopEffect() {
 
+    }
+
+    stopAll() {
+        this.isPlay = false;
+        this.stopBg();
+    }
+
+    openAll() {
+        this.isPlay = true;
+        this.playBg();
     }
 
     playBg() {
@@ -63,6 +78,7 @@ export default class AudioMgr extends cc.Component {
 
     stopBg() {
         cc.audioEngine.stopMusic();
+        this.isPlay = false;
     }
 
     pauseAll() {

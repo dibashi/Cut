@@ -24,6 +24,20 @@ cc.Class({
         },
 
 
+        onMusicSpriteFrame: {
+            default:null,
+            type: cc.SpriteFrame,
+        },
+
+        offMusicSpriteFrame: {
+            default:null,
+            type:cc.SpriteFrame,
+        },
+        musicSprite: {
+            default:null,
+            type:cc.Sprite,
+        }
+
     },
 
     goCheckpoint: function (event, eventData) {
@@ -46,6 +60,12 @@ cc.Class({
             //let AudioMgr = require("AudioMgr");
             cc.audioMgr = new AudioMgr();
             cc.audioMgr.init();
+        }
+
+        if(cc.audioMgr.isPlay) {
+            this.musicSprite.spriteFrame = this.onMusicSpriteFrame;
+        } else {
+            this.musicSprite.spriteFrame = this.offMusicSpriteFrame;
         }
       
          this.refreshCheckPoint();
@@ -153,5 +173,15 @@ cc.Class({
     goMainLayer: function () {
 
         cc.director.loadScene('start');
+    },
+
+    musicClick:function() {
+        if(cc.audioMgr.isPlay) {
+            cc.audioMgr.stopAll();
+            this.musicSprite.spriteFrame = this.offMusicSpriteFrame;
+        } else {
+            cc.audioMgr.openAll();
+            this.musicSprite.spriteFrame = this.onMusicSpriteFrame;
+        }
     },
 });
