@@ -106,6 +106,10 @@ cc.Class({
 
         this.halfWinHeight = cc.find('Canvas').height*0.5;
 
+        //标记 是否正在向上或者向下
+
+        this.dirUp = false;
+        this.dirDown = false;
         
     },
 
@@ -116,7 +120,14 @@ cc.Class({
     reNewClick: function () {
         this.gameLayer.getComponent("gameLayer").reNew();
         //this.nextNode.getComponent(cc.Animation).play("nextNodeBackAni");
-        this.nextNode.runAction(cc.moveTo(1.0, cc.v2(0, -1000)));
+        //this.nextNode.runAction(cc.moveTo(1.0, cc.v2(0, -1000)));
+
+        if(!this.dirDown) {
+            this.dirDown = true;
+            let ac = cc.moveTo(1.0, cc.v2(0, -1000));
+            let fc = cc.callFunc(this.dirDowned,this);
+            this.nextNode.runAction(cc.sequence(ac,fc));
+        }
         this.refreash();
     },
 
@@ -148,9 +159,23 @@ cc.Class({
 
         if (cc.dataMgr.currentCheckPoint < cc.dataMgr.MAX_CHECKPOINT_COUNT) {
             //this.nextNode.getComponent(cc.Animation).play("nextNodeAni");
-            this.nextNode.runAction(cc.moveTo(1.0,cc.v2(0,-this.halfWinHeight + this.nextNode.height*0.5)))
+            if(!this.dirUp) {
+                this.dirUp = true;
+                let ac = cc.moveTo(1.0,cc.v2(0,-this.halfWinHeight + this.nextNode.height*0.5 ));
+                let fc = cc.callFunc(this.dirUped,this);
+                this.nextNode.runAction(cc.sequence(ac,fc));
+            }
+          
         }
 
+    },
+
+    dirUped:function() {
+        this.dirUp = false;
+    },
+
+    dirDowned:function() {
+        this.dirDown = false;
     }
 
 });
