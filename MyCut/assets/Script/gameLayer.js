@@ -90,10 +90,26 @@ cc.Class({
 
     readerHelpLine: function () {
         this.reNew();
-        let pointBegin = this.currentNode.getComponent("checkPointTouchLogic").helpTouchBegin;
-        let pointEnd = this.currentNode.getComponent("checkPointTouchLogic").helpTouchEnd;
-        this.ctx.moveTo(pointBegin.x, pointBegin.y);
-        this.ctx.lineTo(pointEnd.x, pointEnd.y);
+        if(this.currentNode.getComponent("checkPointTouchLogic").helpLineCount == 1) {
+            let pointBegin = this.currentNode.getComponent("checkPointTouchLogic").helpTouchBegin;
+            let pointEnd = this.currentNode.getComponent("checkPointTouchLogic").helpTouchEnd;
+
+            this.drawHLine(pointBegin,pointEnd);
+        } else if(this.currentNode.getComponent("checkPointTouchLogic").helpLineCount == 2) {
+            let pointBegin = this.currentNode.getComponent("checkPointTouchLogic").helpTouchBegin;
+            let pointEnd = this.currentNode.getComponent("checkPointTouchLogic").helpTouchEnd;
+            this.drawHLine(pointBegin,pointEnd);
+
+            let pointBegin1 = this.currentNode.getComponent("checkPointTouchLogic").helpTouchBegin1;
+            let pointEnd1 = this.currentNode.getComponent("checkPointTouchLogic").helpTouchEnd1;
+            this.drawHLine(pointBegin1,pointEnd1);
+        }
+      
+    },
+
+    drawHLine:function(p1,p2) {
+        this.ctx.moveTo(p1.x, p1.y);
+        this.ctx.lineTo(p2.x, p2.y);
         this.ctx.stroke();
     },
 

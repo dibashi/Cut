@@ -27,12 +27,24 @@ cc.Class({
         //当前任务进度
         currentResultCount: 0,
 
+        helpLineCount:1,
+
         helpTouchBegin: {
             default: null,
             type: cc.Vec2,
         },
 
         helpTouchEnd: {
+            default: null,
+            type: cc.Vec2,
+        },
+
+        helpTouchBegin1: {
+            default: null,
+            type: cc.Vec2,
+        },
+
+        helpTouchEnd1: {
             default: null,
             type: cc.Vec2,
         },
