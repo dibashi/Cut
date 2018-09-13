@@ -57,7 +57,7 @@ cc.Class({
        console.log("碰到了！ indirectCol");
         if (otherCollider.node.group === "indirectCol" && this.isDeadFlag == false) {
             this.isDeadFlag = true;
-
+            cc.audioMgr.playEffect("eatStar");
             console.log("碰到了！ indirectCol");
             this.node.parent.parent.getComponent("gameLayer").hittedTarget();
             this.node.removeFromParent(false);

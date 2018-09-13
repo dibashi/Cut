@@ -56,6 +56,7 @@ cc.Class({
        // let isWin = cc.find("Canvas").getComponent("gameScene").guanKaWin;
         if (otherCollider.node.group === "cutSquare" && this.isDeadFlag == false) {
             this.isDeadFlag = true;
+            cc.audioMgr.playEffect("eatStar");
 
             //console.log("碰到了！");
             this.node.parent.parent.getComponent("gameLayer").hittedTarget();

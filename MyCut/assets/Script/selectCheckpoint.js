@@ -1,5 +1,7 @@
 import DataMgr from 'DataMgr';
 
+import AudioMgr from 'AudioMgr';
+
 cc.Class({
     extends: cc.Component,
 
@@ -38,6 +40,12 @@ cc.Class({
           
             cc.dataMgr = new DataMgr();
             cc.dataMgr.initData();
+        }
+
+        if (!cc.audioMgr) {
+            //let AudioMgr = require("AudioMgr");
+            cc.audioMgr = new AudioMgr();
+            cc.audioMgr.init();
         }
       
          this.refreshCheckPoint();
