@@ -51,11 +51,17 @@ cc.Class({
         // cc.director.getPhysicsManager().debugDrawFlags = 0; //-设置为0则关闭调试
         cc.director.getPhysicsManager().gravity = cc.v2(0, -320);//-320像素/秒的平方，这个是默认值，为了以后调试先放在这
 
-
-
-
+       
+        let self = this;
+        this.node.on('checkpointSuccess', function(event) {
+            console.log("接收到 关卡成功事件");
+            event.stopPropagation();
+            self.uiLayer.getComponent("uiLayer").onCheckpointSuccess(event);  
+        });
     },
 
+   
+    
     start: function () {
 
         // console.log("game scenen on start");

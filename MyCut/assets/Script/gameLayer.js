@@ -69,7 +69,7 @@ cc.Class({
 
 
     checkpointInit: function () {
-        let checkpointIndex = parseInt(cc.dataMgr.currentCheckPoint) - 1;
+        let checkpointIndex = cc.dataMgr.currentCheckPoint - 1;
 
         this.currentNode = cc.instantiate(this.checkpoints[checkpointIndex]);
 

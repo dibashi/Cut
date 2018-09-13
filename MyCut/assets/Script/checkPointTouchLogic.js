@@ -42,7 +42,7 @@ cc.Class({
 
         //被切割物体的总质量
         totalMass: 0,
-        currentMass:0.0,
+        currentMass: 0.0,
 
         //旋转关节的节点集合，用于在gameLayer中检测 分配新生成的刚体
         revoluteJointNodeArr: {
@@ -51,18 +51,22 @@ cc.Class({
         },
 
         //用于给ui界面一个目标显示 蓝的不用赋值
-        targetSprite:{
-            default:null,
+        targetSprite: {
+            default: null,
             type: cc.Sprite,
         },
     },
 
     onLoad: function () {
 
-        for(let i = 0; i<this.revoluteJointNodeArr.length;i++) {
+        for (let i = 0; i < this.revoluteJointNodeArr.length; i++) {
             this.revoluteJointNodeArr[i].zIndex = 3;
         }
+
+
     },
+
+
 
     start: function () {
         if (this.checkpointClass == 1) {
@@ -90,6 +94,9 @@ cc.Class({
         console.log("check is over");
 
         if (this.currentResultCount >= this.resultCount) {
+            console.log("发送事件  checkpointSuccess");
+            // this.node.emit('checkpointSuccess');
+
             //皇冠数量储存 
             let crownCount = 3 - (this.currentTouchCount - this.touchCount);
             if (crownCount > 3) {
@@ -97,8 +104,14 @@ cc.Class({
             } else if (crownCount < 1) {
                 crownCount = 1;
             }
+            let ea = new cc.Event.EventCustom('checkpointSuccess', true);
+            ea.detail = { "crownCount": crownCount };
+           console.log(ea);
+            this.node.dispatchEvent(ea);
+
+
             //获取当前关卡索引 往json对象数组插入数据
-            let checkpointIndex = parseInt(cc.dataMgr.currentCheckPoint) - 1;
+            let checkpointIndex = cc.dataMgr.currentCheckPoint - 1;
             let stringOfJSON = cc.sys.localStorage.getItem("checkPointJsonData");
             let jsonObj = JSON.parse(stringOfJSON);
             if (crownCount > jsonObj[checkpointIndex].crownCount) {
@@ -116,11 +129,11 @@ cc.Class({
         }
     },
 
-    hittedMassTrigger:function(mass) {
+    hittedMassTrigger: function (mass) {
         this.currentMass += mass;
         console.log(this.currentMass);
-        
-        this.currentResultCount = Math.round(this.currentMass/this.totalMass * 100);
+
+        this.currentResultCount = Math.round(this.currentMass / this.totalMass * 100);
     },
 
     update() {

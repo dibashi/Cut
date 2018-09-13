@@ -28,7 +28,7 @@ cc.Class({
        
 
         console.log(eventData);
-        cc.dataMgr.currentCheckPoint = eventData;
+        cc.dataMgr.currentCheckPoint = parseInt(eventData);
         cc.director.loadScene('gameScene');
     },
 
