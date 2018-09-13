@@ -54,10 +54,10 @@ cc.Class({
         //需要一个标记位，用来记录
         //需要判断当前游戏是否胜利，这是关卡模式的要求，在无尽模式中永远未胜利
        // let isWin = cc.find("Canvas").getComponent("gameScene").guanKaWin;
-       console.log(otherCollider);
+      // console.log(otherCollider);
         if (otherCollider.tag == 2 ) {
             let mass = otherCollider.node.getComponent(cc.RigidBody).getMass();
-            console.log("调用！！！");
+           // console.log("调用！！！");
 
             //console.log("碰到了！");
             this.node.parent.parent.getComponent("gameLayer").hittedMassTrigger(mass);

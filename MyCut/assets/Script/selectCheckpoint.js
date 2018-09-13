@@ -43,7 +43,7 @@ cc.Class({
     goCheckpoint: function (event, eventData) {
        
 
-        console.log(eventData);
+      //  console.log(eventData);
         cc.dataMgr.currentCheckPoint = parseInt(eventData);
         cc.director.loadScene('gameScene');
     },

@@ -116,8 +116,8 @@ cc.Class({
         this.r1 = this.r2 = this.results = null;
         this.touchStartPoint = this.touchPoint = cc.v2(event.touch.getLocation());
 
-        // console.log("touchStart");
-        //  console.log(this.touchStartPoint);
+        console.log("touchStart");
+         console.log(this.node.convertToNodeSpaceAR(this.touchStartPoint));
     },
 
     onTouchMove: function (event) {
@@ -127,6 +127,8 @@ cc.Class({
     },
 
     onTouchEnd: function (event) {
+              console.log("touchend");
+         console.log(this.node.convertToNodeSpaceAR(this.touchPoint));
         this.touchPoint = cc.v2(event.touch.getLocation());
         this.recalcResults();
         this.touching = false;

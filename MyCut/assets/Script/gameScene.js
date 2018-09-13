@@ -40,7 +40,7 @@ cc.Class({
     onLoad: function () {
 
 
-        console.log("game scene on load");
+      //  console.log("game scene on load");
 
         cc.director.getPhysicsManager().enabled = true; //开启物理系统，否则在编辑器里做的一切都没有任何效果
         //cc.director.getPhysicsManager().debugDrawFlags = //cc.PhysicsManager.DrawBits.e_aabbBit |
@@ -54,7 +54,7 @@ cc.Class({
        
         let self = this;
         this.node.on('checkpointSuccess', function(event) {
-            console.log("接收到 关卡成功事件");
+          //  console.log("接收到 关卡成功事件");
             event.stopPropagation();
             self.uiLayer.getComponent("uiLayer").onCheckpointSuccess(event);  
         });

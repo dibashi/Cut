@@ -59,7 +59,7 @@ cc.Class({
             this.targetSprite.spriteFrame = this.touchImg.spriteFrame;
 
         } else if (this.checkpointClass == 1) {
-            console.log("执行到了 area img");
+           // console.log("执行到了 area img");
 
             let w = this.targetSprite.node.width;
             let h = this.targetSprite.node.height;
@@ -148,7 +148,7 @@ cc.Class({
 
     onCheckpointSuccess: function (event) {
 
-        console.log(event);
+      //  console.log(event);
         for (let i = 0; i < this.honors.children.length; i++) {
             this.honors.children[i].color = cc.color(65, 50, 50, 255);
         }
