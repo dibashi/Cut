@@ -58,9 +58,13 @@ cc.Class({
         if (otherCollider.node.group === "indirectCol" && this.isDeadFlag == false) {
             this.isDeadFlag = true;
             cc.audioMgr.playEffect("eatStar");
-            console.log("碰到了！ indirectCol");
+           
+            let ac = cc.spawn(cc.scaleTo(0.3,3),cc.fadeOut(0.3));
+            let fc = cc.callFunc(this.dead,this);
+            this.node.runAction(cc.sequence(ac,fc));
+            //console.log("碰到了！");
             this.node.parent.parent.getComponent("gameLayer").hittedTarget();
-            this.node.removeFromParent(false);
+          
             //this.dead();
             //先用这个，将来用上面那个
             // cc.find("Canvas").getComponent("gameScene").gameOver();
@@ -69,33 +73,33 @@ cc.Class({
     },
 
     dead: function () {
-        cc.find("Canvas").getComponent("gameScene").slowMotion(0.15);
-        this.boomAni();
+        this.node.removeFromParent(false);
     },
 
-    boomAni: function () {
-        let gameSoundBG = cc.sys.localStorage.getItem('gameSoundBG');
-        if (gameSoundBG == 1) {
-            cc.audioEngine.playEffect(this.boomAudio, false);
-        }
-        this.node.group = "default";
-        //this.node.active = false;
-        this.node.opacity = 0;
-        this.unscheduleAllCallbacks();
 
-        let aniBoom = cc.instantiate(this.teXiaoBoom);
-        let armatureDisplay = aniBoom.getComponent(dragonBones.ArmatureDisplay);
-        armatureDisplay.playAnimation("boom");
-        this.node.parent.addChild(aniBoom);
-        aniBoom.setPosition(this.node.position);
-        armatureDisplay.addEventListener(dragonBones.EventObject.LOOP_COMPLETE, this.baozhaOver, this);
-    },
+    // boomAni: function () {
+    //     let gameSoundBG = cc.sys.localStorage.getItem('gameSoundBG');
+    //     if (gameSoundBG == 1) {
+    //         cc.audioEngine.playEffect(this.boomAudio, false);
+    //     }
+    //     this.node.group = "default";
+    //     //this.node.active = false;
+    //     this.node.opacity = 0;
+    //     this.unscheduleAllCallbacks();
 
-    baozhaOver: function () {
-        this.unscheduleAllCallbacks();
-        cc.find("Canvas").getComponent("gameScene").gameOver();
-        this.node.destroy();
-    },
+    //     let aniBoom = cc.instantiate(this.teXiaoBoom);
+    //     let armatureDisplay = aniBoom.getComponent(dragonBones.ArmatureDisplay);
+    //     armatureDisplay.playAnimation("boom");
+    //     this.node.parent.addChild(aniBoom);
+    //     aniBoom.setPosition(this.node.position);
+    //     armatureDisplay.addEventListener(dragonBones.EventObject.LOOP_COMPLETE, this.baozhaOver, this);
+    // },
+
+    // baozhaOver: function () {
+    //     this.unscheduleAllCallbacks();
+    //     cc.find("Canvas").getComponent("gameScene").gameOver();
+    //     this.node.destroy();
+    // },
 
     // 只在两个碰撞体结束接触时被调用一次
     onEndContact: function (contact, selfCollider, otherCollider) {

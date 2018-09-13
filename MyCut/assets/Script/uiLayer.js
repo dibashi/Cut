@@ -104,7 +104,9 @@ cc.Class({
 
     start: function () {
 
+        this.halfWinHeight = cc.find('Canvas').height*0.5;
 
+        
     },
 
     backClick: function () {
@@ -114,7 +116,7 @@ cc.Class({
     reNewClick: function () {
         this.gameLayer.getComponent("gameLayer").reNew();
         //this.nextNode.getComponent(cc.Animation).play("nextNodeBackAni");
-        this.nextNode.runAction(cc.moveTo(0.3, cc.v2(0, -1000)));
+        this.nextNode.runAction(cc.moveTo(1.0, cc.v2(0, -1000)));
         this.refreash();
     },
 
@@ -143,9 +145,10 @@ cc.Class({
         for (let i = 0; i < event.detail.crownCount; i++) {
             this.honors.children[i].color = cc.color(255, 255, 255, 255);
         }
-        
+
         if (cc.dataMgr.currentCheckPoint < cc.dataMgr.MAX_CHECKPOINT_COUNT) {
-            this.nextNode.getComponent(cc.Animation).play("nextNodeAni");
+            //this.nextNode.getComponent(cc.Animation).play("nextNodeAni");
+            this.nextNode.runAction(cc.moveTo(1.0,cc.v2(0,-this.halfWinHeight + this.nextNode.height*0.5)))
         }
 
     }
