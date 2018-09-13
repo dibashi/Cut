@@ -50,7 +50,7 @@ cc.Class({
             type: cc.Node,
         },
 
-        //用于给ui界面一个目标显示
+        //用于给ui界面一个目标显示 蓝的不用赋值
         targetSprite:{
             default:null,
             type: cc.Sprite,
