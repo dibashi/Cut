@@ -191,7 +191,7 @@
         "y": -250
       }
     ],
-    "_id": "eeeqQGysFHkKTf9Qa29VAf"
+    "_id": "2fegcxDkdBxo8y6w7DYCHu"
   },
   {
     "__type__": "cc.RigidBody",
@@ -215,7 +215,7 @@
     "_fixedRotation": false,
     "enabledContactListener": false,
     "bullet": false,
-    "_id": "63Ro+FGHhJcLgDjf7NX79G"
+    "_id": "21dK/viz1P9JL07US6UU1H"
   },
   {
     "__type__": "44ebeIDGjBGiYlQFJBgKLFw",
@@ -225,7 +225,7 @@
       "__id__": 2
     },
     "_enabled": true,
-    "_id": "185vAAQftPTqGCYcXvdSdJ"
+    "_id": "fbEQiP1exBmqfCsZ6YTScD"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -336,7 +336,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "fbz/0Go9pGCZEOHUmnVFM0"
+    "_id": "95ifk2ylNJXoZ0H3RtwFEE"
   },
   {
     "__type__": "cc.RigidBody",
@@ -360,7 +360,7 @@
     "_fixedRotation": false,
     "enabledContactListener": true,
     "bullet": false,
-    "_id": "3dH2bY7YVKN7n9JkYZtTSx"
+    "_id": "093UQG11hKIb1SFiksvS3Z"
   },
   {
     "__type__": "cc.PhysicsCircleCollider",
@@ -382,7 +382,7 @@
       "y": 0
     },
     "_radius": 18,
-    "_id": "2c++Yg0JFDyI0Ubk5I5mj+"
+    "_id": "9bY0OLwQ5Hi7y4B70GIOO2"
   },
   {
     "__type__": "e4fd7MPrOxIyoGO4+5E/8MA",
@@ -393,7 +393,7 @@
     },
     "_enabled": true,
     "isDeadFlag": false,
-    "_id": "dcHjRbBodL84DQlO0VR7mQ"
+    "_id": "beuRROQu5A7bHiK3e8XQjm"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -497,7 +497,7 @@
     "_fixedRotation": false,
     "enabledContactListener": false,
     "bullet": false,
-    "_id": "44ogzi2HxMILpMuiPLhMqH"
+    "_id": "6byNZhrOJORJD1OemWImks"
   },
   {
     "__type__": "cc.PhysicsPolygonCollider",
@@ -540,7 +540,7 @@
         "y": -120
       }
     ],
-    "_id": "0dXo5aLa9ExqIMD2OItz+3"
+    "_id": "62j0sjGENCraGZ/I5nUNLJ"
   },
   {
     "__type__": "44ebeIDGjBGiYlQFJBgKLFw",
@@ -550,7 +550,7 @@
       "__id__": 13
     },
     "_enabled": true,
-    "_id": "b6iiGzpsFNL7iftgXgrj76"
+    "_id": "e6A9iPkYxEGJ5zJVe9jJCi"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -575,22 +575,25 @@
     "resultCount": 1,
     "currentTouchCount": 0,
     "currentResultCount": 0,
+    "helpLineCount": 1,
     "helpTouchBegin": {
       "__type__": "cc.Vec2",
-      "x": -147,
-      "y": 346
+      "x": 126,
+      "y": -313
     },
     "helpTouchEnd": {
       "__type__": "cc.Vec2",
-      "x": 13,
-      "y": 116
+      "x": 242,
+      "y": -413
     },
+    "helpTouchBegin1": null,
+    "helpTouchEnd1": null,
     "checkpointClass": 0,
     "totalMass": 0,
     "currentMass": 0,
     "revoluteJointNodeArr": [],
     "targetSprite": null,
-    "_id": "a0K2D6ZopCoJSDPi7dlktm"
+    "_id": "1bXZ/o8BtJ86PMBKxttBkD"
   },
   {
     "__type__": "cc.PrefabInfo",

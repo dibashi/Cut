@@ -51,7 +51,7 @@ export default class DataMgr extends cc.Component {
                 
                 checkPointJsonData.push(j);
             }
-          //  var a = JSON.stringify(checkPointJsonData);
+            var a = JSON.stringify(checkPointJsonData);
          //   console.log(a);
             cc.sys.localStorage.setItem("checkPointJsonData",a);
         }
