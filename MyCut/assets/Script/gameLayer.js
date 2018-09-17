@@ -85,11 +85,12 @@ cc.Class({
     reNew: function () {
         //console.log("re new");
         this.currentNode.removeFromParent();
+        this.ctx.clear();
         this.checkpointInit();
     },
 
     renderHelpLine: function () {
-        this.reNew();
+        //this.reNew();
         if(this.currentNode.getComponent("checkPointTouchLogic").helpLineCount == 1) {
             let pointBegin = this.currentNode.getComponent("checkPointTouchLogic").helpTouchBegin;
             let pointEnd = this.currentNode.getComponent("checkPointTouchLogic").helpTouchEnd;

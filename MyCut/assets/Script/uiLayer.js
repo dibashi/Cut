@@ -153,6 +153,7 @@ cc.Class({
     },
 
     helpCallback: function () {
+        this.reNewClick();
         this.gameLayer.getComponent("gameLayer").renderHelpLine();
     },
 

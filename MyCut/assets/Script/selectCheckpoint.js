@@ -192,4 +192,8 @@ cc.Class({
             this.musicSprite.spriteFrame = this.onMusicSpriteFrame;
         }
     },
+
+    onLeaderboardClick:function() {
+        console.log("onLeaderboardClick~");
+    },
 });
