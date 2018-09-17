@@ -66,7 +66,9 @@ export default class DataMgr extends cc.Component {
         console.log("getRankData");
         cc.loader.loadRes("Prefab/RankingListView", (err, prefab) => {
             if (!err) {
+               
                 var node = cc.instantiate(prefab);
+                console.log("读到了prefab");
                 if (shareTicket != undefined) {
                     node.getComponent(cc.Component).shareTicket = shareTicket;
                 }

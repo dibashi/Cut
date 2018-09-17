@@ -1,7 +1,4 @@
-var GameConfig = require("GameConfig");
-var AnimLayerTool = require("AnimLayerTool");
-var GameTools = require("GameTools");
-var GameUiTools = require("GameUiTools");
+
 cc.Class({
     extends: cc.Component,
     // name: "RankingListView",
@@ -15,57 +12,57 @@ cc.Class({
         this.showAnimation(true);
     },
     start() {
-        GameUiTools.setButtonClickEvents(this, this.backButton, "backButtonFunc");
-        GameUiTools.setButtonClickEvents(this, this.shareButton, "shareButtonFunc");
-        AnimLayerTool.createShowMessageBox(120, -350, "分享到群里可查看群排行榜！", 0, this.node);
-        if (this.shareTicket != null) {
-            let shareNode = new cc.Node();
-            shareNode.addComponent(cc.Label).string = "群排行";
-            shareNode.setPosition(-260, 503);
-            this.node.addChild(shareNode);
-        }
-        if (CC_WECHATGAME) {
-            this.tex = new cc.Texture2D();
-            window.sharedCanvas.width = 720;
-            window.sharedCanvas.height = 1280;
-            // 发消息给子域
-            cc.log(this.shareTicket)
-            if (this.shareTicket != null) {
-                window.wx.postMessage({
-                    messageType: 5,
-                    MAIN_MENU_NUM: GameConfig.MAIN_MENU_NUM,
-                    shareTicket: this.shareTicket
-                });
-            } else {
-                window.wx.postMessage({
-                    messageType: 1,
-                    MAIN_MENU_NUM: GameConfig.MAIN_MENU_NUM,
-                });
-            }
-        } else {
-            let gameTypeNode = new cc.Node();
-            gameTypeNode.addComponent(cc.Label).string = "暂无排行榜数据";
-            this.node.addChild(gameTypeNode);
-            cc.log("获取排行榜数据。" + GameConfig.MAIN_MENU_NUM);
-        }
+        // GameUiTools.setButtonClickEvents(this, this.backButton, "backButtonFunc");
+        // GameUiTools.setButtonClickEvents(this, this.shareButton, "shareButtonFunc");
+       // AnimLayerTool.createShowMessageBox(120, -350, "分享到群里可查看群排行榜！", 0, this.node);
+        // if (this.shareTicket != null) {
+        //     let shareNode = new cc.Node();
+        //     shareNode.addComponent(cc.Label).string = "群排行";
+        //     shareNode.setPosition(-260, 503);
+        //     this.node.addChild(shareNode);
+        // }
+        // if (CC_WECHATGAME) {
+        //     this.tex = new cc.Texture2D();
+        //     window.sharedCanvas.width = 720;
+        //     window.sharedCanvas.height = 1280;
+        //     // 发消息给子域
+        //     cc.log(this.shareTicket)
+        //     if (this.shareTicket != null) {
+        //         window.wx.postMessage({
+        //             messageType: 5,
+        //             MAIN_MENU_NUM: GameConfig.MAIN_MENU_NUM,
+        //             shareTicket: this.shareTicket
+        //         });
+        //     } else {
+        //         window.wx.postMessage({
+        //             messageType: 1,
+        //             MAIN_MENU_NUM: GameConfig.MAIN_MENU_NUM,
+        //         });
+        //     }
+        // } else {
+        //     let gameTypeNode = new cc.Node();
+        //     gameTypeNode.addComponent(cc.Label).string = "暂无排行榜数据";
+        //     this.node.addChild(gameTypeNode);
+        //     cc.log("获取排行榜数据。" + GameConfig.MAIN_MENU_NUM);
+        // }
     },
 
     shareButtonFunc: function (event) {
-        GameTools.playSimpleAudioEngine(4);
-        setTimeout(() => {
-            GameTools.sharePicture("shareTicket");
-        }, 100);
+        // GameTools.playSimpleAudioEngine(4);
+        // setTimeout(() => {
+        //     GameTools.sharePicture("shareTicket");
+        // }, 100);
     },
 
     backButtonFunc: function (event) {
-        GameTools.playSimpleAudioEngine(0);
-        GameTools.removeRankData();
-        if (CC_WECHATGAME) {
-            window.wx.postMessage({// 发消息给子域
-                messageType: 4,
-                MAIN_MENU_NUM: GameConfig.MAIN_MENU_NUM,
-            });
-        }
+        // GameTools.playSimpleAudioEngine(0);
+        // GameTools.removeRankData();
+        // if (CC_WECHATGAME) {
+        //     window.wx.postMessage({// 发消息给子域
+        //         messageType: 4,
+        //         MAIN_MENU_NUM: GameConfig.MAIN_MENU_NUM,
+        //     });
+        // }
         this.node.destroy();
     },
 
@@ -80,12 +77,12 @@ cc.Class({
         }
     },
     update() {
-        this._updateSubDomainCanvas();
+      //  this._updateSubDomainCanvas();
     },
     showAnimation(isShow) {
-        if (isShow) {
-            AnimLayerTool.bottonAnim(this.backButton);
-            AnimLayerTool.bottonAnim(this.shareButton);
-        }
+        // if (isShow) {
+        //     AnimLayerTool.bottonAnim(this.backButton);
+        //     AnimLayerTool.bottonAnim(this.shareButton);
+        // }
     }
 });
