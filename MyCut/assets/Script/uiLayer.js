@@ -50,16 +50,24 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
-        // console.log("UI ONLOAD"); 
+
+        console.log("UI ONLOAD");
+
+        this.refreash();
+    },
+
+    refreash: function () {
+        console.log("UI refreash");
         // console.log(this.gameLayer.getComponent("gameLayer").currentNode.getComponent("checkPointTouchLogic").targetCount);
         this.checkPointJS = this.gameLayer.getComponent("gameLayer").currentNode.getComponent("checkPointTouchLogic");
         this.checkpointClass = this.checkPointJS.checkpointClass;
+        this.targetSprite.node.color = cc.color(255, 255, 255, 255);
         //击中完成关卡
         if (this.checkpointClass == 0) {
             this.targetSprite.spriteFrame = this.touchImg.spriteFrame;
 
         } else if (this.checkpointClass == 1) {
-           // console.log("执行到了 area img");
+            // console.log("执行到了 area img");
 
             let w = this.targetSprite.node.width;
             let h = this.targetSprite.node.height;
@@ -72,16 +80,14 @@ cc.Class({
         } else if (this.checkpointClass == 2) {
             let w = this.targetSprite.node.width;
             let h = this.targetSprite.node.height;
+            console.log("aaa");
+            console.log(this.checkPointJS.targetSprite);
             this.targetSprite.spriteFrame = this.checkPointJS.targetSprite.spriteFrame;
             this.targetSprite.node.width = w;
             this.targetSprite.node.height = h;
         }
-        this.refreash();
-    },
 
-    refreash: function () {
-        this.checkPointJS = this.gameLayer.getComponent("gameLayer").currentNode.getComponent("checkPointTouchLogic");
-        this.checkpointClass = this.checkPointJS.checkpointClass;
+      
         //  console.log("看下进度");
         this.cutProgressLabel.string = this.checkPointJS.currentTouchCount + "/" + this.checkPointJS.touchCount;
         //console.log(this.checkpointClass);
@@ -104,13 +110,13 @@ cc.Class({
 
     start: function () {
 
-        this.halfWinHeight = cc.find('Canvas').height*0.5;
+        this.halfWinHeight = cc.find('Canvas').height * 0.5;
 
         //标记 是否正在向上或者向下
 
         this.dirUp = false;
         this.dirDown = false;
-        
+
     },
 
     backClick: function () {
@@ -122,11 +128,11 @@ cc.Class({
         //this.nextNode.getComponent(cc.Animation).play("nextNodeBackAni");
         //this.nextNode.runAction(cc.moveTo(1.0, cc.v2(0, -1000)));
 
-        if(!this.dirDown) {
+        if (!this.dirDown) {
             this.dirDown = true;
             let ac = cc.moveTo(1.0, cc.v2(0, -1000));
-            let fc = cc.callFunc(this.dirDowned,this);
-            this.nextNode.runAction(cc.sequence(ac,fc));
+            let fc = cc.callFunc(this.dirDowned, this);
+            this.nextNode.runAction(cc.sequence(ac, fc));
         }
         this.refreash();
     },
@@ -148,7 +154,7 @@ cc.Class({
 
     onCheckpointSuccess: function (event) {
 
-      //  console.log(event);
+        //  console.log(event);
         for (let i = 0; i < this.honors.children.length; i++) {
             this.honors.children[i].color = cc.color(65, 50, 50, 255);
         }
@@ -159,22 +165,22 @@ cc.Class({
 
         if (cc.dataMgr.currentCheckPoint < cc.dataMgr.MAX_CHECKPOINT_COUNT) {
             //this.nextNode.getComponent(cc.Animation).play("nextNodeAni");
-            if(!this.dirUp) {
+            if (!this.dirUp) {
                 this.dirUp = true;
-                let ac = cc.moveTo(1.0,cc.v2(0,-this.halfWinHeight + this.nextNode.height*0.5 ));
-                let fc = cc.callFunc(this.dirUped,this);
-                this.nextNode.runAction(cc.sequence(ac,fc));
+                let ac = cc.moveTo(1.0, cc.v2(0, -this.halfWinHeight + this.nextNode.height * 0.5));
+                let fc = cc.callFunc(this.dirUped, this);
+                this.nextNode.runAction(cc.sequence(ac, fc));
             }
-          
+
         }
 
     },
 
-    dirUped:function() {
+    dirUped: function () {
         this.dirUp = false;
     },
 
-    dirDowned:function() {
+    dirDowned: function () {
         this.dirDown = false;
     }
 
