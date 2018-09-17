@@ -62,6 +62,40 @@ export default class DataMgr extends cc.Component {
         }
     };
 
+    getRankData(shareTicket) { //获取排行榜
+        console.log("getRankData");
+        cc.loader.loadRes("Prefab/RankingListView", (err, prefab) => {
+            if (!err) {
+                var node = cc.instantiate(prefab);
+                if (shareTicket != undefined) {
+                    node.getComponent(cc.Component).shareTicket = shareTicket;
+                }
+                cc.director.getScene().children[0].addChild(node);
+            }
+        });
+    };
+
+    removeRankData() {//移除排行榜数据
+        if (CC_WECHATGAME) {
+            window.wx.postMessage({
+                messageType: 0,
+            });
+        } else {
+            cc.log("移除排行榜数据。");
+        }
+    };
+    submitScore(score) { //提交得分
+        if (CC_WECHATGAME) {
+            window.wx.postMessage({
+                messageType: 3,
+                MAIN_MENU_NUM: GameConfig.MAIN_MENU_NUM,
+                score: score,
+            });
+        } else {
+            cc.log("提交得分:" + GameConfig.MAIN_MENU_NUM + " : " + score)
+        }
+    };
+
 
     // getRigidBodyColorByTag(tag) {
 

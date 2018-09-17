@@ -195,5 +195,6 @@ cc.Class({
 
     onLeaderboardClick:function() {
         console.log("onLeaderboardClick~");
+        cc.dataMgr.getRankData(null);
     },
 });
