@@ -185,7 +185,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "2d8EHp8KlJ6Jj26y5jmdew"
+    "_id": "e5sQnKfFJFqZE7tKwtMaqj"
   },
   {
     "__type__": "cc.Button",
@@ -238,7 +238,7 @@
     "_N$target": {
       "__id__": 2
     },
-    "_id": "abmxIlV8FJzq2Y1wYJfWp9"
+    "_id": "50qcaQyflHgrU62I6BVN84"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -340,7 +340,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "bbYH4GtR9FKZ96jQNmBXwT"
+    "_id": "derNa5Oj5KvILF+bi0K45Y"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -442,7 +442,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "64A0f3PupMG7pLznBr60Jc"
+    "_id": "54p8SfbepK6boVyCeEcK5n"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -542,7 +542,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "0dyN87weNEVJV6mzSVXx2e"
+    "_id": "19PgXc4j1GEYAnrZFEDOL3"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -647,7 +647,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "74CkyqoolLIq7mN+cLJOt+"
+    "_id": "d0rNCJm3pKRpgaWxdFM/Vi"
   },
   {
     "__type__": "cc.Button",
@@ -704,15 +704,15 @@
     "_N$target": {
       "__id__": 15
     },
-    "_id": "e7gijnxnZLnosLARbz+WWG"
+    "_id": "0d3vgN92lOeILV26VAAXi0"
   },
   {
     "__type__": "cc.ClickEvent",
     "target": {
       "__id__": 1
     },
-    "component": "cc.MissingScript",
-    "handler": "",
+    "component": "RankingListView",
+    "handler": "backButtonFunc",
     "customEventData": ""
   },
   {
@@ -813,7 +813,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "116n38aThLMpeHhb0qA8m7"
+    "_id": "c2STT8m7ZOoI2L2f5xOaSN"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -912,7 +912,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "c89txNyKdNp7G44oQZ71ZL"
+    "_id": "1aHS7q7SdNUahpOujhMCJy"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -943,7 +943,7 @@
       "__id__": 13
     },
     "shareTicket": null,
-    "_id": "11InOdz3ZNx5MCaGfpWeCm"
+    "_id": "feXB1KZcRJEbrjbhFTW583"
   },
   {
     "__type__": "cc.PrefabInfo",

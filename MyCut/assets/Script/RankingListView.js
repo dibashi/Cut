@@ -63,6 +63,7 @@ cc.Class({
         //         MAIN_MENU_NUM: GameConfig.MAIN_MENU_NUM,
         //     });
         // }
+        console.log("排行榜回退");
         this.node.destroy();
     },
 
