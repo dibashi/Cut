@@ -88,7 +88,7 @@ cc.Class({
         this.checkpointInit();
     },
 
-    readerHelpLine: function () {
+    renderHelpLine: function () {
         this.reNew();
         if(this.currentNode.getComponent("checkPointTouchLogic").helpLineCount == 1) {
             let pointBegin = this.currentNode.getComponent("checkPointTouchLogic").helpTouchBegin;

@@ -55,6 +55,11 @@ export default class DataMgr extends cc.Component {
          //   console.log(a);
             cc.sys.localStorage.setItem("checkPointJsonData",a);
         }
+
+        let rc = cc.sys.localStorage.getItem("recommendedCurrency");
+        if(!rc) {
+            cc.sys.localStorage.setItem("recommendedCurrency",0);
+        }
     };
 
 

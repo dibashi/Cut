@@ -40,6 +40,11 @@ cc.Class({
         honors: {
             default: null,
             type: cc.Node,
+        },
+
+        shareAlert: {
+            default: null,
+            type: cc.Prefab,
         }
 
     },
@@ -87,7 +92,7 @@ cc.Class({
             this.targetSprite.node.height = h;
         }
 
-      
+
         //  console.log("看下进度");
         this.cutProgressLabel.string = this.checkPointJS.currentTouchCount + "/" + this.checkPointJS.touchCount;
         //console.log(this.checkpointClass);
@@ -138,7 +143,17 @@ cc.Class({
     },
 
     helpClick: function () {
-        this.gameLayer.getComponent("gameLayer").readerHelpLine();
+
+
+        let ss = cc.instantiate(this.shareAlert);
+        ss.zIndex = 1000;
+        ss.getComponent("shareAlert").onWho = this.node;
+        this.node.addChild(ss);
+
+    },
+
+    helpCallback: function () {
+        this.gameLayer.getComponent("gameLayer").renderHelpLine();
     },
 
     nextCheckpointClick: function () {
@@ -146,7 +161,6 @@ cc.Class({
 
 
         cc.dataMgr.currentCheckPoint += 1;
-
 
 
         this.reNewClick();
