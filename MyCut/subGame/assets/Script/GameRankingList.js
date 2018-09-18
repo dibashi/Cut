@@ -143,7 +143,8 @@ export default class GameRankingList extends cc.Component {
                             weekNum = getres.KVDataList[0].value.week;
                         }
                         console.log("-- socreGet--" + scoreGet + " -- " + score + " -- " + weekNum);
-                        if (scoreGet > score && weekNum == self.getTimeWeek_i()) { //这里比较了是否超过了服务器的数据，若没超过则不上传
+                        //&& weekNum == self.getTimeWeek_i()
+                        if (scoreGet > score ) { //这里比较了是否超过了服务器的数据，若没超过则不上传
                             if (isOver)
                                 self.gameOverRank(MAIN_MENU_NUM);
                             return;
@@ -277,6 +278,7 @@ export default class GameRankingList extends cc.Component {
         }
     }
 
+    
     //好友排行列表
     fetchFriendData(MAIN_MENU_NUM) {
         let self = this;
@@ -306,8 +308,8 @@ export default class GameRankingList extends cc.Component {
                                     console.log("-- strValue " + strValue);
                                     let valueD = JSON.parse(strValue);
                                     if (typeof (valueD) == "object") {
-                                        if (valueD.week != nowWeek)
-                                            valueD.wxgame.score = 0;
+                                        // if (valueD.week != nowWeek)
+                                        //     valueD.wxgame.score = 0;
                                         data[i].KVDataList[0].value = valueD;
                                         console.log(valueD);
                                     }
@@ -371,6 +373,8 @@ export default class GameRankingList extends cc.Component {
         }
     }
 
+
+
     //群排行列表
     fetchGroupData(MAIN_MENU_NUM, shareTicket) {
         console.log("--- 子域群排行 ---" + shareTicket);
@@ -402,8 +406,8 @@ export default class GameRankingList extends cc.Component {
                                     console.log("-- strValue " + strValue);
                                     let valueD = JSON.parse(strValue);
                                     if (typeof (valueD) == "object") {
-                                        if (valueD.week != nowWeek)
-                                            valueD.wxgame.score = 0;
+                                        // if (valueD.week != nowWeek)
+                                        //     valueD.wxgame.score = 0;
                                         data[i].KVDataList[0].value = valueD;
                                         console.log(valueD);
                                     }
