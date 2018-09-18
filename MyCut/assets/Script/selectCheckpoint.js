@@ -7,7 +7,7 @@ cc.Class({
 
     properties: {
         crownLabel: cc.Label,
-        progressLabel:cc.Label,
+        progressLabel: cc.Label,
         checkPoints: {
             default: null,
             type: cc.Node,
@@ -25,25 +25,46 @@ cc.Class({
 
 
         onMusicSpriteFrame: {
-            default:null,
+            default: null,
             type: cc.SpriteFrame,
         },
 
         offMusicSpriteFrame: {
-            default:null,
-            type:cc.SpriteFrame,
+            default: null,
+            type: cc.SpriteFrame,
         },
         musicSprite: {
-            default:null,
-            type:cc.Sprite,
-        }
+            default: null,
+            type: cc.Sprite,
+        },
+
+        rankingView: {
+            default: null,
+            type: cc.Node,
+        },
+
+        sub_list: {
+            default: null,
+            type: cc.Node,
+        },
+
+        sub_my: {
+            default: null,
+            type: cc.Node,
+        },
+
+        node_content: {
+            default: null,
+            type: cc.Node,
+        },
+
 
     },
 
     goCheckpoint: function (event, eventData) {
-       
 
-      //  console.log(eventData);
+
+        //  console.log(eventData);
         cc.dataMgr.currentCheckPoint = parseInt(eventData);
         cc.director.loadScene('gameScene');
     },
@@ -51,7 +72,7 @@ cc.Class({
     // use this for initialization
     onLoad: function () {
         if (!cc.dataMgr) {
-          
+
             cc.dataMgr = new DataMgr();
             cc.dataMgr.initData();
         }
@@ -62,14 +83,61 @@ cc.Class({
             cc.audioMgr.init();
         }
 
-        if(cc.audioMgr.isPlay) {
+        if (cc.audioMgr.isPlay) {
             this.musicSprite.spriteFrame = this.onMusicSpriteFrame;
         } else {
             this.musicSprite.spriteFrame = this.offMusicSpriteFrame;
         }
-      
-         this.refreshCheckPoint();
-        // this.diamondLabel.string = cc.sys.localStorage.getItem("diamondCount");
+
+        this.refreshCheckPoint();
+
+
+        this.rankingView.active = false;
+        this.initSubCanvas();
+
+        if (CC_WECHATGAME) {
+            let obj = wx.getLaunchOptionsSync();
+            console.log(obj);
+            if (obj && obj.shareTicket) {
+                cc.dataMgr.shareTicket = obj.shareTicket;
+                this.showGroup();
+            }
+            let path = obj.path;
+            console.log("--- 游戏 path --" + path);
+            if (!path)
+                path = "";
+        }
+    },
+
+    initSubCanvas() {
+        if (!this.tex)
+            this.tex = new cc.Texture2D();
+        if (CC_WECHATGAME) {
+            //console.log("-- WECHAT Start.js initSubCanvas --");
+            window.sharedCanvas.width = 720;
+            window.sharedCanvas.height = 1280;
+        }
+    },
+
+    //分享给好友
+    shareFriend() {
+        if (CC_WECHATGAME) {
+            let type = "end";
+            if (cc.dataMgr.userData.countJump <= 0)
+                type = "random";
+            window.wx.shareAppMessage({
+                title: cc.dataMgr.getShareDesc_s(type),
+                imageUrl: cc.dataMgr.imageUrl.relive,
+                query: "otherID=" + cc.dataMgr.openid,
+                success: (res) => {
+                    cc.dataMgr.shareSuccess("end");
+                    cc.director.loadScene("game");
+                }
+            });
+        } else {
+            //console.log("-- Not is wechatGame --");
+            cc.dataMgr.shareSuccess("end");
+        }
     },
 
     refreshCheckPoint: function () {
@@ -99,7 +167,7 @@ cc.Class({
         //     }
         // }
 
-        let maxCheckpoint =  parseInt(cc.sys.localStorage.getItem("maxCheckpoint"));
+        let maxCheckpoint = parseInt(cc.sys.localStorage.getItem("maxCheckpoint"));
         console.log(maxCheckpoint);
         let jsons = cc.sys.localStorage.getItem("checkPointJsonData");
         //console.log(jsons);
@@ -109,17 +177,17 @@ cc.Class({
 
         this.label_crownCount = 0;
         this.label_progressCount = 0;
-        for(let i = 0; i<checkPoints.length;i++) {
+        for (let i = 0; i < checkPoints.length; i++) {
             let crownCount = parseInt(jsonObj[i].crownCount);
             //显示皇冠数量
-            this.showCrown(checkPoints[i],crownCount);
+            this.showCrown(checkPoints[i], crownCount);
             //底层图片是否碎裂
-            this.showPanel(checkPoints[i],crownCount);
+            this.showPanel(checkPoints[i], crownCount);
             //是否枷锁 //是否可玩
-            this.showLock(checkPoints[i],i,maxCheckpoint);
+            this.showLock(checkPoints[i], i, maxCheckpoint);
 
             this.label_crownCount += crownCount;
-            if(crownCount>0) {
+            if (crownCount > 0) {
                 this.label_progressCount += 1;
             }
         }
@@ -129,42 +197,42 @@ cc.Class({
         //给所有关卡 添加星数，有星数的 过关，过关的方块碎了，否则完好，max后的关卡 要锁上
     },
 
-    showCrown:function(checkPointNode,showCrownCount) {
+    showCrown: function (checkPointNode, showCrownCount) {
         //先关闭所有的皇冠
         let crownCountNode = checkPointNode.getChildByName("crownCount");
-        let honors =  crownCountNode.children;
-        for(let i = 0; i<honors.length;i++) {
+        let honors = crownCountNode.children;
+        for (let i = 0; i < honors.length; i++) {
             honors[i].active = false;
         }
 
-        if(showCrownCount == 1) {
+        if (showCrownCount == 1) {
             honors[0].active = true;
-            honors[0].position = cc.v2(0,0);
-        } else if(showCrownCount == 2) {
+            honors[0].position = cc.v2(0, 0);
+        } else if (showCrownCount == 2) {
             honors[0].active = true;
             honors[1].active = true;
-            honors[0].position = cc.v2(-20,0);
-            honors[1].position = cc.v2(20,0);
-        } else if(showCrownCount == 3) {
+            honors[0].position = cc.v2(-20, 0);
+            honors[1].position = cc.v2(20, 0);
+        } else if (showCrownCount == 3) {
             honors[0].active = true;
             honors[1].active = true;
             honors[2].active = true;
-            honors[0].position = cc.v2(0,0);
-            honors[1].position = cc.v2(-30,0);
-            honors[2].position = cc.v2(30,0);
+            honors[0].position = cc.v2(0, 0);
+            honors[1].position = cc.v2(-30, 0);
+            honors[2].position = cc.v2(30, 0);
         }
     },
 
-    showPanel:function(checkPointNode,showCrownCount) {
-        if(showCrownCount>0) {
+    showPanel: function (checkPointNode, showCrownCount) {
+        if (showCrownCount > 0) {
             checkPointNode.getComponent(cc.Sprite).spriteFrame = this.panelEnd.spriteFrame;
         } else {
             checkPointNode.getComponent(cc.Sprite).spriteFrame = this.panelBegin.spriteFrame;
         }
     },
 
-    showLock:function(checkPointNode,index,maxCheckpoint) {
-        if(index>=maxCheckpoint) {
+    showLock: function (checkPointNode, index, maxCheckpoint) {
+        if (index >= maxCheckpoint) {
             checkPointNode.getComponent(cc.Button).interactable = false;
             checkPointNode.getChildByName("lock").active = true;
         } else {
@@ -183,8 +251,8 @@ cc.Class({
         cc.director.loadScene('start');
     },
 
-    musicClick:function() {
-        if(cc.audioMgr.isPlay) {
+    musicClick: function () {
+        if (cc.audioMgr.isPlay) {
             cc.audioMgr.stopAll();
             this.musicSprite.spriteFrame = this.offMusicSpriteFrame;
         } else {
@@ -193,8 +261,91 @@ cc.Class({
         }
     },
 
-    onLeaderboardClick:function() {
+    onLeaderboardClick: function () {
         console.log("onLeaderboardClick~");
-        cc.dataMgr.getRankData(null);
+        this.showFriend();
     },
+
+    showFriend: function () {
+      
+        if (CC_WECHATGAME) {
+            this.rankingView.active = true;
+            this.rankingView.getChildByName("spr_friend").active = true;
+            this.rankingView.getChildByName("spr_qun").active = false;
+            //console.log("-- WECHAT Start.js subPostMessage --");
+            window.wx.postMessage({
+                messageType: 1,
+                MAIN_MENU_NUM: "score"
+                //,myScore: cc.dataMgr.userData.countJump
+            });
+            this.node.runAction(cc.sequence(cc.delayTime(0.1), cc.callFunc(this.updataSubCanvas, this)));
+            this.scheduleOnce(this.updataSubCanvas, 2.4);
+        }
+    },
+
+    groupClick: function () {
+        let self = this;
+        if (CC_WECHATGAME) {
+            window.wx.updateShareMenu({
+                withShareTicket: true,
+                success() {
+                    window.wx.shareAppMessage({
+                        title: cc.dataMgr.getShareDesc_s("qunRank"),
+                        imageUrl: cc.dataMgr.imageUrl.qunRank,
+                        query: "otherID=" + cc.dataMgr.openid,
+                        success: (res) => {
+                            console.log("-- shareGroup success --");
+                            console.log(res);
+                            if (res.shareTickets != undefined && res.shareTickets.length > 0) {
+                                cc.dataMgr.shareTicket = res.shareTickets[0];
+                                self.showGroup();
+                            }
+                        }
+                    });
+                }
+            });
+        } else {
+            //console.log("-- Not is wechatGame --");
+        }
+    },
+
+    showGroup() {
+        if (CC_WECHATGAME) {
+            this.rankingView.active = true;
+            this.rankingView.getChildByName("spr_friend").active = false;
+            this.rankingView.getChildByName("spr_qun").active = true;
+            console.log("-- 开局显示群排行 --" + cc.dataMgr.shareTicket);
+            if (cc.dataMgr.shareTicket) {
+                window.wx.postMessage({
+                    messageType: 5,
+                    MAIN_MENU_NUM: "score",
+                    shareTicket: cc.dataMgr.shareTicket
+                });
+            }
+
+            this.node.runAction(cc.sequence(cc.delayTime(0.1), cc.callFunc(this.updataSubCanvas, this)));
+            this.scheduleOnce(this.updataSubCanvas, 2.4);
+        }
+    },
+
+    updataSubCanvas() {
+        if (CC_WECHATGAME && this.rankingView.active) {
+            //console.log("-- WECHAT Start.js updataSubCanvas --");
+            this.tex.initWithElement(window.sharedCanvas);
+            this.tex.handleLoadedTexture();
+            this.sub_list.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(this.tex);
+            this.sub_my.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(this.tex);
+            this.node_content.height = this.sub_list.height;
+        }
+    },
+
+    onBackClick: function () {
+        this.rankingView.active = false;
+    },
+
+    onShareClick: function () {
+        console.log("点击分享");
+    },
+
+
 });
