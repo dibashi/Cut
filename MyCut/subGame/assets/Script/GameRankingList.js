@@ -64,6 +64,7 @@ export default class GameRankingList extends cc.Component {
                 this.showPanel("friend");
                 this.fetchFriendData(data.MAIN_MENU_NUM);
             } else if (data.messageType == 2) { //提交得分
+                console.log("准备提交分数");
                 this.submitScore(data.MAIN_MENU_NUM, data.myScore, false);
             } else if (data.messageType == 3) { //获取好友排行榜横向排列展示模式
                 this.showPanel("end");
@@ -125,67 +126,67 @@ export default class GameRankingList extends cc.Component {
 
     //提交得分 isOver(若果是 的话会刷新over 界面)
     submitScore(MAIN_MENU_NUM, score, isOver) {
-        if (CC_WECHATGAME) {
-            let self = this;
-            window.wx.getUserCloudStorage({
-                // 以key/value形式存储
-                keyList: [MAIN_MENU_NUM],
-                success(getres) {
-                    console.log("--- 提交分数 getUserCloudStorage success ---");
-                    console.log(getres);
-                    if (getres.KVDataList.length != 0) {
-                        let scoreGet = 0;
-                        let weekNum = 0;
-                        let strGet = getres.KVDataList[0].value;
-                        if (typeof (JSON.parse(strGet)) == "object") {
-                            getres.KVDataList[0].value = JSON.parse(strGet);
-                            scoreGet = getres.KVDataList[0].value.wxgame.score;
-                            weekNum = getres.KVDataList[0].value.week;
-                        }
-                        console.log("-- socreGet--" + scoreGet + " -- " + score + " -- " + weekNum);
-                        //&& weekNum == self.getTimeWeek_i()
-                        if (scoreGet > score ) { //这里比较了是否超过了服务器的数据，若没超过则不上传
-                            if (isOver)
-                                self.gameOverRank(MAIN_MENU_NUM);
-                            return;
-                        }
+        // if (CC_WECHATGAME) {
+        let self = this;
+        console.log("准备获得用户的服务器存储数据");
+        window.wx.getUserCloudStorage({
+            // 以key/value形式存储
+            keyList: [MAIN_MENU_NUM],
+            success(getres) {
+                console.log("--- 提交分数 getUserCloudStorage success ---");
+                console.log(getres);
+                if (getres.KVDataList.length != 0) {
+                    let scoreGet = 0;
+                    let weekNum = 0;
+                    let strGet = getres.KVDataList[0].value;
+                    if (typeof (JSON.parse(strGet)) == "object") {
+                        getres.KVDataList[0].value = JSON.parse(strGet);
+                        scoreGet = getres.KVDataList[0].value.wxgame.score;
+                        weekNum = getres.KVDataList[0].value.week;
                     }
-                    // 对用户托管数据进行写数据操作
-                    window.wx.setUserCloudStorage({
-                        KVDataList: [{
-                            key: MAIN_MENU_NUM,
-                            value: self.getWxValue_s(score)
-                        }],
-                        success(res) {
-                            console.log(res);
-                            console.log('setUserCloudStorage', 'success', res)
-                            if (isOver)
-                                self.gameOverRank(MAIN_MENU_NUM);
-                        },
-                        fail(res) {
-                            console.log('setUserCloudStorage', 'fail')
-                        },
-                        complete(res) {
-                            console.log('setUserCloudStorage', 'ok')
-                        }
-                    });
-                },
-                fail(res) {
-                    // console.log('getUserCloudStorage', 'fail')
-                },
-                complete(res) {
-                    // console.log('getUserCloudStorage', 'ok')
+                    console.log("-- socreGet--" + scoreGet + " -- " + score + " -- " + weekNum);
+                    //&& weekNum == self.getTimeWeek_i()
+                    if (scoreGet >= score) { //这里比较了是否超过了服务器的数据，若没超过则不上传
+                        if (isOver)
+                            self.gameOverRank(MAIN_MENU_NUM);
+                        return;
+                    }
                 }
-            });
-        } else {
-            //  cc.log("提交得分:" + MAIN_MENU_NUM + " : " + score)
-        }
+                // 对用户托管数据进行写数据操作
+                window.wx.setUserCloudStorage({
+                    KVDataList: [{
+                        key: MAIN_MENU_NUM,
+                        value: self.getWxValue_s(score)
+                    }],
+                    success(res) {
+                        console.log(res);
+                        console.log('setUserCloudStorage', 'success', res)
+                        if (isOver)
+                            self.gameOverRank(MAIN_MENU_NUM);
+                    },
+                    fail(res) {
+                        console.log('setUserCloudStorage', 'fail')
+                    },
+                    complete(res) {
+                        console.log('setUserCloudStorage', 'ok')
+                    }
+                });
+            },
+            fail(res) {
+                // console.log('getUserCloudStorage', 'fail')
+            },
+            complete(res) {
+                // console.log('getUserCloudStorage', 'ok')
+            }
+        });
+        //  } 
+
     }
 
     //游戏结束界面显示最近两人
     gameOverRank(MAIN_MENU_NUM) {
         let self = this;
-        if (CC_WECHATGAME) {
+       // if (CC_WECHATGAME) {
             wx.getUserInfo({
                 openIdList: ['selfOpenId'],
                 success: (userRes) => {
@@ -275,102 +276,102 @@ export default class GameRankingList extends cc.Component {
                     self.loadingLabel.getComponent(cc.Label).string = "数据加载失败，请检测网络，谢谢。";
                 }
             });
-        }
+       // }
     }
 
-    
+
     //好友排行列表
     fetchFriendData(MAIN_MENU_NUM) {
         let self = this;
-        if (CC_WECHATGAME) {
-            wx.getUserInfo({
-                openIdList: ['selfOpenId'],
-                success: (userRes) => {
-                    let userData = userRes.data[0];
-                    //取出所有好友数据
-                    wx.getFriendCloudStorage({
-                        keyList: [MAIN_MENU_NUM],
-                        success: res => {
-                            console.log("--- fetchFriendData success ---");
-                            console.log(res);
-                            self.loadingLabel.active = false;
-                            self.node_list.active = true;
-                            self.scrollViewContent.active = true;
+        // if (CC_WECHATGAME) {
+        wx.getUserInfo({
+            openIdList: ['selfOpenId'],
+            success: (userRes) => {
+                let userData = userRes.data[0];
+                //取出所有好友数据
+                wx.getFriendCloudStorage({
+                    keyList: [MAIN_MENU_NUM],
+                    success: res => {
+                        console.log("--- fetchFriendData success ---");
+                        console.log(res);
+                        self.loadingLabel.active = false;
+                        self.node_list.active = true;
+                        self.scrollViewContent.active = true;
 
-                            let data = res.data;
-                            //整合data 数据
-                            console.log("-- 开始整合数据 ---");
-                            let nowWeek = this.getTimeWeek_i();
-                            for (let i = 0; i < data.length; ++i) {
-                                console.log("-- i " + i + " -- " + data[i].KVDataList.length);
-                                if (data[i].KVDataList.length > 0) {
-                                    let strValue = data[i].KVDataList[0].value;
-                                    console.log("-- strValue " + strValue);
-                                    let valueD = JSON.parse(strValue);
-                                    if (typeof (valueD) == "object") {
-                                        // if (valueD.week != nowWeek)
-                                        //     valueD.wxgame.score = 0;
-                                        data[i].KVDataList[0].value = valueD;
-                                        console.log(valueD);
-                                    }
-                                    else
-                                        data[i].KVDataList[0].value = 0;
+                        let data = res.data;
+                        //整合data 数据
+                        console.log("-- 开始整合数据 ---");
+                        let nowWeek = this.getTimeWeek_i();
+                        for (let i = 0; i < data.length; ++i) {
+                            console.log("-- i " + i + " -- " + data[i].KVDataList.length);
+                            if (data[i].KVDataList.length > 0) {
+                                let strValue = data[i].KVDataList[0].value;
+                                console.log("-- strValue " + strValue);
+                                let valueD = JSON.parse(strValue);
+                                if (typeof (valueD) == "object") {
+                                    // if (valueD.week != nowWeek)
+                                    //     valueD.wxgame.score = 0;
+                                    data[i].KVDataList[0].value = valueD;
+                                    console.log(valueD);
                                 }
+                                else
+                                    data[i].KVDataList[0].value = 0;
                             }
-                            data.sort((a, b) => {
-                                if (a.KVDataList.length == 0 && b.KVDataList.length == 0) {
-                                    return 0;
-                                }
-                                if (a.KVDataList.length == 0) {
-                                    return 1;
-                                }
-                                if (b.KVDataList.length == 0) {
-                                    return -1;
-                                }
-                                let scoreA = a.KVDataList[0].value;
-                                let scoreB = b.KVDataList[0].value;
-                                if (typeof (scoreA) == "object")
-                                    scoreA = a.KVDataList[0].value.wxgame.score;
-                                if (typeof (scoreB) == "object")
-                                    scoreB = b.KVDataList[0].value.wxgame.score;
-                                return scoreB - scoreA;
-                                //return b.KVDataList[0].value.wxgame.score - a.KVDataList[0].value.wxgame.score;
-                            });
-
-                            //判断加载最大值
-                            let maxNum = data.length;
-                            if (maxNum > 30)
-                                maxNum = 30;
-                            //加空间
-                            let addNum = maxNum - self.scrollViewContent.children.length;
-                            for (let j = 0; j < addNum; ++j) {
-                                let nodeN = cc.instantiate(self.pre_rankItem)
-                                self.scrollViewContent.addChild(nodeN);
-                            }
-                            for (let i = 0; i < self.scrollViewContent.children.length; ++i) {
-                                let nodeN = self.scrollViewContent.children[i];
-                                if (i < data.length) {
-                                    nodeN.active = true;
-                                    nodeN.getComponent('RankItem').init(i, data[i]);
-                                    if (data[i].avatarUrl == userData.avatarUrl) {
-                                        self.node_myself.active = true;
-                                        self.node_myself.getComponent('RankItem').init(i, data[i]);
-                                    }
-                                } else
-                                    nodeN.active = false;
-                            }
-                        },
-                        fail: res => {
-                            //  console.log("wx.getFriendCloudStorage fail", res);
-                            self.loadingLabel.getComponent(cc.Label).string = "数据加载失败，请检测网络，谢谢。";
                         }
-                    });
-                },
-                fail: (res) => {
-                    self.loadingLabel.getComponent(cc.Label).string = "数据加载失败，请检测网络，谢谢。";
-                }
-            });
-        }
+                        data.sort((a, b) => {
+                            if (a.KVDataList.length == 0 && b.KVDataList.length == 0) {
+                                return 0;
+                            }
+                            if (a.KVDataList.length == 0) {
+                                return 1;
+                            }
+                            if (b.KVDataList.length == 0) {
+                                return -1;
+                            }
+                            let scoreA = a.KVDataList[0].value;
+                            let scoreB = b.KVDataList[0].value;
+                            if (typeof (scoreA) == "object")
+                                scoreA = a.KVDataList[0].value.wxgame.score;
+                            if (typeof (scoreB) == "object")
+                                scoreB = b.KVDataList[0].value.wxgame.score;
+                            return scoreB - scoreA;
+                            //return b.KVDataList[0].value.wxgame.score - a.KVDataList[0].value.wxgame.score;
+                        });
+
+                        //判断加载最大值
+                        let maxNum = data.length;
+                        if (maxNum > 30)
+                            maxNum = 30;
+                        //加空间
+                        let addNum = maxNum - self.scrollViewContent.children.length;
+                        for (let j = 0; j < addNum; ++j) {
+                            let nodeN = cc.instantiate(self.pre_rankItem)
+                            self.scrollViewContent.addChild(nodeN);
+                        }
+                        for (let i = 0; i < self.scrollViewContent.children.length; ++i) {
+                            let nodeN = self.scrollViewContent.children[i];
+                            if (i < data.length) {
+                                nodeN.active = true;
+                                nodeN.getComponent('RankItem').init(i, data[i]);
+                                if (data[i].avatarUrl == userData.avatarUrl) {
+                                    self.node_myself.active = true;
+                                    self.node_myself.getComponent('RankItem').init(i, data[i]);
+                                }
+                            } else
+                                nodeN.active = false;
+                        }
+                    },
+                    fail: res => {
+                        //  console.log("wx.getFriendCloudStorage fail", res);
+                        self.loadingLabel.getComponent(cc.Label).string = "数据加载失败，请检测网络，谢谢。";
+                    }
+                });
+            },
+            fail: (res) => {
+                self.loadingLabel.getComponent(cc.Label).string = "数据加载失败，请检测网络，谢谢。";
+            }
+        });
+        //}
     }
 
 
@@ -379,7 +380,7 @@ export default class GameRankingList extends cc.Component {
     fetchGroupData(MAIN_MENU_NUM, shareTicket) {
         console.log("--- 子域群排行 ---" + shareTicket);
         let self = this;
-        if (CC_WECHATGAME) {
+       // if (CC_WECHATGAME) {
             wx.getUserInfo({
                 openIdList: ['selfOpenId'],
                 success: (userRes) => {
@@ -470,13 +471,13 @@ export default class GameRankingList extends cc.Component {
                     self.loadingLabel.getComponent(cc.Label).string = "数据加载失败，请检测网络，谢谢。";
                 }
             });
-        }
+      //  }
     }
 
     //获取超越时数据
     fetchFriendDataToBeyond(MAIN_MENU_NUM) {
         let self = this;
-        if (CC_WECHATGAME) {
+        //if (CC_WECHATGAME) {
             wx.getUserInfo({
                 openIdList: ['selfOpenId'],
                 success: (userRes) => {
@@ -552,7 +553,7 @@ export default class GameRankingList extends cc.Component {
                     self.loadingLabel.getComponent(cc.Label).string = "数据加载失败，请检测网络，谢谢。";
                 }
             });
-        }
+        //}
     }
 
     //是否超越

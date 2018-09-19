@@ -192,10 +192,29 @@ cc.Class({
             }
         }
 
+
+        //皇冠总数显示
         this.crownLabel.string = "X" + this.label_crownCount;
+        //完成关卡进度显示
         this.progressLabel.string = this.label_progressCount + "/" + checkPoints.length;
-        //给所有关卡 添加星数，有星数的 过关，过关的方块碎了，否则完好，max后的关卡 要锁上
+        //向服务器上传得分
+        this.submitScore();
     },
+
+
+    //上传皇冠总数
+    submitScore: function () {
+
+        if (CC_WECHATGAME) {
+            window.wx.postMessage({
+                messageType: 2,
+                MAIN_MENU_NUM: "score",
+                myScore: this.label_crownCount
+            });
+        }
+    },
+
+
 
     showCrown: function (checkPointNode, showCrownCount) {
         //先关闭所有的皇冠
@@ -267,7 +286,6 @@ cc.Class({
     },
 
     showFriend: function () {
-      
         if (CC_WECHATGAME) {
             this.rankingView.active = true;
             this.rankingView.getChildByName("spr_friend").active = true;
@@ -345,6 +363,24 @@ cc.Class({
 
     onShareClick: function () {
         console.log("点击分享");
+
+        if (CC_WECHATGAME) {
+            let type = "end";
+            if (cc.dataMgr.userData.countJump <= 0)
+                type = "random";
+            window.wx.shareAppMessage({
+                title: cc.dataMgr.getShareDesc_s(type),
+                imageUrl: cc.dataMgr.imageUrl.relive,
+                query: "otherID=" + cc.dataMgr.openid,
+                success: (res) => {
+                    cc.dataMgr.shareSuccess("end");
+                    cc.director.loadScene("game");
+                }
+            });
+        } else {
+            //console.log("-- Not is wechatGame --");
+            cc.dataMgr.shareSuccess("end");
+        }
     },
 
 

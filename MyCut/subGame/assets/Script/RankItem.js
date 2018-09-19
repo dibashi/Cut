@@ -28,7 +28,7 @@ export default class RankItem extends cc.Component {
         let grade = data.KVDataList.length != 0 ? (typeof (data.KVDataList[0].value) == "object" ? data.KVDataList[0].value.wxgame.score : 0) : 0;
 
         if (rank % 2 == 0) {
-            this.backSprite.color = new cc.Color(55, 55, 55, 255);
+            //this.backSprite.color = new cc.Color(55, 55, 55, 255);
         }
 
         if (rank == 0) {
@@ -47,7 +47,7 @@ export default class RankItem extends cc.Component {
         this.topScoreLabel.string = grade.toString();
     }
     createImage(avatarUrl) {
-        if (CC_WECHATGAME) {
+        //if (CC_WECHATGAME) {
             try {
                 let image = wx.createImage();
                 image.onload = () => {
@@ -66,14 +66,14 @@ export default class RankItem extends cc.Component {
                 // cc.log(e);
                 this.avatarImgSprite.node.active = false;
             }
-        } else {
-            cc.loader.load({
-                url: avatarUrl,
-                type: 'jpg'
-            }, (err, texture) => {
-                this.avatarImgSprite.spriteFrame = new cc.SpriteFrame(texture);
-            });
-        }
+        // } else {
+        //     cc.loader.load({
+        //         url: avatarUrl,
+        //         type: 'jpg'
+        //     }, (err, texture) => {
+        //         this.avatarImgSprite.spriteFrame = new cc.SpriteFrame(texture);
+        //     });
+        // }
     }
 
 }

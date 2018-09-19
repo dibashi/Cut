@@ -39,7 +39,7 @@ export default class GameOverRank extends cc.Component {
         this.topScoreLabel.string = grade.toString();
     }
     createImage(avatarUrl) {
-        if (CC_WECHATGAME) {
+       // if (CC_WECHATGAME) {
             try {
                 let image = wx.createImage();
                 image.onload = () => {
@@ -58,14 +58,14 @@ export default class GameOverRank extends cc.Component {
                 // cc.log(e);
                 this.avatarImgSprite.node.active = false;
             }
-        } else {
-            cc.loader.load({
-                url: avatarUrl,
-                type: 'jpg'
-            }, (err, texture) => {
-                this.avatarImgSprite.spriteFrame = new cc.SpriteFrame(texture);
-            });
-        }
+        // } else {
+        //     cc.loader.load({
+        //         url: avatarUrl,
+        //         type: 'jpg'
+        //     }, (err, texture) => {
+        //         this.avatarImgSprite.spriteFrame = new cc.SpriteFrame(texture);
+        //     });
+        // }
     }
 
 }

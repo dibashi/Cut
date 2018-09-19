@@ -83,7 +83,7 @@ export default class BeyondFriend extends cc.Component {
 
     fetchFriendDataToBeyond(MAIN_MENU_NUM) {
         this.node.active = true;
-        if (CC_WECHATGAME) {
+       // if (CC_WECHATGAME) {
             wx.getUserInfo({
                 openIdList: ['selfOpenId'],
                 success: (userRes) => {
@@ -132,6 +132,6 @@ export default class BeyondFriend extends cc.Component {
                     this.loadingLabel.getComponent(cc.Label).string = "数据加载失败，请检测网络，谢谢。";
                 }
             });
-        }
+       // }
     }
 }
