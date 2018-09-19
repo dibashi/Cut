@@ -303,14 +303,27 @@ cc.Class({
 
     groupClick: function () {
         let self = this;
+
+        var str_imageUrl = null;
+        var str_index = Math.floor(Math.random() * 2);
+        var str_title = null;
+        if (str_index == 0) {
+            str_imageUrl = "https://bpw.blyule.com/res/raw-assets/Texture/shareImage0.5f075.jpg";
+            str_title = "走开，别碰我！萌哭了";
+        } else {
+            str_imageUrl = "https://bpw.blyule.com/res/raw-assets/Texture/shareImage1.678a4.jpg";
+            str_title = "萌翻全场，好想都抱回家!";
+        }
+
+
+
         if (CC_WECHATGAME) {
             window.wx.updateShareMenu({
                 withShareTicket: true,
                 success() {
                     window.wx.shareAppMessage({
-                        title: cc.dataMgr.getShareDesc_s("qunRank"),
-                        imageUrl: cc.dataMgr.imageUrl.qunRank,
-                        query: "otherID=" + cc.dataMgr.openid,
+                        title: str_title,
+                        imageUrl: str_imageUrl,
                         success: (res) => {
                             console.log("-- shareGroup success --");
                             console.log(res);
@@ -322,8 +335,6 @@ cc.Class({
                     });
                 }
             });
-        } else {
-            //console.log("-- Not is wechatGame --");
         }
     },
 
@@ -364,23 +375,21 @@ cc.Class({
     onShareClick: function () {
         console.log("点击分享");
 
-        if (CC_WECHATGAME) {
-            let type = "end";
-            if (cc.dataMgr.userData.countJump <= 0)
-                type = "random";
-            window.wx.shareAppMessage({
-                title: cc.dataMgr.getShareDesc_s(type),
-                imageUrl: cc.dataMgr.imageUrl.relive,
-                query: "otherID=" + cc.dataMgr.openid,
-                success: (res) => {
-                    cc.dataMgr.shareSuccess("end");
-                    cc.director.loadScene("game");
-                }
-            });
+        var str_imageUrl = null;
+        var str_index = Math.floor(Math.random() * 2);
+        var str_title = null;
+        if (str_index == 0) {
+            str_imageUrl = "https://bpw.blyule.com/res/raw-assets/Texture/shareImage0.5f075.jpg";
+            str_title = "走开，别碰我！萌哭了";
         } else {
-            //console.log("-- Not is wechatGame --");
-            cc.dataMgr.shareSuccess("end");
+            str_imageUrl = "https://bpw.blyule.com/res/raw-assets/Texture/shareImage1.678a4.jpg";
+            str_title = "萌翻全场，好想都抱回家!";
         }
+
+        wx.shareAppMessage({
+            title: str_title,
+            imageUrl: str_imageUrl
+        });
     },
 
 
