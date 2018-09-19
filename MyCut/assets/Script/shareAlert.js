@@ -76,15 +76,12 @@ cc.Class({
     shareClick: function () {
         console.log("分享提示");
         let self = this;
-        cc.eventManager.pauseTarget(self.node, true);
-        self.onWho.getComponent("uiLayer").helpCallback();
-
-        let cbFadeOut = cc.callFunc(self.onFadeOutFinish, self);
-        let actionFadeOut = cc.sequence(cc.spawn(cc.fadeTo(0.3, 0), cc.scaleTo(0.3, 2.0)), cbFadeOut);
-        self.node.runAction(actionFadeOut);
-        return;
+       
         
-        let query_string = cc.sys.localStorage.getItem("openid");
+      
+       // return;
+        
+       // let query_string = cc.sys.localStorage.getItem("openid");
         //console.log("准备发送请求的 query " + query_string);
         var str_imageUrl = null;
         var str_index = Math.floor(Math.random() * 2);
@@ -98,16 +95,17 @@ cc.Class({
         }
 
 
-
+        //query: "otherID=" + query_string,
         wx.shareAppMessage({
             title: str_title,
-            imageUrl: str_imageUrl, query: "otherID=" + query_string,
+            imageUrl: str_imageUrl, 
             success: (obj) => {
                 console.log("分享回调成功")
                 console.log(obj);
 
                 cc.eventManager.pauseTarget(self.node, true);
-                self.onWho.getComponent("gameScene").goNewBalloon();
+                self.onWho.getComponent("uiLayer").helpCallback();
+
 
                 let cbFadeOut = cc.callFunc(self.onFadeOutFinish, self);
                 let actionFadeOut = cc.sequence(cc.spawn(cc.fadeTo(0.3, 0), cc.scaleTo(0.3, 2.0)), cbFadeOut);

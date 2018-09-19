@@ -359,7 +359,7 @@ cc.Class({
 
     updataSubCanvas() {
         if (CC_WECHATGAME && this.rankingView.active) {
-            //console.log("-- WECHAT Start.js updataSubCanvas --");
+            console.log("-- WECHAT Start.js updataSubCanvas --");
             this.tex.initWithElement(window.sharedCanvas);
             this.tex.handleLoadedTexture();
             this.sub_list.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(this.tex);
