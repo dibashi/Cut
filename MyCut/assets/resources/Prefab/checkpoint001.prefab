@@ -172,7 +172,7 @@
     "_fixedRotation": false,
     "enabledContactListener": false,
     "bullet": false,
-    "_id": "51XLM3b7RPBIHMQPomX2pk"
+    "_id": "e74stu1YNHMr60YAfG/ItD"
   },
   {
     "__type__": "cc.PhysicsPolygonCollider",
@@ -215,7 +215,7 @@
         "y": -50
       }
     ],
-    "_id": "d9+NIqrMNHVo50fDCgM+O7"
+    "_id": "3dWUwQ9l5OP4JghsnsKBq9"
   },
   {
     "__type__": "44ebeIDGjBGiYlQFJBgKLFw",
@@ -225,7 +225,7 @@
       "__id__": 2
     },
     "_enabled": true,
-    "_id": "62UpftV45OC50xp1ygGzsv"
+    "_id": "baD6PrfB9OMZV7E0ORFqwK"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -329,7 +329,7 @@
     "_fixedRotation": false,
     "enabledContactListener": false,
     "bullet": false,
-    "_id": "fekcX4cFdBf7Aj0w4DWsh+"
+    "_id": "79j5CTG9FPRojwmN7ihqQd"
   },
   {
     "__type__": "cc.PhysicsPolygonCollider",
@@ -372,7 +372,7 @@
         "y": -100
       }
     ],
-    "_id": "e8As7k02BLEKLQK61qmNiD"
+    "_id": "58zT+LMPRI2LHYhWhw6r1o"
   },
   {
     "__type__": "44ebeIDGjBGiYlQFJBgKLFw",
@@ -382,7 +382,7 @@
       "__id__": 7
     },
     "_enabled": true,
-    "_id": "55sIiIPJZIgoorVQ4bpA5W"
+    "_id": "b9kPZWavtHRb7Ii4y8dqHk"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -493,7 +493,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "79sFdbY4JA86iLzfAgezAq"
+    "_id": "9537mn0/pJ+6RtpWXB52QA"
   },
   {
     "__type__": "cc.RigidBody",
@@ -517,7 +517,7 @@
     "_fixedRotation": false,
     "enabledContactListener": true,
     "bullet": false,
-    "_id": "4ecE4hbtBE54rVKAQzeYeR"
+    "_id": "54yE/B86BJkKc3Kkqua7pm"
   },
   {
     "__type__": "cc.PhysicsCircleCollider",
@@ -539,7 +539,7 @@
       "y": 0
     },
     "_radius": 18,
-    "_id": "4fc1UlzmJAGqAT32pB3dC6"
+    "_id": "95i4U5JEZDx5SME8cDgbLP"
   },
   {
     "__type__": "e4fd7MPrOxIyoGO4+5E/8MA",
@@ -550,7 +550,7 @@
     },
     "_enabled": true,
     "isDeadFlag": false,
-    "_id": "bf/Kqgnd5PA6LvOnwV/lvS"
+    "_id": "23XPbJ141PzbR6cGKMfvsl"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -575,7 +575,6 @@
     "resultCount": 1,
     "currentTouchCount": 0,
     "currentResultCount": 0,
-    "helpLineCount": 1,
     "helpTouchBegin": {
       "__type__": "cc.Vec2",
       "x": -147,
@@ -586,14 +585,10 @@
       "x": 13,
       "y": 116
     },
-    "helpTouchBegin1": null,
-    "helpTouchEnd1": null,
     "checkpointClass": 0,
     "totalMass": 0,
     "currentMass": 0,
-    "revoluteJointNodeArr": [],
-    "targetSprite": null,
-    "_id": "fdxArWKiFGzLEDt1IoefVS"
+    "_id": "b6ZUQyua1LbIwv1bSyS639"
   },
   {
     "__type__": "cc.PrefabInfo",
