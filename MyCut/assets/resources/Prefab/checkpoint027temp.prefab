@@ -12,7 +12,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "checkpoint025",
+    "_name": "checkpoint027",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
@@ -128,8 +128,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -41,
-      "y": 21,
+      "x": 229,
+      "y": 22,
       "z": 0
     },
     "_scale": {
@@ -194,7 +194,7 @@
         "y": -20
       }
     ],
-    "_id": "70JX2a9oZHX72LHdy13Q8b"
+    "_id": "158EK2qRRFjZmX2tGhmNoy"
   },
   {
     "__type__": "cc.RigidBody",
@@ -218,7 +218,7 @@
     "_fixedRotation": false,
     "enabledContactListener": false,
     "bullet": false,
-    "_id": "3aSYWxxsFL/LQ4uLq7Q/fs"
+    "_id": "67fUDPFGhKFZf0ig80scEp"
   },
   {
     "__type__": "cc.Sprite",
@@ -246,7 +246,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "ce/RW2v/VIzb9vyMT/4L9D"
+    "_id": "a7q7fgTdxA0IrhuJK9226H"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -254,7 +254,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "72c65642-54f3-4dc0-8ccc-0e53732c1dfd"
+      "__uuid__": "666f71b6-086b-4afe-b2a5-b6dc098a9b78"
     },
     "fileId": "6cuzoPvkVMyadZBQNkGtgd",
     "sync": false
@@ -303,8 +303,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 180,
-      "y": 100,
+      "x": 0,
+      "y": 393,
       "z": 0
     },
     "_scale": {
@@ -350,26 +350,21 @@
     "points": [
       {
         "__type__": "cc.Vec2",
-        "x": -100,
-        "y": 100
+        "x": -134.2,
+        "y": 258.5
       },
       {
         "__type__": "cc.Vec2",
-        "x": 100,
-        "y": 100
+        "x": -17.2,
+        "y": -31.9
       },
       {
         "__type__": "cc.Vec2",
-        "x": 100,
-        "y": -100
-      },
-      {
-        "__type__": "cc.Vec2",
-        "x": -100,
-        "y": -100
+        "x": 177.8,
+        "y": 255.7
       }
     ],
-    "_id": "1fggIo0jxLLIRTNydGIwkH"
+    "_id": "18oc8njGVPQqIimzVcwxW2"
   },
   {
     "__type__": "cc.RigidBody",
@@ -393,7 +388,7 @@
     "_fixedRotation": false,
     "enabledContactListener": false,
     "bullet": false,
-    "_id": "57r8TnO1hAwYGYDvGn6G7b"
+    "_id": "6dJ1f815JF5ITs2nPppaJe"
   },
   {
     "__type__": "44ebeIDGjBGiYlQFJBgKLFw",
@@ -403,7 +398,7 @@
       "__id__": 7
     },
     "_enabled": true,
-    "_id": "c3SzXkL6pBr5Zv9H/KFYzF"
+    "_id": "99G7l+kwFK4IsSTJ+HiCIF"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -411,7 +406,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "72c65642-54f3-4dc0-8ccc-0e53732c1dfd"
+      "__uuid__": "666f71b6-086b-4afe-b2a5-b6dc098a9b78"
     },
     "fileId": "e6T3dRCPVPIrRFtoxwhulC",
     "sync": false
@@ -461,7 +456,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -25,
+      "y": -390,
       "z": 0
     },
     "_scale": {
@@ -507,7 +502,7 @@
     "_fixedRotation": false,
     "enabledContactListener": false,
     "bullet": false,
-    "_id": "67gQdpZSNDzoVBtwIna6uk"
+    "_id": "c2M8J6rEhEaZObf+JiOmgZ"
   },
   {
     "__type__": "cc.PhysicsPolygonCollider",
@@ -531,26 +526,41 @@
     "points": [
       {
         "__type__": "cc.Vec2",
-        "x": -280,
-        "y": 25
+        "x": -360,
+        "y": 250
       },
       {
         "__type__": "cc.Vec2",
-        "x": 280,
-        "y": 25
+        "x": -105,
+        "y": 161
       },
       {
         "__type__": "cc.Vec2",
-        "x": 280,
-        "y": -25
+        "x": -17.2,
+        "y": -31.9
       },
       {
         "__type__": "cc.Vec2",
-        "x": -280,
-        "y": -25
+        "x": 96,
+        "y": 91
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": 360,
+        "y": 0
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": 360,
+        "y": -250
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": -360,
+        "y": -250
       }
     ],
-    "_id": "c6SU1fTCZEXLYX72vPCYoK"
+    "_id": "c3DtglZoVNL5DWq6yFClGJ"
   },
   {
     "__type__": "44ebeIDGjBGiYlQFJBgKLFw",
@@ -560,7 +570,7 @@
       "__id__": 12
     },
     "_enabled": true,
-    "_id": "aesqgikG5JnK2OotlztbHc"
+    "_id": "0bWoVTjwhJyaH86CkGtMe6"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -568,7 +578,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "72c65642-54f3-4dc0-8ccc-0e53732c1dfd"
+      "__uuid__": "666f71b6-086b-4afe-b2a5-b6dc098a9b78"
     },
     "fileId": "0bZMpwwgZK9rcEQ9jxFTvz",
     "sync": false
@@ -620,8 +630,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -231,
-      "y": 42,
+      "x": 211,
+      "y": -282,
       "z": 0
     },
     "_scale": {
@@ -671,7 +681,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "4bDv9S3cNCsIUAdH4AHQ+m"
+    "_id": "f2CKcL8X5BPKlLb2yN2+8w"
   },
   {
     "__type__": "cc.RigidBody",
@@ -695,7 +705,7 @@
     "_fixedRotation": false,
     "enabledContactListener": true,
     "bullet": false,
-    "_id": "28xbMimmhBArOEFS+J6hI+"
+    "_id": "08wHWWo5hPq4zkjcYjq+J4"
   },
   {
     "__type__": "cc.PhysicsCircleCollider",
@@ -717,7 +727,7 @@
       "y": 0
     },
     "_radius": 18,
-    "_id": "7atOAqGkRE9YOcbsbd7Guz"
+    "_id": "099mHd/a5O97JD1n98vnJp"
   },
   {
     "__type__": "24c61L9979BUZq5r4vWrJ4x",
@@ -728,7 +738,7 @@
     },
     "_enabled": true,
     "isDeadFlag": false,
-    "_id": "3eXezOIGRMeZH0MTPQ80Wm"
+    "_id": "86dcU+RvNCDLJ4/eiDbyJY"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -736,7 +746,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "72c65642-54f3-4dc0-8ccc-0e53732c1dfd"
+      "__uuid__": "666f71b6-086b-4afe-b2a5-b6dc098a9b78"
     },
     "fileId": "d60eZR8W1Dlp92hRa/Aa/N",
     "sync": false
@@ -773,7 +783,7 @@
     "targetSprite": {
       "__id__": 18
     },
-    "_id": "686VWYSxVEmJFLrYetg3id"
+    "_id": "13DC8GrBxL8azWq4DwVQBH"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -781,7 +791,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "72c65642-54f3-4dc0-8ccc-0e53732c1dfd"
+      "__uuid__": "666f71b6-086b-4afe-b2a5-b6dc098a9b78"
     },
     "fileId": "cewwcSAeZNx7TcQfdXJplY",
     "sync": false

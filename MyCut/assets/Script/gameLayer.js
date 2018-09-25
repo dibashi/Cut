@@ -376,7 +376,7 @@ cc.Class({
         }
 
         if (index1 === undefined || index2 === undefined) {
-            debugger
+          //  debugger
             return;
         }
 

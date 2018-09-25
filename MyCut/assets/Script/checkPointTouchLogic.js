@@ -94,6 +94,7 @@ cc.Class({
                 //    console.log(childs[i].getComponent(cc.RigidBody));
                 //    console.log(childs[i].getComponent(cc.RigidBody).getMass());
                     this.totalMass += childs[i].getComponent(cc.RigidBody).getMass();
+                    console.log("初始质量 " + this.totalMass);
                 }
             }
         }

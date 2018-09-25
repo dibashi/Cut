@@ -46,20 +46,13 @@ cc.Class({
        
     },
     onBeginContact: function (contact, selfCollider, otherCollider) {
-        //这里的处理逻辑还是比较多的
-        //第1 要判断是谁击中了气球，必须是enemy才处理。
-        //如何处理？1 游戏结束，跳转到弹出框，用于表示是否复活？这怎么复活？ 关卡模式可以复活吗？
-        //估计只有无限模式才复活
-        //再判断结束前，要先播放爆炸动画，动画回调中结束，如果这时候又有敌人触摸到气球 如何判断？
-        //需要一个标记位，用来记录
-        //需要判断当前游戏是否胜利，这是关卡模式的要求，在无尽模式中永远未胜利
-       // let isWin = cc.find("Canvas").getComponent("gameScene").guanKaWin;
-      // console.log(otherCollider);
+       
         if (otherCollider.tag == 2 ) {
             let mass = otherCollider.node.getComponent(cc.RigidBody).getMass();
            // console.log("调用！！！");
 
-            //console.log("碰到了！");
+            console.log("碰到了！" + mass);
+            console.log(otherCollider);
             this.node.parent.parent.getComponent("gameLayer").hittedMassTrigger(mass);
           otherCollider.node.removeFromParent(false);
             //this.dead();
