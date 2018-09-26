@@ -62,6 +62,21 @@ export default class DataMgr extends cc.Component {
         }
     };
 
+    //直接全部遍历 以为以后不是顺序玩关卡了
+    currentScore() {
+        let jsons = cc.sys.localStorage.getItem("checkPointJsonData");
+        let jsonObj = JSON.parse(jsons);
+
+        var resultScore = 0;
+       
+        for (let i = 0; i <  this.MAX_CHECKPOINT_COUNT; i++) {
+            let crownCount = parseInt(jsonObj[i].crownCount);
+            resultScore += crownCount;
+        }
+
+        return resultScore;
+    };
+
     
 
 
