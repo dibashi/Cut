@@ -33,6 +33,11 @@ cc.Class({
 
 
     properties: {
+        node_streak: {
+            default: null,
+            type: cc.Prefab,
+        },
+
 
         checkpoints: {
             default: [],
@@ -60,8 +65,8 @@ cc.Class({
     },
 
     touchOpen: function () {
-        this.halfWinWidth = cc.find('Canvas').width*0.5;
-        this.halfWinHeight = cc.find('Canvas').height*0.5;
+        this.halfWinWidth = cc.find('Canvas').width * 0.5;
+        this.halfWinHeight = cc.find('Canvas').height * 0.5;
         this.node.on("touchstart", this.onTouchStart, this);
         this.node.on('touchmove', this.onTouchMove, this);
         this.node.on('touchend', this.onTouchEnd, this);
@@ -91,24 +96,24 @@ cc.Class({
 
     renderHelpLine: function () {
         //this.reNew();
-        if(this.currentNode.getComponent("checkPointTouchLogic").helpLineCount == 1) {
+        if (this.currentNode.getComponent("checkPointTouchLogic").helpLineCount == 1) {
             let pointBegin = this.currentNode.getComponent("checkPointTouchLogic").helpTouchBegin;
             let pointEnd = this.currentNode.getComponent("checkPointTouchLogic").helpTouchEnd;
 
-            this.drawHLine(pointBegin,pointEnd);
-        } else if(this.currentNode.getComponent("checkPointTouchLogic").helpLineCount == 2) {
+            this.drawHLine(pointBegin, pointEnd);
+        } else if (this.currentNode.getComponent("checkPointTouchLogic").helpLineCount == 2) {
             let pointBegin = this.currentNode.getComponent("checkPointTouchLogic").helpTouchBegin;
             let pointEnd = this.currentNode.getComponent("checkPointTouchLogic").helpTouchEnd;
-            this.drawHLine(pointBegin,pointEnd);
+            this.drawHLine(pointBegin, pointEnd);
 
             let pointBegin1 = this.currentNode.getComponent("checkPointTouchLogic").helpTouchBegin1;
             let pointEnd1 = this.currentNode.getComponent("checkPointTouchLogic").helpTouchEnd1;
-            this.drawHLine(pointBegin1,pointEnd1);
+            this.drawHLine(pointBegin1, pointEnd1);
         }
-      
+
     },
 
-    drawHLine:function(p1,p2) {
+    drawHLine: function (p1, p2) {
         this.ctx.moveTo(p1.x, p1.y);
         this.ctx.lineTo(p2.x, p2.y);
         this.ctx.stroke();
@@ -134,18 +139,24 @@ cc.Class({
         this.touchStartPoint = this.touchPoint = cc.v2(event.touch.getLocation());
 
         console.log("touchStart");
-         console.log(this.node.convertToNodeSpaceAR(this.touchStartPoint));
+        console.log(this.node.convertToNodeSpaceAR(this.touchStartPoint));
     },
 
     onTouchMove: function (event) {
         this.touchPoint = cc.v2(event.touch.getLocation());
+
+        //this.node_streak.position = cc.v2( this.touchPoint.x - this.halfWinWidth,  this.touchPoint.y - this.halfWinHeight);
         //      console.log("touchMove");
         //  console.log(this.touchPoint);
     },
 
+    removeStreak: function (streakTemp) {
+        streakTemp.parent = null;
+    },
+
     onTouchEnd: function (event) {
-              console.log("touchend");
-         console.log(this.node.convertToNodeSpaceAR(this.touchPoint));
+        console.log("touchend");
+        console.log(this.node.convertToNodeSpaceAR(this.touchPoint));
         this.touchPoint = cc.v2(event.touch.getLocation());
         this.recalcResults();
         this.touching = false;
@@ -168,6 +179,18 @@ cc.Class({
             //console.log(this.currentNode.getComponent("checkPointTouchLogic").currentTouchCount);
             this.currentNode.getComponent("checkPointTouchLogic").currentTouchCount += 1;
             this.uiLayer.getComponent("uiLayer").refreash();
+
+            //创建拖尾效果
+
+            var streakTemp = cc.instantiate(this.node_streak);
+            streakTemp.parent = this.graphicsLayer;
+            streakTemp.position = cc.v2(this.touchStartPoint.x - this.halfWinWidth, this.touchStartPoint.y - this.halfWinHeight);
+
+            let acts = cc.sequence(cc.moveTo(0.2,cc.v2(this.touchPoint.x - this.halfWinWidth, this.touchPoint.y - this.halfWinHeight)), cc.callFunc(this.removeStreak, this, streakTemp));
+            streakTemp.runAction(acts);
+
+          
+
         } else {
             console.log("无效的切割");
         }
@@ -376,7 +399,7 @@ cc.Class({
         }
 
         if (index1 === undefined || index2 === undefined) {
-          //  debugger
+            //  debugger
             return;
         }
 
@@ -470,7 +493,7 @@ cc.Class({
 
                 r1.splice(i, 1);
                 i -= 1;
-            } 
+            }
             // else {
             //     console.log("看这里");
             //     console.log(r1[i].collider.tag);
@@ -480,7 +503,7 @@ cc.Class({
             if (r2[i].collider.tag > 100) {
                 r2.splice(i, 1);
                 i -= 1;
-            } 
+            }
             // else {
             //     console.log("zai看这里");
             //     console.log(r2[i].collider.tag);

@@ -33,6 +33,18 @@ export default class GameRankingList extends cc.Component {
     @property(cc.Label)
     scoreLabel = null;
 
+
+    //游戏内超越好友
+    @property(cc.Node)
+    game_beyond = null;
+    @property(cc.Node)
+    game_byond_head = null;
+    @property(cc.Label)
+    game_beyond_name = null;
+    @property(cc.Label)
+    game_beyond_score = null;
+
+
     @property(cc.Node)
     loadingLabel = null; //加载文字
 
@@ -78,9 +90,15 @@ export default class GameRankingList extends cc.Component {
                 this.fetchFriendDataToBeyond(data.MAIN_MENU_NUM);
             } else if (data.messageType == 7) { //用于查询给的分数是否超过当前数据源中的分数，超过谁就显示谁，然后删除掉
                 this.isBeyond(data.myScore);
-            } else if (data.messageType == 8) { //显示下个即将超越的好友
+            } 
+            else if (data.messageType == 8) { //显示下个即将超越的好友  游戏内
+               this.showPanel("game_beyond");
+                this.nextBeyond(data.myScore,8);
+            }  
+            
+            else if (data.messageType == 9) { //显示下个即将超越的好友
                 this.showPanel("beyond");
-                this.nextBeyond(data.myScore);
+                this.nextBeyond(data.myScore,9);
             }
         });
 
@@ -92,6 +110,7 @@ export default class GameRankingList extends cc.Component {
             this.node_list.active = false;
             this.node_over.active = true;
             this.node_beyond.active = false;
+            this.game_beyond.active = false;
             this.loadingLabel.active = true;
 
             this.node_overRank.active = false;
@@ -100,6 +119,7 @@ export default class GameRankingList extends cc.Component {
             this.node_myself.active = false;
             this.node_over.active = false;
             this.node_beyond.active = false;
+            this.game_beyond.active = false;
             this.loadingLabel.active = true;
 
             this.scrollViewContent.active = false;
@@ -108,6 +128,7 @@ export default class GameRankingList extends cc.Component {
             this.node_myself.active = false;
             this.node_over.active = false;
             this.node_beyond.active = false;
+            this.game_beyond.active = false;
             this.loadingLabel.active = true;
 
             this.scrollViewContent.active = false;
@@ -115,13 +136,25 @@ export default class GameRankingList extends cc.Component {
             this.node_list.active = false;
             this.node_over.active = false;
             this.node_beyond.active = true;
+            this.game_beyond.active = false;
             this.loadingLabel.active = false;
-        } else {
+        }else if (panelName == "game_beyond") {
             this.node_list.active = false;
             this.node_over.active = false;
             this.node_beyond.active = false;
+            this.game_beyond.active = true;
             this.loadingLabel.active = false;
         }
+        
+        
+        else {
+            this.node_list.active = false;
+            this.node_over.active = false;
+            this.node_beyond.active = false;
+            this.game_beyond.active = false;
+            this.loadingLabel.active = false;
+           
+        } 
     }
 
     //提交得分 isOver(若果是 的话会刷新over 界面)
@@ -146,11 +179,13 @@ export default class GameRankingList extends cc.Component {
                     }
                     console.log("-- socreGet--" + scoreGet + " -- " + score + " -- " + weekNum);
                     //&& weekNum == self.getTimeWeek_i()
-                    if (scoreGet >= score) { //这里比较了是否超过了服务器的数据，若没超过则不上传
+                    //if (scoreGet >= score) { //这里比较了是否超过了服务器的数据，若没超过则不上传 再次更改：由于切割项目 不需比较直接上传
+                    if (false) {
                         if (isOver)
                             self.gameOverRank(MAIN_MENU_NUM);
                         return;
                     }
+                    //}
                 }
                 // 对用户托管数据进行写数据操作
                 window.wx.setUserCloudStorage({
@@ -173,10 +208,10 @@ export default class GameRankingList extends cc.Component {
                 });
             },
             fail(res) {
-                // console.log('getUserCloudStorage', 'fail')
+                console.log('getUserCloudStorage', 'fail')
             },
             complete(res) {
-                // console.log('getUserCloudStorage', 'ok')
+                console.log('getUserCloudStorage', 'ok')
             }
         });
         //  } 
@@ -186,97 +221,97 @@ export default class GameRankingList extends cc.Component {
     //游戏结束界面显示最近两人
     gameOverRank(MAIN_MENU_NUM) {
         let self = this;
-       // if (CC_WECHATGAME) {
-            wx.getUserInfo({
-                openIdList: ['selfOpenId'],
-                success: (userRes) => {
-                    //    cc.log('success', userRes.data)
-                    let userData = userRes.data[0];
-                    //取出所有好友数据
-                    wx.getFriendCloudStorage({
-                        keyList: [MAIN_MENU_NUM],
-                        success: res => {
-                            console.log("--- gameOverRank success ---");
-                            console.log(res);
-                            self.loadingLabel.active = false;
-                            self.node_overRank.active = true;
+        // if (CC_WECHATGAME) {
+        wx.getUserInfo({
+            openIdList: ['selfOpenId'],
+            success: (userRes) => {
+                //    cc.log('success', userRes.data)
+                let userData = userRes.data[0];
+                //取出所有好友数据
+                wx.getFriendCloudStorage({
+                    keyList: [MAIN_MENU_NUM],
+                    success: res => {
+                        console.log("--- gameOverRank success ---");
+                        console.log(res);
+                        self.loadingLabel.active = false;
+                        self.node_overRank.active = true;
 
-                            let data = res.data;
-                            //整合data 数据
-                            console.log("-- 开始整合数据 ---");
-                            let nowWeek = this.getTimeWeek_i();
-                            for (let i = 0; i < data.length; ++i) {
-                                console.log("-- i " + i + " -- " + data[i].KVDataList.length);
-                                if (data[i].KVDataList.length > 0) {
-                                    let strValue = data[i].KVDataList[0].value;
-                                    console.log("-- strValue " + strValue);
-                                    let valueD = JSON.parse(strValue);
-                                    if (typeof (valueD) == "object") {
-                                        if (valueD.week != nowWeek)
-                                            valueD.wxgame.score = 0;
-                                        data[i].KVDataList[0].value = valueD;
-                                        console.log(valueD);
-                                    }
-                                    else
-                                        data[i].KVDataList[0].value = 0;
+                        let data = res.data;
+                        //整合data 数据
+                        console.log("-- 开始整合数据 ---");
+                        let nowWeek = this.getTimeWeek_i();
+                        for (let i = 0; i < data.length; ++i) {
+                            console.log("-- i " + i + " -- " + data[i].KVDataList.length);
+                            if (data[i].KVDataList.length > 0) {
+                                let strValue = data[i].KVDataList[0].value;
+                                console.log("-- strValue " + strValue);
+                                let valueD = JSON.parse(strValue);
+                                if (typeof (valueD) == "object") {
+                                    if (valueD.week != nowWeek)
+                                        valueD.wxgame.score = 0;
+                                    data[i].KVDataList[0].value = valueD;
+                                    console.log(valueD);
                                 }
+                                else
+                                    data[i].KVDataList[0].value = 0;
                             }
-
-                            data.sort((a, b) => {
-                                if (a.KVDataList.length == 0 && b.KVDataList.length == 0) {
-                                    return 0;
-                                }
-                                if (a.KVDataList.length == 0) {
-                                    return 1;
-                                }
-                                if (b.KVDataList.length == 0) {
-                                    return -1;
-                                }
-                                let scoreA = a.KVDataList[0].value;
-                                let scoreB = b.KVDataList[0].value;
-                                if (typeof (scoreA) == "object")
-                                    scoreA = a.KVDataList[0].value.wxgame.score;
-                                if (typeof (scoreB) == "object")
-                                    scoreB = b.KVDataList[0].value.wxgame.score;
-                                return scoreB - scoreA;
-                                //return b.KVDataList[0].value.wxgame.score - a.KVDataList[0].value.wxgame.score;
-                            });
-
-                            let fristShowIdx = 0;
-                            let myIdx = "null";
-                            for (let i = 0; i < data.length; i++) {
-                                if (data[i].avatarUrl == userData.avatarUrl) {
-                                    myIdx = i;
-                                    if (i - 1 >= 0)
-                                        fristShowIdx = i - 1;
-                                    else
-                                        fristShowIdx = i;
-                                    break;
-                                }
-                            }
-                            console.log("-- fristShowIdx : " + fristShowIdx + " -- " + myIdx);
-
-                            for (let i = 0; i < self.node_overRank.children.length; ++i) {
-                                let nodeN = self.node_overRank.children[i];
-                                if (myIdx != "null" && fristShowIdx + i < data.length) {
-                                    nodeN.active = true;
-                                    nodeN.getComponent('GameOverRank').init(fristShowIdx + i, data[fristShowIdx + i], fristShowIdx + i == myIdx);
-                                } else
-                                    nodeN.active = false;
-                            }
-                            console.log("--- gameOver init over ---");
-                        },
-                        fail: res => {
-                            // console.log("wx.getFriendCloudStorage fail", res);
-                            self.loadingLabel.getComponent(cc.Label).string = "数据加载失败，请检测网络，谢谢。";
                         }
-                    });
-                },
-                fail: (res) => {
-                    self.loadingLabel.getComponent(cc.Label).string = "数据加载失败，请检测网络，谢谢。";
-                }
-            });
-       // }
+
+                        data.sort((a, b) => {
+                            if (a.KVDataList.length == 0 && b.KVDataList.length == 0) {
+                                return 0;
+                            }
+                            if (a.KVDataList.length == 0) {
+                                return 1;
+                            }
+                            if (b.KVDataList.length == 0) {
+                                return -1;
+                            }
+                            let scoreA = a.KVDataList[0].value;
+                            let scoreB = b.KVDataList[0].value;
+                            if (typeof (scoreA) == "object")
+                                scoreA = a.KVDataList[0].value.wxgame.score;
+                            if (typeof (scoreB) == "object")
+                                scoreB = b.KVDataList[0].value.wxgame.score;
+                            return scoreB - scoreA;
+                            //return b.KVDataList[0].value.wxgame.score - a.KVDataList[0].value.wxgame.score;
+                        });
+
+                        let fristShowIdx = 0;
+                        let myIdx = "null";
+                        for (let i = 0; i < data.length; i++) {
+                            if (data[i].avatarUrl == userData.avatarUrl) {
+                                myIdx = i;
+                                if (i - 1 >= 0)
+                                    fristShowIdx = i - 1;
+                                else
+                                    fristShowIdx = i;
+                                break;
+                            }
+                        }
+                        console.log("-- fristShowIdx : " + fristShowIdx + " -- " + myIdx);
+
+                        for (let i = 0; i < self.node_overRank.children.length; ++i) {
+                            let nodeN = self.node_overRank.children[i];
+                            if (myIdx != "null" && fristShowIdx + i < data.length) {
+                                nodeN.active = true;
+                                nodeN.getComponent('GameOverRank').init(fristShowIdx + i, data[fristShowIdx + i], fristShowIdx + i == myIdx);
+                            } else
+                                nodeN.active = false;
+                        }
+                        console.log("--- gameOver init over ---");
+                    },
+                    fail: res => {
+                        // console.log("wx.getFriendCloudStorage fail", res);
+                        self.loadingLabel.getComponent(cc.Label).string = "数据加载失败，请检测网络，谢谢。";
+                    }
+                });
+            },
+            fail: (res) => {
+                self.loadingLabel.getComponent(cc.Label).string = "数据加载失败，请检测网络，谢谢。";
+            }
+        });
+        // }
     }
 
 
@@ -380,179 +415,179 @@ export default class GameRankingList extends cc.Component {
     fetchGroupData(MAIN_MENU_NUM, shareTicket) {
         console.log("--- 子域群排行 ---" + shareTicket);
         let self = this;
-       // if (CC_WECHATGAME) {
-            wx.getUserInfo({
-                openIdList: ['selfOpenId'],
-                success: (userRes) => {
-                    console.log('success', userRes.data)
-                    let userData = userRes.data[0];
-                    //取出所有好友数据
-                    wx.getGroupCloudStorage({
-                        shareTicket: shareTicket,
-                        keyList: [MAIN_MENU_NUM],
-                        success: res => {
-                            console.log("--- fetchGroupData success ---");
-                            self.loadingLabel.active = false;
-                            self.node_list.active = true;
-                            self.scrollViewContent.active = true;
+        // if (CC_WECHATGAME) {
+        wx.getUserInfo({
+            openIdList: ['selfOpenId'],
+            success: (userRes) => {
+                console.log('success', userRes.data)
+                let userData = userRes.data[0];
+                //取出所有好友数据
+                wx.getGroupCloudStorage({
+                    shareTicket: shareTicket,
+                    keyList: [MAIN_MENU_NUM],
+                    success: res => {
+                        console.log("--- fetchGroupData success ---");
+                        self.loadingLabel.active = false;
+                        self.node_list.active = true;
+                        self.scrollViewContent.active = true;
 
-                            let data = res.data;
-                            //整合data 数据
-                            console.log("-- 开始整合数据 ---");
-                            let nowWeek = this.getTimeWeek_i();
-                            for (let i = 0; i < data.length; ++i) {
-                                console.log("-- i " + i + " -- " + data[i].KVDataList.length);
-                                if (data[i].KVDataList.length > 0) {
-                                    let strValue = data[i].KVDataList[0].value;
-                                    console.log("-- strValue " + strValue);
-                                    let valueD = JSON.parse(strValue);
-                                    if (typeof (valueD) == "object") {
-                                        // if (valueD.week != nowWeek)
-                                        //     valueD.wxgame.score = 0;
-                                        data[i].KVDataList[0].value = valueD;
-                                        console.log(valueD);
-                                    }
-                                    else
-                                        data[i].KVDataList[0].value = 0;
+                        let data = res.data;
+                        //整合data 数据
+                        console.log("-- 开始整合数据 ---");
+                        let nowWeek = this.getTimeWeek_i();
+                        for (let i = 0; i < data.length; ++i) {
+                            console.log("-- i " + i + " -- " + data[i].KVDataList.length);
+                            if (data[i].KVDataList.length > 0) {
+                                let strValue = data[i].KVDataList[0].value;
+                                console.log("-- strValue " + strValue);
+                                let valueD = JSON.parse(strValue);
+                                if (typeof (valueD) == "object") {
+                                    // if (valueD.week != nowWeek)
+                                    //     valueD.wxgame.score = 0;
+                                    data[i].KVDataList[0].value = valueD;
+                                    console.log(valueD);
                                 }
+                                else
+                                    data[i].KVDataList[0].value = 0;
                             }
-                            data.sort((a, b) => {
-                                if (a.KVDataList.length == 0 && b.KVDataList.length == 0) {
-                                    return 0;
-                                }
-                                if (a.KVDataList.length == 0) {
-                                    return 1;
-                                }
-                                if (b.KVDataList.length == 0) {
-                                    return -1;
-                                }
-                                let scoreA = a.KVDataList[0].value;
-                                let scoreB = b.KVDataList[0].value;
-                                if (typeof (scoreA) == "object")
-                                    scoreA = a.KVDataList[0].value.wxgame.score;
-                                if (typeof (scoreB) == "object")
-                                    scoreB = b.KVDataList[0].value.wxgame.score;
-                                return scoreB - scoreA;
-                                //return b.KVDataList[0].value.wxgame.score - a.KVDataList[0].value.wxgame.score;
-                            });
-
-                            //判断加载最大值
-                            let maxNum = data.length;
-                            if (maxNum > 30)
-                                maxNum = 30;
-                            //加空间
-                            let addNum = maxNum - self.scrollViewContent.children.length;
-                            for (let j = 0; j < addNum; ++j) {
-                                let nodeN = cc.instantiate(self.pre_rankItem)
-                                self.scrollViewContent.addChild(nodeN);
-                            }
-                            console.log("--- 群 ---" + data.length);
-
-                            for (let i = 0; i < self.scrollViewContent.children.length; ++i) {
-                                let nodeN = self.scrollViewContent.children[i];
-                                if (i < data.length) {
-                                    nodeN.active = true;
-                                    nodeN.getComponent('RankItem').init(i, data[i]);
-                                    if (data[i].avatarUrl == userData.avatarUrl) {
-                                        self.node_myself.active = true;
-                                        self.node_myself.getComponent('RankItem').init(i, data[i]);
-                                    }
-                                } else
-                                    nodeN.active = false;
-                            }
-                        },
-                        fail: res => {
-                            // console.log("wx.getFriendCloudStorage fail", res);
-                            self.loadingLabel.getComponent(cc.Label).string = "数据加载失败，请检测网络，谢谢。";
                         }
-                    });
-                },
-                fail: (res) => {
-                    self.loadingLabel.getComponent(cc.Label).string = "数据加载失败，请检测网络，谢谢。";
-                }
-            });
-      //  }
+                        data.sort((a, b) => {
+                            if (a.KVDataList.length == 0 && b.KVDataList.length == 0) {
+                                return 0;
+                            }
+                            if (a.KVDataList.length == 0) {
+                                return 1;
+                            }
+                            if (b.KVDataList.length == 0) {
+                                return -1;
+                            }
+                            let scoreA = a.KVDataList[0].value;
+                            let scoreB = b.KVDataList[0].value;
+                            if (typeof (scoreA) == "object")
+                                scoreA = a.KVDataList[0].value.wxgame.score;
+                            if (typeof (scoreB) == "object")
+                                scoreB = b.KVDataList[0].value.wxgame.score;
+                            return scoreB - scoreA;
+                            //return b.KVDataList[0].value.wxgame.score - a.KVDataList[0].value.wxgame.score;
+                        });
+
+                        //判断加载最大值
+                        let maxNum = data.length;
+                        if (maxNum > 30)
+                            maxNum = 30;
+                        //加空间
+                        let addNum = maxNum - self.scrollViewContent.children.length;
+                        for (let j = 0; j < addNum; ++j) {
+                            let nodeN = cc.instantiate(self.pre_rankItem)
+                            self.scrollViewContent.addChild(nodeN);
+                        }
+                        console.log("--- 群 ---" + data.length);
+
+                        for (let i = 0; i < self.scrollViewContent.children.length; ++i) {
+                            let nodeN = self.scrollViewContent.children[i];
+                            if (i < data.length) {
+                                nodeN.active = true;
+                                nodeN.getComponent('RankItem').init(i, data[i]);
+                                if (data[i].avatarUrl == userData.avatarUrl) {
+                                    self.node_myself.active = true;
+                                    self.node_myself.getComponent('RankItem').init(i, data[i]);
+                                }
+                            } else
+                                nodeN.active = false;
+                        }
+                    },
+                    fail: res => {
+                        // console.log("wx.getFriendCloudStorage fail", res);
+                        self.loadingLabel.getComponent(cc.Label).string = "数据加载失败，请检测网络，谢谢。";
+                    }
+                });
+            },
+            fail: (res) => {
+                self.loadingLabel.getComponent(cc.Label).string = "数据加载失败，请检测网络，谢谢。";
+            }
+        });
+        //  }
     }
 
     //获取超越时数据
     fetchFriendDataToBeyond(MAIN_MENU_NUM) {
         let self = this;
         //if (CC_WECHATGAME) {
-            wx.getUserInfo({
-                openIdList: ['selfOpenId'],
-                success: (userRes) => {
-                    //console.log('超越部分：success', userRes.data)
-                    let userData = userRes.data[0];
-                    //取出所有好友数据
-                    wx.getFriendCloudStorage({
-                        keyList: [MAIN_MENU_NUM],
-                        success: res => {
-                            console.log("--- fetchFriendDataToBeyond success ---");
-                            console.log(res);
-                            let data = res.data;
-                            //整合data 数据
-                            console.log("-- 开始整合数据 ---");
-                            let nowWeek = this.getTimeWeek_i();
-                            for (let i = 0; i < data.length; ++i) {
-                                console.log("-- i " + i + " -- " + data[i].KVDataList.length);
-                                if (data[i].KVDataList.length > 0) {
-                                    let strValue = data[i].KVDataList[0].value;
-                                    console.log("-- strValue " + strValue);
-                                    let valueD = JSON.parse(strValue);
-                                    if (typeof (valueD) == "object") {
-                                        if (valueD.week != nowWeek)
-                                            valueD.wxgame.score = 0;
-                                        data[i].KVDataList[0].value = valueD;
-                                        console.log(valueD);
-                                    }
-                                    else
-                                        data[i].KVDataList[0].value = 0;
+        wx.getUserInfo({
+            openIdList: ['selfOpenId'],
+            success: (userRes) => {
+                //console.log('超越部分：success', userRes.data)
+                let userData = userRes.data[0];
+                //取出所有好友数据
+                wx.getFriendCloudStorage({
+                    keyList: [MAIN_MENU_NUM],
+                    success: res => {
+                        console.log("--- fetchFriendDataToBeyond success ---");
+                        console.log(res);
+                        let data = res.data;
+                        //整合data 数据
+                        console.log("-- 开始整合数据 ---");
+                        let nowWeek = this.getTimeWeek_i();
+                        for (let i = 0; i < data.length; ++i) {
+                            console.log("-- i " + i + " -- " + data[i].KVDataList.length);
+                            if (data[i].KVDataList.length > 0) {
+                                let strValue = data[i].KVDataList[0].value;
+                                console.log("-- strValue " + strValue);
+                                let valueD = JSON.parse(strValue);
+                                if (typeof (valueD) == "object") {
+                                    // if (valueD.week != nowWeek)
+                                    //     valueD.wxgame.score = 0;
+                                    data[i].KVDataList[0].value = valueD;
+                                    console.log(valueD);
                                 }
+                                else
+                                    data[i].KVDataList[0].value = 0;
                             }
-                            data.sort((a, b) => {
-                                if (a.KVDataList.length == 0 && b.KVDataList.length == 0) {
-                                    return 0;
-                                }
-                                if (a.KVDataList.length == 0) {
-                                    return 1;
-                                }
-                                if (b.KVDataList.length == 0) {
-                                    return -1;
-                                }
-                                let scoreA = a.KVDataList[0].value;
-                                let scoreB = b.KVDataList[0].value;
-                                if (typeof (scoreA) == "object")
-                                    scoreA = a.KVDataList[0].value.wxgame.score;
-                                if (typeof (scoreB) == "object")
-                                    scoreB = b.KVDataList[0].value.wxgame.score;
-                                return scoreB - scoreA;
-                                //return b.KVDataList[0].value.wxgame.score - a.KVDataList[0].value.wxgame.score;
-                            });
-                            let waitingForDelete = 0;
-                            for (let i = 0; i < data.length; i++) {
-                                if (data[i].avatarUrl == userData.avatarUrl) { //这是自己，要从待超集合中删除
-                                    waitingForDelete = i;
-                                }
-                            }
-
-                            data.splice(waitingForDelete, 1);
-                            self.waitingForBeyondFriends = data;
-                            //console.log("这里 这里！");
-                            // for (let j = 0; j < self.waitingForBeyondFriends.length; j++) {
-                            //     console.log(self.waitingForBeyondFriends[j]);
-                            // }
-
-                        },
-                        fail: res => {
-                            //console.log("wx.getFriendCloudStorage fail", res);
-                            self.loadingLabel.getComponent(cc.Label).string = "数据加载失败，请检测网络，谢谢。";
                         }
-                    });
-                },
-                fail: (res) => {
-                    self.loadingLabel.getComponent(cc.Label).string = "数据加载失败，请检测网络，谢谢。";
-                }
-            });
+                        data.sort((a, b) => {
+                            if (a.KVDataList.length == 0 && b.KVDataList.length == 0) {
+                                return 0;
+                            }
+                            if (a.KVDataList.length == 0) {
+                                return 1;
+                            }
+                            if (b.KVDataList.length == 0) {
+                                return -1;
+                            }
+                            let scoreA = a.KVDataList[0].value;
+                            let scoreB = b.KVDataList[0].value;
+                            if (typeof (scoreA) == "object")
+                                scoreA = a.KVDataList[0].value.wxgame.score;
+                            if (typeof (scoreB) == "object")
+                                scoreB = b.KVDataList[0].value.wxgame.score;
+                            return scoreB - scoreA;
+                            //return b.KVDataList[0].value.wxgame.score - a.KVDataList[0].value.wxgame.score;
+                        });
+                        let waitingForDelete = 0;
+                        for (let i = 0; i < data.length; i++) {
+                            if (data[i].avatarUrl == userData.avatarUrl) { //这是自己，要从待超集合中删除
+                                waitingForDelete = i;
+                            }
+                        }
+
+                        data.splice(waitingForDelete, 1);
+                        self.waitingForBeyondFriends = data;
+                        //console.log("这里 这里！");
+                        // for (let j = 0; j < self.waitingForBeyondFriends.length; j++) {
+                        //     console.log(self.waitingForBeyondFriends[j]);
+                        // }
+
+                    },
+                    fail: res => {
+                        //console.log("wx.getFriendCloudStorage fail", res);
+                        self.loadingLabel.getComponent(cc.Label).string = "数据加载失败，请检测网络，谢谢。";
+                    }
+                });
+            },
+            fail: (res) => {
+                self.loadingLabel.getComponent(cc.Label).string = "数据加载失败，请检测网络，谢谢。";
+            }
+        });
         //}
     }
 
@@ -588,9 +623,15 @@ export default class GameRankingList extends cc.Component {
     }
 
     //下一个超越的是那一个
-    nextBeyond(currentScore) {
+    nextBeyond(currentScore,beyond_type) {
         if (this.waitingForBeyondFriends == null || this.waitingForBeyondFriends.length == 0) {
-            this.node_beyond.active = false;
+            if(beyond_type == 8) {
+                this.game_beyond.active = false;
+            } else if(beyond_type == 9) {
+                this.node_beyond.active = false;
+            }
+            
+            
             console.log("-- nextBeyond 无 --");
             return;
         }
@@ -612,32 +653,65 @@ export default class GameRankingList extends cc.Component {
 
         //console.log("看下传到子域的当前得分！--》 " + currentScore);
         if (nextBeyondIndex != -1) {
-            this.node_beyond.active = true;
+            if(beyond_type == 8) {
+                this.game_beyond.active = true;
+                this.game_beyond_name.string = this.waitingForBeyondFriends[nextBeyondIndex].nickname;
+                this.game_beyond_score.string = (typeof (this.waitingForBeyondFriends[nextBeyondIndex].KVDataList[0].value) == "object" ? this.waitingForBeyondFriends[nextBeyondIndex].KVDataList[0].value.wxgame.score : 0);
+           
+                this.initSprite(this.waitingForBeyondFriends[nextBeyondIndex],this.game_byond_head);
+            } else if(beyond_type == 9) {
+                this.node_beyond.active = true;
+
+                this.nameLabel.string = this.waitingForBeyondFriends[nextBeyondIndex].nickname;
+                this.scoreLabel.string = (typeof (this.waitingForBeyondFriends[nextBeyondIndex].KVDataList[0].value) == "object" ? this.waitingForBeyondFriends[nextBeyondIndex].KVDataList[0].value.wxgame.score : 0);
+           
+                this.initSprite(this.waitingForBeyondFriends[nextBeyondIndex],this.headImageNode);
+            }
+        
             //splice 返回的是一个数组。一定要加索引来访问
             //let beyondData = this.waitingForBeyondFriends.splice(beyondIndex, 1);
             console.log("看下超越的玩家数据");
-            // console.log(beyondData[0]);
+             console.log(beyondData[0]);
 
-            this.initSprite(this.waitingForBeyondFriends[nextBeyondIndex]);
-            this.nameLabel.string = this.waitingForBeyondFriends[nextBeyondIndex].nickname;
-            this.scoreLabel.string = (typeof (this.waitingForBeyondFriends[nextBeyondIndex].KVDataList[0].value) == "object" ? this.waitingForBeyondFriends[nextBeyondIndex].KVDataList[0].value.wxgame.score : 0);
+           
+           
         } else {
-            // console.log("执行到这里，隐藏了下个好友！");
-            this.node_beyond.active = false;
+             console.log("执行到这里，隐藏了下个好友！");
+            if(beyond_type == 8) {
+                this.game_beyond.active = false;
+            } else if(beyond_type == 9) {
+                this.node_beyond.active = false;
+            }
         }
         console.log("---- beyondOver ----");
     }
 
-    initSprite(beyondData) {
+    initSprite(beyondData,headImageNode) {
         let avatarUrl = beyondData.avatarUrl;
-        //  console.log("看下 头像 URL");
-        //  console.log(avatarUrl);
-        //  console.log(this.headImageNode);
-        //  console.log(this.headImageNode.getComponent(cc.Animation));
-        this.createImage(avatarUrl);
-        // let anim = this.headImageNode.getComponent(cc.Animation);
-        //anim.play();
-        // this.headImageNode.runAction(cc.moveTo(5.0,cc.v2(200,200)));
+       
+
+        var self = this;
+        try {
+            let image = wx.createImage();
+            image.onload = () => {
+                try {
+                    let texture = new cc.Texture2D();
+                    texture.initWithElement(image);
+                    texture.handleLoadedTexture();
+                    headImageNode.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(texture);
+                } catch (e) {
+                    console.log("--- err 1 ---");
+                    cc.log(e);
+                    headImageNode.active = false;
+                }
+            };
+            image.src = avatarUrl;
+        } catch (e) {
+            console.log("--- err 2 ---");
+            cc.log(e);
+            headImageNode.active = false;
+        }
+
     }
 
     createImage(avatarUrl) {
