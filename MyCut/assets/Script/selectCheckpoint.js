@@ -175,7 +175,7 @@ cc.Class({
         //console.log(jsonObj);
         let checkPoints = this.checkPoints.children;
 
-        this.label_crownCount = 0;
+      // this.label_crownCount = 0;
         this.label_progressCount = 0;
         for (let i = 0; i < checkPoints.length; i++) {
             let crownCount = parseInt(jsonObj[i].crownCount);
@@ -186,13 +186,13 @@ cc.Class({
             //是否枷锁 //是否可玩
             this.showLock(checkPoints[i], i, maxCheckpoint);
 
-            this.label_crownCount += crownCount;
+           // this.label_crownCount += crownCount;
             if (crownCount > 0) {
                 this.label_progressCount += 1;
             }
         }
 
-
+  this.label_crownCount = cc.dataMgr.currentScore();
         //皇冠总数显示
         this.crownLabel.string = "X" + this.label_crownCount;
         //完成关卡进度显示

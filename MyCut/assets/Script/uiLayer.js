@@ -45,7 +45,12 @@ cc.Class({
         shareAlert: {
             default: null,
             type: cc.Prefab,
-        }
+        },
+
+        nextFriend: {
+            default: null,
+            type: cc.Sprite,
+        },
 
     },
 
@@ -55,6 +60,10 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
+
+          //向子域发送请求，获得所有的好友数据
+          this.sendMessageToSubdomainGetFriendDatas();
+          this.tex = new cc.Texture2D();
 
         console.log("UI ONLOAD");
 
@@ -109,6 +118,17 @@ cc.Class({
         }
     },
 
+    sendMessageToSubdomainGetFriendDatas: function () {
+        if (CC_WECHATGAME) {
+            window.sharedCanvas.width = 720;
+            window.sharedCanvas.height = 1280;
+            window.wx.postMessage({
+                messageType: 6,
+                MAIN_MENU_NUM: "score"
+            });
+        }
+    },
+
     initUI: function () {
 
     },
@@ -122,6 +142,36 @@ cc.Class({
         this.dirUp = false;
         this.dirDown = false;
 
+        this.showNextFriend();
+    },
+
+    showNextFriend:function() {
+        this.scheduleOnce(this.seeNextBeyondFriend,0.5);
+    }, 
+    
+    seeNextBeyondFriend: function () {
+        if (CC_WECHATGAME) {
+            let self = this;
+            window.wx.postMessage({
+                messageType: 8,
+                currentScore: self.currentScore(),
+            });
+            self.scheduleOnce(this._updateSubDomainCanvas, 2);
+        }
+    },
+
+    currentScore:function() {
+        return cc.dataMgr.currentScore();
+    },
+
+
+     // 刷新子域的纹理
+     _updateSubDomainCanvas() {
+        if (window.sharedCanvas != undefined) {
+            this.tex.initWithElement(window.sharedCanvas);
+            this.tex.handleLoadedTexture();
+            this.nextFriend.spriteFrame = new cc.SpriteFrame(this.tex);
+        }
     },
 
     backClick: function () {
@@ -129,6 +179,7 @@ cc.Class({
     },
 
     reNewClick: function () {
+        this.showNextFriend();
         this.gameLayer.getComponent("gameLayer").reNew();
         //this.nextNode.getComponent(cc.Animation).play("nextNodeBackAni");
         //this.nextNode.runAction(cc.moveTo(1.0, cc.v2(0, -1000)));
