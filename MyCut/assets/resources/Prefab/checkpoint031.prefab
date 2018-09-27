@@ -172,7 +172,7 @@
     "_fixedRotation": false,
     "enabledContactListener": false,
     "bullet": false,
-    "_id": "74l5BS4+JE1o6Yacj5RoI6"
+    "_id": "2aQLqF+bVGor+zE14sIeJq"
   },
   {
     "__type__": "cc.PhysicsPolygonCollider",
@@ -235,7 +235,7 @@
         "y": -15
       }
     ],
-    "_id": "0fFqiEvUBNsrK9jJnt3Luk"
+    "_id": "32oZIj3AxMB4JhPCgnwzBT"
   },
   {
     "__type__": "44ebeIDGjBGiYlQFJBgKLFw",
@@ -245,7 +245,7 @@
       "__id__": 2
     },
     "_enabled": true,
-    "_id": "b1gglhtAVByrrArrIVotEa"
+    "_id": "bdqpRI/RRKL71wi6WkpMW0"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -356,7 +356,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "04tg2PPtpNLomg2wzwbB4Y"
+    "_id": "aa1gD1oK1Pyr4qqPSZNf66"
   },
   {
     "__type__": "cc.RigidBody",
@@ -380,7 +380,7 @@
     "_fixedRotation": false,
     "enabledContactListener": true,
     "bullet": false,
-    "_id": "90zg364YxKwrHtfyt0SM16"
+    "_id": "32T7TvpUZBwZwNyXnJ5Lc/"
   },
   {
     "__type__": "cc.PhysicsCircleCollider",
@@ -402,7 +402,7 @@
       "y": 0
     },
     "_radius": 18,
-    "_id": "bdggymq8ZDrISGt7c7mih7"
+    "_id": "c0JZfhOIlOdp3dGQDS3q9f"
   },
   {
     "__type__": "e4fd7MPrOxIyoGO4+5E/8MA",
@@ -413,7 +413,7 @@
     },
     "_enabled": true,
     "isDeadFlag": false,
-    "_id": "9b9mJTEtxDZLZEkWBTBXS3"
+    "_id": "59NbzqXD9Ocp+JyMfUZN8N"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -536,7 +536,7 @@
         "y": -100
       }
     ],
-    "_id": "34dy5RAKFEprfT9CPsoHY7"
+    "_id": "2el2pNt5FOhbn+kGITyi02"
   },
   {
     "__type__": "cc.RigidBody",
@@ -560,7 +560,7 @@
     "_fixedRotation": false,
     "enabledContactListener": false,
     "bullet": false,
-    "_id": "309O3fCntGw6gYfp8937Do"
+    "_id": "56z0YmRVZLnJg+Y1LuAIgu"
   },
   {
     "__type__": "44ebeIDGjBGiYlQFJBgKLFw",
@@ -570,7 +570,7 @@
       "__id__": 13
     },
     "_enabled": true,
-    "_id": "56JbyAPxlE3Yh6VbOt5QdF"
+    "_id": "898z3iUk1ESLWdQZdc6P5w"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -598,13 +598,13 @@
     "helpLineCount": 1,
     "helpTouchBegin": {
       "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 370
+      "x": 36.5217,
+      "y": 113.913
     },
     "helpTouchEnd": {
       "__type__": "cc.Vec2",
-      "x": 0,
-      "y": -60
+      "x": 177.391,
+      "y": -68.6956
     },
     "helpTouchBegin1": null,
     "helpTouchEnd1": null,
@@ -613,7 +613,7 @@
     "currentMass": 0,
     "revoluteJointNodeArr": [],
     "targetSprite": null,
-    "_id": "20O6w9PKdJDYEggTA3hnWu"
+    "_id": "bds1jGeOlPEoJ3hXR0VHxl"
   },
   {
     "__type__": "cc.PrefabInfo",
