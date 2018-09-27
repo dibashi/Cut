@@ -154,7 +154,7 @@ cc.Class({
             let self = this;
             window.wx.postMessage({
                 messageType: 8,
-                currentScore: self.currentScore(),
+                myScore: self.currentScore(),
             });
             self.scheduleOnce(this._updateSubDomainCanvas, 2);
         }

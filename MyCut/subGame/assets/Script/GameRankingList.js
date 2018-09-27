@@ -624,6 +624,8 @@ export default class GameRankingList extends cc.Component {
 
     //下一个超越的是那一个
     nextBeyond(currentScore,beyond_type) {
+        console.log("nextbeyond!");
+        console.log(this.waitingForBeyondFriends);
         if (this.waitingForBeyondFriends == null || this.waitingForBeyondFriends.length == 0) {
             if(beyond_type == 8) {
                 this.game_beyond.active = false;
@@ -640,6 +642,8 @@ export default class GameRankingList extends cc.Component {
         // for (let j = 0; j < this.waitingForBeyondFriends.length; j++) {
         //     console.log(this.waitingForBeyondFriends[j]);
         // }
+
+        // console.log("当前得分  " + currentScore);
 
 
         let nextBeyondIndex = -1;
@@ -670,8 +674,8 @@ export default class GameRankingList extends cc.Component {
         
             //splice 返回的是一个数组。一定要加索引来访问
             //let beyondData = this.waitingForBeyondFriends.splice(beyondIndex, 1);
-            console.log("看下超越的玩家数据");
-             console.log(beyondData[0]);
+            // console.log("看下超越的玩家数据");
+            //  console.log(beyondData[0]);
 
            
            
