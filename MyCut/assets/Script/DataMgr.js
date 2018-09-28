@@ -60,6 +60,11 @@ export default class DataMgr extends cc.Component {
         if(!rc) {
             cc.sys.localStorage.setItem("recommendedCurrency",0);
         }
+
+        let coinCount = cc.sys.localStorage.getItem("coinCount");
+        if(!coinCount) {
+            cc.sys.localStorage.setItem("coinCount",0);
+        }
     };
 
     //直接全部遍历 以为以后不是顺序玩关卡了
@@ -75,6 +80,14 @@ export default class DataMgr extends cc.Component {
         }
 
         return resultScore;
+    };
+
+    getCoinCount() {
+        return parseInt(cc.sys.localStorage.getItem("coinCount"));
+    };
+
+    setCoinCount(coinCount) {
+        cc.sys.localStorage.setItem("coinCount",coinCount);
     };
 
     

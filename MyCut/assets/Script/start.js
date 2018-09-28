@@ -8,20 +8,7 @@ cc.Class({
     properties: {
         crownLabel: cc.Label,
         progressLabel: cc.Label,
-        checkPoints: {
-            default: null,
-            type: cc.Node,
-        },
-
-        panelBegin: {
-            default: null,
-            type: cc.Sprite,
-        },
-
-        panelEnd: {
-            default: null,
-            type: cc.Sprite,
-        },
+        coinLabel: cc.Label,
 
 
         onMusicSpriteFrame: {
@@ -88,6 +75,8 @@ cc.Class({
         } else {
             this.musicSprite.spriteFrame = this.offMusicSpriteFrame;
         }
+
+        this.coinLabel.string = "X" + cc.dataMgr.getCoinCount();
 
        
 
@@ -290,5 +279,15 @@ cc.Class({
         });
     },
 
+    inviteClick:function() {
+        console.log("invite click!~");
+    },
+
+    goGame:function() {
+        console.log("go game click!~");
+    },  
+    goSelectCheckpoint:function() {
+        console.log("go game click!~");
+    },  
 
 });
