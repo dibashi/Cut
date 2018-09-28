@@ -177,7 +177,9 @@ cc.Class({
 
       // this.label_crownCount = 0;
         this.label_progressCount = 0;
+       
         for (let i = 0; i < checkPoints.length; i++) {
+            
             let crownCount = parseInt(jsonObj[i].crownCount);
             //显示皇冠数量
             this.showCrown(checkPoints[i], crownCount);
