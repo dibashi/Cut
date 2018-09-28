@@ -52,6 +52,16 @@ cc.Class({
             type: cc.Sprite,
         },
 
+        prizeNode:{
+            default:null,
+            type:cc.Node,
+        },
+
+        coinLabel:{
+            default:null,
+            type:cc.Label,
+        },
+
     },
 
 
@@ -67,6 +77,7 @@ cc.Class({
 
         console.log("UI ONLOAD");
 
+        this.coinLabel.string = "X" + cc.dataMgr.getCoinCount();
         this.refreash();
     },
 
@@ -175,7 +186,7 @@ cc.Class({
     },
 
     backClick: function () {
-        cc.director.loadScene('selectCheckpoint');
+        cc.director.loadScene('start');
     },
 
     reNewClick: function () {
@@ -184,12 +195,7 @@ cc.Class({
         //this.nextNode.getComponent(cc.Animation).play("nextNodeBackAni");
         //this.nextNode.runAction(cc.moveTo(1.0, cc.v2(0, -1000)));
 
-        if (!this.dirDown) {
-            this.dirDown = true;
-            let ac = cc.moveTo(1.0, cc.v2(0, -1000));
-            let fc = cc.callFunc(this.dirDowned, this);
-            this.nextNode.runAction(cc.sequence(ac, fc));
-        }
+       this.closeNextNode();
         this.refreash();
     },
 
@@ -212,7 +218,7 @@ cc.Class({
         //todo 这里没有检测是否越界！！！
 
 
-        cc.dataMgr.currentCheckPoint += 1;
+        cc.dataMgr.currentCheckPoint = cc.dataMgr.getRandomCheckpoint();
 
 
         this.reNewClick();
@@ -229,7 +235,15 @@ cc.Class({
             this.honors.children[i].color = cc.color(255, 255, 255, 255);
         }
 
-        if (cc.dataMgr.currentCheckPoint < cc.dataMgr.MAX_CHECKPOINT_COUNT) {
+        if(event.detail.givePrize == true) {
+           this.prizeNode.active = true;
+           
+           this.coinLabel.string = "X" + cc.dataMgr.addCoinCount(5);
+        } else {
+            this.prizeNode.active = false;
+        }
+
+        //if (cc.dataMgr.currentCheckPoint < cc.dataMgr.MAX_CHECKPOINT_COUNT) {
             //this.nextNode.getComponent(cc.Animation).play("nextNodeAni");
             if (!this.dirUp) {
                 this.dirUp = true;
@@ -238,7 +252,7 @@ cc.Class({
                 this.nextNode.runAction(cc.sequence(ac, fc));
             }
 
-        }
+       // }
 
     },
 
@@ -248,6 +262,15 @@ cc.Class({
 
     dirDowned: function () {
         this.dirDown = false;
-    }
+    },
+
+    closeNextNode:function() {
+        if (!this.dirDown) {
+            this.dirDown = true;
+            let ac = cc.moveTo(1.0, cc.v2(0, -1500));
+            let fc = cc.callFunc(this.dirDowned, this);
+            this.nextNode.runAction(cc.sequence(ac, fc));
+        }
+    },
 
 });

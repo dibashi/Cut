@@ -50,13 +50,6 @@ cc.Class({
 
     },
 
-    goCheckpoint: function (event, eventData) {
-
-
-        //  console.log(eventData);
-        cc.dataMgr.currentCheckPoint = parseInt(eventData);
-        cc.director.loadScene('gameScene');
-    },
 
     // use this for initialization
     onLoad: function () {
@@ -99,6 +92,8 @@ cc.Class({
             if (!path)
                 path = "";
         }
+
+        cc.dataMgr.submitScore();
     },
 
     initSubCanvas() {
@@ -137,18 +132,7 @@ cc.Class({
 
   
 
-
-    //上传皇冠总数
-    submitScore: function () {
-
-        if (CC_WECHATGAME) {
-            window.wx.postMessage({
-                messageType: 2,
-                MAIN_MENU_NUM: "score",
-                myScore: this.label_crownCount
-            });
-        }
-    },
+   
 
 
     // called every frame
@@ -294,6 +278,9 @@ cc.Class({
 
     goGame:function() {
         console.log("go game click!~");
+
+        cc.dataMgr.currentCheckPoint = cc.dataMgr.getRandomCheckpoint();
+        console.log( cc.dataMgr.currentCheckPoint );
         cc.director.loadScene('gameScene');
     },  
     goSelectCheckpoint:function() {

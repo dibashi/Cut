@@ -50,42 +50,13 @@ cc.Class({
 
     refreshCheckPoint: function () {
 
-        // //从1计数 第一关是1
-        // let dangQianGuanKa = parseInt(cc.sys.localStorage.getItem("dangQianGuanKa"));
-        // //console.log("pre dangQianGuanKa " +dangQianGuanKa);
-        // if(dangQianGuanKa == null || typeof(dangQianGuanKa) == undefined || isNaN(dangQianGuanKa)) {
-        //     dangQianGuanKa = 1;
-        // }
-        // //console.log("dangQianGuanKa  " +dangQianGuanKa);
-        // let cps = this.checkPoints.children;
-        // for (let i = 0; i < cps.length; i++) {
-        //     //console.log(cps[i].name);
-        //     if (i < (dangQianGuanKa - 1)) {
-        //         cps[i].opacity = 255;
-        //         cps[i].getComponent(cc.Button).interactable = true;
-        //         cps[i].getChildByName("tubiao_wancheng").active = true;
-        //     } else if (i == (dangQianGuanKa - 1)) {
-        //         cps[i].opacity = 255;
-        //         cps[i].getComponent(cc.Button).interactable = true;
-        //         cps[i].getChildByName("tubiao_wancheng").active = false;
-        //     } else if (i > (dangQianGuanKa - 1)) {
-        //         cps[i].opacity = 70;
-        //         cps[i].getComponent(cc.Button).interactable = false;
-        //         cps[i].getChildByName("tubiao_wancheng").active = false;
-        //     }
-        // }
+        
 
-        let maxCheckpoint = parseInt(cc.sys.localStorage.getItem("maxCheckpoint"));
-        console.log(maxCheckpoint);
+      
         let jsons = cc.sys.localStorage.getItem("checkPointJsonData");
-        //console.log(jsons);
         let jsonObj = JSON.parse(jsons);
-        //console.log(jsonObj);
         let checkPoints = this.checkPoints.children;
 
-      // this.label_crownCount = 0;
-        this.label_progressCount = 0;
-       
         for (let i = 0; i < checkPoints.length; i++) {
             
             let crownCount = parseInt(jsonObj[i].crownCount);
@@ -94,21 +65,11 @@ cc.Class({
             //底层图片是否碎裂
             this.showPanel(checkPoints[i], crownCount);
             //是否枷锁 //是否可玩
-            this.showLock(checkPoints[i], i, maxCheckpoint);
+            this.showLock(checkPoints[i], crownCount);
 
-           // this.label_crownCount += crownCount;
-            if (crownCount > 0) {
-                this.label_progressCount += 1;
-            }
+           
         }
-
-  this.label_crownCount = cc.dataMgr.currentScore();
-        //皇冠总数显示
-        this.crownLabel.string = "X" + this.label_crownCount;
-        //完成关卡进度显示
-        this.progressLabel.string = this.label_progressCount + "/" + checkPoints.length;
-        //向服务器上传得分
-        this.submitScore();
+        
     },
 
 
@@ -149,13 +110,13 @@ cc.Class({
         }
     },
 
-    showLock: function (checkPointNode, index, maxCheckpoint) {
-        if (index >= maxCheckpoint) {
-            checkPointNode.getComponent(cc.Button).interactable = false;
-            checkPointNode.getChildByName("lock").active = true;
-        } else {
+    showLock: function (checkPointNode, showCrownCount) {
+        if (showCrownCount >0) {
             checkPointNode.getComponent(cc.Button).interactable = true;
             checkPointNode.getChildByName("lock").active = false;
+        } else {
+            checkPointNode.getComponent(cc.Button).interactable = false;
+            checkPointNode.getChildByName("lock").active = true;
         }
     },
 
