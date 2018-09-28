@@ -273,4 +273,19 @@ cc.Class({
         }
     },
 
+    tipsClick:function() {
+        //如果金币够 则提示
+        if( cc.dataMgr.getCoinCount() >= 50) {
+            this.coinLabel.string = "X" + cc.dataMgr.addCoinCount(-50);
+            this.helpCallback();
+        } else {
+            let ss = cc.instantiate(this.shareAlert);
+            ss.zIndex = 1000;
+            ss.getComponent("shareAlert").onWho = this.node;
+            ss.getComponent("shareAlert").showTips();
+            this.node.addChild(ss);
+    
+        }
+    },
+
 });

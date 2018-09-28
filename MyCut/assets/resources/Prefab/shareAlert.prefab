@@ -27,20 +27,23 @@
       },
       {
         "__id__": 23
+      },
+      {
+        "__id__": 26
       }
     ],
     "_active": true,
     "_level": 1,
     "_components": [
       {
-        "__id__": 26
+        "__id__": 29
       },
       {
-        "__id__": 27
+        "__id__": 30
       }
     ],
     "_prefab": {
-      "__id__": 28
+      "__id__": 31
     },
     "_opacity": 255,
     "_color": {
@@ -179,7 +182,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "e1aZ8jaolDAJhDksEDA3eW"
+    "_id": "06e3O5lSBKi7qKfVKqExrP"
   },
   {
     "__type__": "cc.Widget",
@@ -206,7 +209,7 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 2,
     "_originalHeight": 2,
-    "_id": "28+gv5ox1Lg7BE4S2cKyWT"
+    "_id": "18uLhwZAFEIZj5aIXYVnT1"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -261,7 +264,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -328,
+      "y": -380,
       "z": 0
     },
     "_scale": {
@@ -340,7 +343,7 @@
     "_N$target": {
       "__id__": 6
     },
-    "_id": "5e3+++VXFMjLlZXkeW+21J"
+    "_id": "6dbbeAf6pBB4EfQzDri3Ug"
   },
   {
     "__type__": "cc.ClickEvent",
@@ -377,7 +380,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "bdlogX5mBC8Z4qAvCl9FFD"
+    "_id": "1coUb7cf5E4Ys2IFxZ4FNR"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -498,7 +501,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 252,
+      "y": 163,
       "z": 0
     },
     "_scale": {
@@ -589,7 +592,7 @@
     "_N$target": {
       "__id__": 12
     },
-    "_id": "c5gtZf1o5OEZmeg3r5h5u7"
+    "_id": "fax+Ltn2VCaLYIZot2JLEH"
   },
   {
     "__type__": "cc.ClickEvent",
@@ -626,7 +629,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "7b7kxYrm1CuqH44rRMDNI2"
+    "_id": "37WWb79nVIGKA1X+1VJxJW"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -681,7 +684,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 39,
+      "y": -23,
       "z": 0
     },
     "_scale": {
@@ -760,7 +763,7 @@
     "_N$target": {
       "__id__": 17
     },
-    "_id": "e2IrBzEX5O+5Phwp6wPNGs"
+    "_id": "f5JSU+oedKxbx/8FowzIwg"
   },
   {
     "__type__": "cc.ClickEvent",
@@ -797,7 +800,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "86+toLHwtA9LQdbbNxVjb/"
+    "_id": "7f2U+dR8dN+azVOpuagQZ4"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -907,7 +910,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "5d7NvimKFLNbr0ePkgbbTE"
+    "_id": "b09tY7ubhOoZBJr8RUnqzM"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -918,6 +921,105 @@
       "__uuid__": "d1414d67-bc6b-40f3-91b0-1af6495f516f"
     },
     "fileId": "b4n3sDEMNLspSYPkYhXdUr",
+    "sync": false
+  },
+  {
+    "__type__": "cc.Node",
+    "_name": "coinTips",
+    "_objFlags": 0,
+    "_parent": {
+      "__id__": 1
+    },
+    "_children": [],
+    "_active": false,
+    "_level": 2,
+    "_components": [
+      {
+        "__id__": 27
+      }
+    ],
+    "_prefab": {
+      "__id__": 28
+    },
+    "_opacity": 255,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 560,
+      "height": 120
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_position": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 162,
+      "z": 0
+    },
+    "_scale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "_rotationX": 0,
+    "_rotationY": 0,
+    "_quat": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_zIndex": 0,
+    "groupIndex": 0,
+    "_id": ""
+  },
+  {
+    "__type__": "cc.Label",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 26
+    },
+    "_enabled": true,
+    "_srcBlendFactor": 1,
+    "_dstBlendFactor": 771,
+    "_useOriginalSize": false,
+    "_string": "金币不足\n可观看广告或邀请好友获得提示",
+    "_N$string": "金币不足\n可观看广告或邀请好友获得提示",
+    "_fontSize": 40,
+    "_lineHeight": 60,
+    "_enableWrapText": true,
+    "_N$file": null,
+    "_isSystemFontUsed": true,
+    "_spacingX": 0,
+    "_N$horizontalAlign": 1,
+    "_N$verticalAlign": 1,
+    "_N$fontFamily": "Arial",
+    "_N$overflow": 0,
+    "_id": "4dGMCYlsFLLpmFzieHuMXS"
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "d1414d67-bc6b-40f3-91b0-1af6495f516f"
+    },
+    "fileId": "daeKzXkl5MmKf1VnzGVjg6",
     "sync": false
   },
   {
@@ -932,7 +1034,10 @@
     "inviteAlert": {
       "__uuid__": "8fd678f6-09df-44c9-a799-bb37a754a61a"
     },
-    "_id": "0eHy2JiGtKh4pHV29yIJPY"
+    "coinTips": {
+      "__id__": 26
+    },
+    "_id": "a4e7LL0FNNc44Sb/cDu7pk"
   },
   {
     "__type__": "cc.Button",
@@ -985,7 +1090,7 @@
     "_N$target": {
       "__id__": 1
     },
-    "_id": "44WzF+tTBGMJu8qdSAy+kz"
+    "_id": "aci0+djKlDiYCKs+EY1cnL"
   },
   {
     "__type__": "cc.PrefabInfo",
