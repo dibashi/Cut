@@ -79,7 +79,10 @@ cc.Class({
 
         this.rankingView.active = false;
         this.initSubCanvas();
+        cc.dataMgr.submitScore();
 
+
+        
         if (CC_WECHATGAME) {
             let obj = wx.getLaunchOptionsSync();
             console.log(obj);
@@ -93,7 +96,7 @@ cc.Class({
                 path = "";
         }
 
-        cc.dataMgr.submitScore();
+        
     },
 
     initSubCanvas() {
@@ -106,26 +109,7 @@ cc.Class({
         }
     },
 
-    //分享给好友
-    shareFriend() {
-        if (CC_WECHATGAME) {
-            let type = "end";
-            if (cc.dataMgr.userData.countJump <= 0)
-                type = "random";
-            window.wx.shareAppMessage({
-                title: cc.dataMgr.getShareDesc_s(type),
-                imageUrl: cc.dataMgr.imageUrl.relive,
-                query: "otherID=" + cc.dataMgr.openid,
-                success: (res) => {
-                    cc.dataMgr.shareSuccess("end");
-                    cc.director.loadScene("game");
-                }
-            });
-        } else {
-            //console.log("-- Not is wechatGame --");
-            cc.dataMgr.shareSuccess("end");
-        }
-    },
+
 
   
      

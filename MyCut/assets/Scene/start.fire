@@ -4261,7 +4261,7 @@
     "target": {
       "__id__": 2
     },
-    "component": "selectCheckpoint",
+    "component": "start",
     "handler": "onBackClick",
     "customEventData": ""
   },
@@ -4419,7 +4419,7 @@
     "target": {
       "__id__": 2
     },
-    "component": "selectCheckpoint",
+    "component": "start",
     "handler": "onShareClick",
     "customEventData": ""
   },

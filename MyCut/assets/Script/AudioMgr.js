@@ -29,7 +29,7 @@ export default class AudioMgr extends cc.Component {
         cc.loader.loadRes("sound/bgm", cc.AudioClip, function (err, clip) {
             if (!err) {
                 self._audioSource_o.bgm = clip;
-                //self.playBg();
+                self.playBg();
                 
             }
         });
