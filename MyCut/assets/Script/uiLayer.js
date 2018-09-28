@@ -62,6 +62,22 @@ cc.Class({
             type:cc.Label,
         },
 
+        rankingView: {
+            default: null,
+            type: cc.Node,
+        },
+
+        sub_list: {
+            default: null,
+            type: cc.Node,
+        },
+
+        sub_my: {
+            default: null,
+            type: cc.Node,
+        },
+
+      
     },
 
 
@@ -79,6 +95,19 @@ cc.Class({
 
         this.coinLabel.string = "X" + cc.dataMgr.getCoinCount();
         this.refreash();
+
+        this.rankingView.active = false;
+        this.initSubCanvas();
+    },
+
+    initSubCanvas() {
+        if (!this.tex1)
+            this.tex1 = new cc.Texture2D();
+        if (CC_WECHATGAME) {
+            //console.log("-- WECHAT Start.js initSubCanvas --");
+            window.sharedCanvas.width = 720;
+            window.sharedCanvas.height = 1280;
+        }
     },
 
     refreash: function () {
@@ -157,6 +186,7 @@ cc.Class({
     },
 
     showNextFriend:function() {
+      
         this.scheduleOnce(this.seeNextBeyondFriend,0.5);
     }, 
     
@@ -287,5 +317,35 @@ cc.Class({
     
         }
     },
+
+    onLeaderboardClick:function() {
+        if (CC_WECHATGAME) {
+            this.rankingView.active = true;
+          
+            //console.log("-- WECHAT Start.js subPostMessage --");
+            window.wx.postMessage({
+                messageType: 1,
+                MAIN_MENU_NUM: "score"
+                //,myScore: cc.dataMgr.userData.countJump
+            });
+            this.node.runAction(cc.sequence(cc.delayTime(0.1), cc.callFunc(this.updataSubCanvas, this)));
+            this.scheduleOnce(this.updataSubCanvas, 2.4);
+        }
+    },
+
+    updataSubCanvas() {
+        if (CC_WECHATGAME && this.rankingView.active) {
+            console.log("-- WECHAT Start.js updataSubCanvas --");
+            this.tex1.initWithElement(window.sharedCanvas);
+            this.tex1.handleLoadedTexture();
+            this.sub_list.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(this.tex1);
+            this.sub_my.getComponent(cc.Sprite).spriteFrame = new cc.SpriteFrame(this.tex1);
+        }
+    },
+
+    onBackClick: function () {
+        this.rankingView.active = false;
+    },
+
 
 });
