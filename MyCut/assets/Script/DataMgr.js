@@ -90,6 +90,8 @@ export default class DataMgr extends cc.Component {
         cc.sys.localStorage.setItem("coinCount",coinCount);
     };
 
+   
+
     
 
 

@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.5927660581989184,
-      "y": 0.5927660581989184,
+      "x": 0.425,
+      "y": 0.425,
       "z": 1
     },
     "_quat": {
@@ -621,7 +621,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "76cedd68-24d1-46b8-86e1-87ae5d1c2afd"
+      "__uuid__": "7942b190-90b8-4b4d-9820-b8b1f49e7c9f"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -4456,6 +4456,9 @@
     },
     "coinLabel": {
       "__id__": 28
+    },
+    "inviteAlert": {
+      "__uuid__": "8fd678f6-09df-44c9-a799-bb37a754a61a"
     },
     "onMusicSpriteFrame": {
       "__uuid__": "a811e839-63a7-4cf0-bb80-fb5ce4bd5fb0"

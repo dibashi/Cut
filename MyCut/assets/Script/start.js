@@ -10,6 +10,8 @@ cc.Class({
         progressLabel: cc.Label,
         coinLabel: cc.Label,
 
+        inviteAlert:cc.Prefab,
+
 
         onMusicSpriteFrame: {
             default: null,
@@ -77,6 +79,8 @@ cc.Class({
         }
 
         this.coinLabel.string = "X" + cc.dataMgr.getCoinCount();
+
+        this.crownLabel.string = "X" + cc.dataMgr.currentScore();
 
        
 
@@ -281,13 +285,21 @@ cc.Class({
 
     inviteClick:function() {
         console.log("invite click!~");
+        let ss = cc.instantiate(this.inviteAlert);
+        ss.zIndex = 1000;
+        ss.getComponent("inviteAlert").onWho = this.node;
+        this.node.addChild(ss);
+        
     },
 
     goGame:function() {
         console.log("go game click!~");
+        cc.director.loadScene('gameScene');
     },  
     goSelectCheckpoint:function() {
         console.log("go game click!~");
+        
+        cc.director.loadScene('selectCheckpoint');
     },  
 
 });
