@@ -115,8 +115,12 @@ cc.Class({
             checkPointNode.getComponent(cc.Button).interactable = true;
             checkPointNode.getChildByName("lock").active = false;
         } else {
-            checkPointNode.getComponent(cc.Button).interactable = false;
-            checkPointNode.getChildByName("lock").active = true;
+            
+            // checkPointNode.getComponent(cc.Button).interactable = false;
+            // checkPointNode.getChildByName("lock").active = true;
+            //调试用
+            checkPointNode.getComponent(cc.Button).interactable = true;
+            checkPointNode.getChildByName("lock").active = false;
         }
     },
 
