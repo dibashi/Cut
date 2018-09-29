@@ -197,7 +197,7 @@
         "y": -150
       }
     ],
-    "_id": "65GEO3mnJICbuxpgcJ/WTI"
+    "_id": ""
   },
   {
     "__type__": "cc.RigidBody",
@@ -221,7 +221,7 @@
     "_fixedRotation": false,
     "enabledContactListener": false,
     "bullet": false,
-    "_id": "3fqrW8LPJBYqylRDNQ0YED"
+    "_id": ""
   },
   {
     "__type__": "44ebeIDGjBGiYlQFJBgKLFw",
@@ -231,7 +231,7 @@
       "__id__": 2
     },
     "_enabled": true,
-    "_id": "27Ycet855FCodiHpotWURI"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -342,7 +342,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "c9C79ENVBLzo45V5p5j42t"
+    "_id": ""
   },
   {
     "__type__": "cc.RigidBody",
@@ -366,7 +366,7 @@
     "_fixedRotation": false,
     "enabledContactListener": true,
     "bullet": false,
-    "_id": "4eBUk/qmlD341gXu179Zo/"
+    "_id": ""
   },
   {
     "__type__": "cc.PhysicsCircleCollider",
@@ -388,7 +388,7 @@
       "y": 0
     },
     "_radius": 1,
-    "_id": "72PF+W0xRF6qKvYS770JWW"
+    "_id": ""
   },
   {
     "__type__": "cc.RevoluteJoint",
@@ -419,7 +419,7 @@
     "referenceAngle": 0,
     "lowerAngle": 0,
     "upperAngle": 0,
-    "_id": "fa/UxhVXdMA421xrcu+Dg2"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -530,7 +530,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "eeOYV4aJdPK4l0Z/EmVA9d"
+    "_id": ""
   },
   {
     "__type__": "cc.RigidBody",
@@ -554,7 +554,7 @@
     "_fixedRotation": false,
     "enabledContactListener": true,
     "bullet": false,
-    "_id": "51eJCs0X9LCYNreQGuKflE"
+    "_id": ""
   },
   {
     "__type__": "cc.PhysicsCircleCollider",
@@ -576,7 +576,7 @@
       "y": 0
     },
     "_radius": 1,
-    "_id": "afCMnUa2hOgbCVBlad+UhE"
+    "_id": ""
   },
   {
     "__type__": "cc.RevoluteJoint",
@@ -607,7 +607,7 @@
     "referenceAngle": 0,
     "lowerAngle": 0,
     "upperAngle": 0,
-    "_id": "a5N8GTeDlFk4z3E9Oo4XdM"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -711,7 +711,7 @@
     "_fixedRotation": false,
     "enabledContactListener": false,
     "bullet": false,
-    "_id": "e8Xik+s1ZG/bkj0l55hX/c"
+    "_id": ""
   },
   {
     "__type__": "cc.PhysicsPolygonCollider",
@@ -746,12 +746,12 @@
       {
         "__type__": "cc.Vec2",
         "x": -50,
-        "y": 50
+        "y": 100
       },
       {
         "__type__": "cc.Vec2",
         "x": 50,
-        "y": 50
+        "y": 100
       },
       {
         "__type__": "cc.Vec2",
@@ -766,15 +766,15 @@
       {
         "__type__": "cc.Vec2",
         "x": 360,
-        "y": -120
+        "y": 50
       },
       {
         "__type__": "cc.Vec2",
         "x": -360,
-        "y": -120
+        "y": 50
       }
     ],
-    "_id": "dell8IzhhPXoUXw5ZtfN7z"
+    "_id": ""
   },
   {
     "__type__": "44ebeIDGjBGiYlQFJBgKLFw",
@@ -784,7 +784,7 @@
       "__id__": 19
     },
     "_enabled": true,
-    "_id": "43gFXYL4lGoKc7l9uQfTXg"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -845,7 +845,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -430,
+      "y": -380,
       "z": 0
     },
     "_scale": {
@@ -895,7 +895,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "7atUAgU8lOJIxucxMQrzs6"
+    "_id": ""
   },
   {
     "__type__": "cc.RigidBody",
@@ -919,7 +919,7 @@
     "_fixedRotation": false,
     "enabledContactListener": true,
     "bullet": false,
-    "_id": "cdRE+aBLhEO5/MZS8VVhTX"
+    "_id": ""
   },
   {
     "__type__": "cc.PhysicsCircleCollider",
@@ -941,7 +941,7 @@
       "y": 0
     },
     "_radius": 18,
-    "_id": "b0no/r5BNB9JNlbFM2CSsT"
+    "_id": ""
   },
   {
     "__type__": "e4fd7MPrOxIyoGO4+5E/8MA",
@@ -952,7 +952,7 @@
     },
     "_enabled": true,
     "isDeadFlag": false,
-    "_id": "f1QV7UXmxHIKbDZsjEPH39"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1002,7 +1002,7 @@
       }
     ],
     "targetSprite": null,
-    "_id": "c0HPHS60ZBHYjue4MP819w"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
