@@ -50,10 +50,7 @@ cc.Class({
 
         
 
-        this.onFadeOutFinish();
-
-      //  cc.dataMgr.shareByTag("invite");
-
+        //this.onFadeOutFinish();
         //邀请好友
         let query_string = cc.sys.localStorage.getItem("openid");
         console.log("准备发送请求的 query " + query_string);
