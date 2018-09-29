@@ -94,6 +94,8 @@ cc.Class({
                 if(obj.query.checkpoint) {
                     console.log("如果有关卡信息，直接跳转" + obj.query.checkpoint);
                     cc.dataMgr.currentCheckPoint = parseInt(obj.query.checkpoint);
+                    //置为null 防止回不来的情况 不然会无限调用
+                    obj.query.checkpoint = null;
                     cc.director.loadScene('gameScene');
                 } 
                 //没有关卡信息 但是有otherID，视为邀请成功，给他金币
@@ -102,6 +104,15 @@ cc.Class({
                 }
                
             }
+
+            // wx.onShow(function(res) {
+            //     console.log("从后台到前台的回调函数！~");
+            //     if(res.query.checkpoint) {
+            //         console.log("如果有关卡信息，直接跳转" + obj.query.checkpoint);
+            //         cc.dataMgr.currentCheckPoint = parseInt(obj.query.checkpoint);
+            //         cc.director.loadScene('gameScene');
+            //     }
+            // });
           
         }
 
