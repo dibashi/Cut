@@ -89,11 +89,20 @@ cc.Class({
             if (obj && obj.shareTicket) {
                 cc.dataMgr.shareTicket = obj.shareTicket;
                 this.showGroup();
+            } else if(obj && obj.query) {
+                //如果有关卡信息，直接跳转
+                if(obj.query.checkpoint) {
+                    console.log("如果有关卡信息，直接跳转" + obj.query.checkpoint);
+                    cc.dataMgr.currentCheckPoint = parseInt(obj.query.checkpoint);
+                    cc.director.loadScene('gameScene');
+                } 
+                //没有关卡信息 但是有otherID，视为邀请成功，给他金币
+                else if(obj.query.otherID) {
+                    console.log("没有关卡信息 但是有otherID，视为邀请成功，给他金币");
+                }
+               
             }
-            let path = obj.path;
-            console.log("--- 游戏 path --" + path);
-            if (!path)
-                path = "";
+          
         }
 
 

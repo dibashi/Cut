@@ -57,7 +57,7 @@ cc.Class({
       
         wx.shareAppMessage({
             title: cc.dataMgr.getShareTitle(),
-            imageUrl: cc.dataMgr.getShareImgeUri(), query: "otherID=" + query_string
+            imageUrl: cc.dataMgr.getShareImgeUri(), query: "otherID=" + query_string + "&guanka="+10
         });
     },
     

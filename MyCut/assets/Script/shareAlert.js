@@ -90,10 +90,12 @@ cc.Class({
         //console.log("准备发送请求的 query " + query_string);
 
 
-        //query: "otherID=" + query_string,
+        console.log("otherID=" + cc.sys.localStorage.getItem("openid") + "checkpoint=" + cc.dataMgr.currentCheckPoin);
         wx.shareAppMessage({
             title: cc.dataMgr.getShareTitle(),
             imageUrl: cc.dataMgr.getShareImgeUri(), 
+            query:"otherID=" + cc.sys.localStorage.getItem("openid") + "checkpoint=" + cc.dataMgr.currentCheckPoint,
+            
             success: (obj) => {
                 console.log("分享回调成功")
                 console.log(obj);
