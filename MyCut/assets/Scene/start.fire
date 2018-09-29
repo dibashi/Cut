@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.425,
-      "y": 0.425,
+      "x": 0.42499999999999993,
+      "y": 0.42499999999999993,
       "z": 1
     },
     "_quat": {
@@ -2210,7 +2210,7 @@
         "__id__": 100
       }
     ],
-    "_active": false,
+    "_active": true,
     "_level": 2,
     "_components": [],
     "_prefab": null,
@@ -4086,7 +4086,7 @@
     "target": {
       "__id__": 2
     },
-    "component": "selectCheckpoint",
+    "component": "start",
     "handler": "showFriend",
     "customEventData": ""
   },
