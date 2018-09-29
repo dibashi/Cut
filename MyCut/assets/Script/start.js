@@ -120,6 +120,7 @@ cc.Class({
 
     start() {
         if (CC_WECHATGAME) {
+            wx.showShareMenu();
             wx.onShareAppMessage(function () {
                 // 用户点击了“转发”按钮
                 return {
@@ -133,7 +134,16 @@ cc.Class({
 
 
 
+    onShareClick: function () {
+        console.log("点击分享");
 
+     
+        wx.shareAppMessage({
+            title: cc.dataMgr.getShareTitle(),
+            imageUrl: cc.dataMgr.getShareImgeUri()
+        });
+      
+    },
 
 
 
