@@ -168,12 +168,7 @@ cc.Class({
     },
 
     groupClick: function () {
-
         let self = this;
-
-
-
-
         if (CC_WECHATGAME) {
             window.wx.updateShareMenu({
                 withShareTicket: true,
@@ -182,8 +177,6 @@ cc.Class({
                         title: cc.dataMgr.getShareTitle(),
                         imageUrl: cc.dataMgr.getShareImgeUri(),
                         success: (res) => {
-                            console.log("-- shareGroup success --");
-                            console.log(res);
                             if (res.shareTickets != undefined && res.shareTickets.length > 0) {
                                 cc.dataMgr.shareTicket = res.shareTickets[0];
                                 self.showGroup();
