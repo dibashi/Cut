@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.5120710367917067,
-      "y": 0.5120710367917067,
+      "x": 0.3047154902033629,
+      "y": 0.3047154902033629,
       "z": 1
     },
     "_quat": {
@@ -3076,6 +3076,9 @@
       "__id__": 66
     },
     "_enabled": true,
+    "content": {
+      "__id__": 72
+    },
     "horizontal": false,
     "vertical": true,
     "inertia": true,
@@ -3084,12 +3087,6 @@
     "bounceDuration": 0,
     "scrollEvents": [],
     "cancelInnerEvents": true,
-    "_N$content": {
-      "__id__": 72
-    },
-    "content": {
-      "__id__": 72
-    },
     "_N$horizontalScrollBar": null,
     "_N$verticalScrollBar": {
       "__id__": 70
@@ -3891,7 +3888,7 @@
     "target": {
       "__id__": 2
     },
-    "component": "selectCheckpoint",
+    "component": "start",
     "handler": "groupClick",
     "customEventData": ""
   },
@@ -4133,7 +4130,7 @@
     "target": {
       "__id__": 2
     },
-    "component": "selectCheckpoint",
+    "component": "start",
     "handler": "showFriend",
     "customEventData": ""
   },
