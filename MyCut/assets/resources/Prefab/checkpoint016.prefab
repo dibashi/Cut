@@ -172,7 +172,7 @@
     "_fixedRotation": false,
     "enabledContactListener": false,
     "bullet": false,
-    "_id": "b5FhghMSNC8J9XJpuNls76"
+    "_id": "e59v4S5ANGJZwoCTsroDtB"
   },
   {
     "__type__": "cc.PhysicsPolygonCollider",
@@ -215,7 +215,7 @@
         "y": -300
       }
     ],
-    "_id": "4bA2kYfzhMV6Yvw6VSkK1w"
+    "_id": "ed9+IV/fpLLIlh/W+gI+8o"
   },
   {
     "__type__": "44ebeIDGjBGiYlQFJBgKLFw",
@@ -225,7 +225,7 @@
       "__id__": 2
     },
     "_enabled": true,
-    "_id": "576fv47ElBwoVYYcismNYX"
+    "_id": "a4koR1is1O2o4CHpJBxfzr"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -329,7 +329,7 @@
     "_fixedRotation": false,
     "enabledContactListener": false,
     "bullet": false,
-    "_id": "85JfKANhRG1omB1jywQ48C"
+    "_id": "a6/Pvg1yZIo5aBr3gsCqb7"
   },
   {
     "__type__": "cc.PhysicsPolygonCollider",
@@ -364,15 +364,15 @@
       {
         "__type__": "cc.Vec2",
         "x": 200,
-        "y": -640
+        "y": -50
       },
       {
         "__type__": "cc.Vec2",
         "x": -200,
-        "y": -640
+        "y": -50
       }
     ],
-    "_id": "4cnwHme0xGKqRXK533vUAy"
+    "_id": "e6L20e0lNHXrF/44OxCLg9"
   },
   {
     "__type__": "44ebeIDGjBGiYlQFJBgKLFw",
@@ -382,7 +382,7 @@
       "__id__": 7
     },
     "_enabled": true,
-    "_id": "59IYi2RutD9LM95STolPBm"
+    "_id": "44iHss/sxMRJfXovIsaMnh"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -486,7 +486,7 @@
     "_fixedRotation": false,
     "enabledContactListener": true,
     "bullet": false,
-    "_id": "2cANYo7fZAb70CNo6Luf0G"
+    "_id": "a8HVz1RypGArDbZ6kDipl2"
   },
   {
     "__type__": "cc.PhysicsBoxCollider",
@@ -512,7 +512,7 @@
       "width": 7000,
       "height": 50
     },
-    "_id": "6aJFyRJjxHp5DaHkWLZWZH"
+    "_id": "0akMfqxotACYd5LOA6VOA9"
   },
   {
     "__type__": "61880L7F5ZHD5/f4h1tVdy6",
@@ -522,7 +522,7 @@
       "__id__": 12
     },
     "_enabled": true,
-    "_id": "c1ds/3SfFBqaVnSLXgGzP0"
+    "_id": "a6VyemQqtO24YVzXRkQAYX"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -565,7 +565,7 @@
     "currentMass": 0,
     "revoluteJointNodeArr": [],
     "targetSprite": null,
-    "_id": "1aPaQe88JOpaGFD3wpJVwK"
+    "_id": "554+c8bJRMkLaxtGj+8G48"
   },
   {
     "__type__": "cc.PrefabInfo",

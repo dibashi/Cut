@@ -27,7 +27,7 @@ cc.Class({
         //当前任务进度
         currentResultCount: 0,
 
-        helpLineCount:1,
+        helpLineCount: 1,
 
         helpTouchBegin: {
             default: null,
@@ -82,34 +82,31 @@ cc.Class({
 
     start: function () {
         if (this.checkpointClass == 1) {
-         //   console.log("执行到了mass");
-          //  console.log(this.node.children);
+            //   console.log("执行到了mass");
+            //  console.log(this.node.children);
             let childs = this.node.children;
             let count = childs.length;
             for (let i = 0; i < count; i++) {
-             //   console.log("执行到了mass1");
+                //   console.log("执行到了mass1");
                 let ppc = childs[i].getComponent(cc.PhysicsPolygonCollider);
                 if (ppc && ppc.tag == 2) {
-                //    console.log("执行到了mass11");
-                //    console.log(childs[i].getComponent(cc.RigidBody));
-                //    console.log(childs[i].getComponent(cc.RigidBody).getMass());
+                    //    console.log("执行到了mass11");
+                    //    console.log(childs[i].getComponent(cc.RigidBody));
+                    //    console.log(childs[i].getComponent(cc.RigidBody).getMass());
                     this.totalMass += childs[i].getComponent(cc.RigidBody).getMass();
                     console.log("初始质量 " + this.totalMass);
                 }
             }
         }
 
-      //  console.log("mass--->  " + this.totalMass);
+        //  console.log("mass--->  " + this.totalMass);
     },
 
 
     checkIsOver: function () {
-      //  console.log("check is over");
+        //  console.log("check is over");
 
         if (this.currentResultCount >= this.resultCount) {
-       //     console.log("发送事件  checkpointSuccess");
-            // this.node.emit('checkpointSuccess');
-
             //皇冠数量储存 
             let crownCount = 3 - (this.currentTouchCount - this.touchCount);
             if (crownCount > 3) {
@@ -117,11 +114,8 @@ cc.Class({
             } else if (crownCount < 1) {
                 crownCount = 1;
             }
-            let ea = new cc.Event.EventCustom('checkpointSuccess', true);
-            ea.detail = { "crownCount": crownCount };
-        //   console.log(ea);
-            this.node.dispatchEvent(ea);
 
+            let ea = new cc.Event.EventCustom('checkpointSuccess', true);
 
             //获取当前关卡索引 往json对象数组插入数据
             let checkpointIndex = cc.dataMgr.currentCheckPoint - 1;
@@ -131,20 +125,27 @@ cc.Class({
                 jsonObj[checkpointIndex].crownCount = crownCount;
                 var a = JSON.stringify(jsonObj);
                 cc.sys.localStorage.setItem("checkPointJsonData", a);
-            }
-        //    console.log(checkpointIndex + 1);
-        //    console.log(cc.sys.localStorage.getItem("maxCheckpoint"));
-            if (checkpointIndex + 1 == parseInt(cc.sys.localStorage.getItem("maxCheckpoint"))) {
-         //       console.log("执行到了");
-                cc.sys.localStorage.setItem("maxCheckpoint", checkpointIndex + 2);
+
+                //给予奖励
+                if(crownCount> 2) {
+                    ea.detail = { "crownCount": crownCount, "givePrize": true };
+                    this.node.dispatchEvent(ea);
+                } else {
+                    ea.detail = { "crownCount": crownCount, "givePrize": false };
+                    this.node.dispatchEvent(ea);
+                }
+            } else {
+                ea.detail = { "crownCount": crownCount, "givePrize": false };
+                this.node.dispatchEvent(ea);
             }
 
+            cc.dataMgr.submitScore();
         }
     },
 
     hittedMassTrigger: function (mass) {
         this.currentMass += mass;
-      //  console.log(this.currentMass);
+        //  console.log(this.currentMass);
 
         this.currentResultCount = Math.round(this.currentMass / this.totalMass * 100);
     },

@@ -8,58 +8,93 @@ export default class DataMgr extends cc.Component {
     //当前玩家选择的关卡 游戏中的关卡
     currentCheckPoint = -1;
     //一共关卡数
-    MAX_CHECKPOINT_COUNT =47;
+    MAX_CHECKPOINT_COUNT = 52;
 
     //根据tag设置颜色,还要根据tag来确定哪些可切，哪些不可切， 约定！！可切的tag<100 不可切的 100< tag <200
     //target tag = 102； 
     OBJECT_COLOR = {
         CUTTABLE_BLUE: 1,
-        CUTTABLE_AREA_GREEN:2,
+        CUTTABLE_AREA_GREEN: 2,
         NAN_SEPARABLE_BLACK: 101,
-        NAN_TRIGGER_MASS:102,//用于检测掉落质量的触发器 
-       
-        JOINT:201,
-        INDIRECT_Col:301,
+        NAN_TRIGGER_MASS: 102,//用于检测掉落质量的触发器 
+
+        JOINT: 201,
+        INDIRECT_Col: 301,
     };
 
     //关卡信息，是碰撞 还是面积，以及达到多少  todo：将来还需加入 提示信息
     CHECKPOINT_DATAS = [
-        {"class":"collision","targetCount":1,"optimalCount":1},
-        {"class":"area","target":0.75}
+        { "class": "collision", "targetCount": 1, "optimalCount": 1 },
+        { "class": "area", "target": 0.75 }
     ];
 
     getRigidBodyColorByTag(tag) {
-        if(tag == this.OBJECT_COLOR.CUTTABLE_BLUE) {
+        if (tag == this.OBJECT_COLOR.CUTTABLE_BLUE) {
             return cc.color(110, 184, 255, 255);
-        }else if(tag == this.OBJECT_COLOR.CUTTABLE_AREA_GREEN) {
+        } else if (tag == this.OBJECT_COLOR.CUTTABLE_AREA_GREEN) {
             return cc.color(139, 209, 63, 255);
-        } else if(tag == this.OBJECT_COLOR.NAN_SEPARABLE_BLACK) {
+        } else if (tag == this.OBJECT_COLOR.NAN_SEPARABLE_BLACK) {
             return cc.color(40, 40, 40, 255);
         }
     };
     initData() {
         console.log("--- initData ---");
         //标记着当前玩到哪个关卡，意味着 之前的关卡未必都过关了，当前的关卡之后的关卡都没有玩，当前关卡可以玩
-        let mc = cc.sys.localStorage.getItem("maxCheckpoint");//和最上面的变量不一样
-       // if (!mc) {
-            cc.sys.localStorage.setItem("maxCheckpoint", 47);
+        //let mc = cc.sys.localStorage.getItem("maxCheckpoint");//和最上面的变量不一样
+        let cj = cc.sys.localStorage.getItem("checkPointJsonData");
+        if (!cj) {
+            //cc.sys.localStorage.setItem("maxCheckpoint", 52);
             var checkPointJsonData = [];
             var j = {};
-            checkPointJsonData.push({crownCount:"0"});
-            for (var i = 1; i < this.MAX_CHECKPOINT_COUNT; i++) {
-                j.crownCount = "0"; 
-                
+            //checkPointJsonData.push({crownCount:"0"});
+            for (var i = 0; i < this.MAX_CHECKPOINT_COUNT; i++) {
+                j.crownCount = "0";
+
                 checkPointJsonData.push(j);
             }
             var a = JSON.stringify(checkPointJsonData);
-         //   console.log(a);
-            cc.sys.localStorage.setItem("checkPointJsonData",a);
-       // }
+            //   console.log(a);
+            cc.sys.localStorage.setItem("checkPointJsonData", a);
+        }
 
         let rc = cc.sys.localStorage.getItem("recommendedCurrency");
-        if(!rc) {
-            cc.sys.localStorage.setItem("recommendedCurrency",0);
+        if (!rc) {
+            cc.sys.localStorage.setItem("recommendedCurrency", 0);
         }
+
+        let coinCount = cc.sys.localStorage.getItem("coinCount");
+        if (!coinCount) {
+            cc.sys.localStorage.setItem("coinCount", 0);
+        }
+    };
+
+    getRandomCheckpoint() {
+        let jsons = cc.sys.localStorage.getItem("checkPointJsonData");
+        let jsonObj = JSON.parse(jsons);
+        // console.log(jsonObj);
+        if (parseInt(jsonObj[0].crownCount) == 0) {
+            return 1;//如果第一关没有皇冠，则随机第一关
+        }
+
+        //放置的是 皇冠少于3个的关卡索引
+        var waitingForChoice = [];
+        for (let i = 0; i < this.MAX_CHECKPOINT_COUNT; i++) {
+            let crownCount = parseInt(jsonObj[i].crownCount);
+            if (crownCount < 3) {
+                waitingForChoice.push(i);
+            }
+        }
+        if (waitingForChoice.length > 0) {
+            let ri = Math.floor(Math.random() * waitingForChoice.length);
+            return waitingForChoice[ri] + 1; //那边计数 是从1 2 3 4.这边是 0,1,2，3
+        } else {
+            //全部通关！
+            //return -1;
+            return Math.floor(Math.random() * this.this.MAX_CHECKPOINT_COUNT)
+        }
+
+
+
     };
 
     //直接全部遍历 以为以后不是顺序玩关卡了
@@ -68,8 +103,8 @@ export default class DataMgr extends cc.Component {
         let jsonObj = JSON.parse(jsons);
 
         var resultScore = 0;
-       
-        for (let i = 0; i <  this.MAX_CHECKPOINT_COUNT; i++) {
+
+        for (let i = 0; i < this.MAX_CHECKPOINT_COUNT; i++) {
             let crownCount = parseInt(jsonObj[i].crownCount);
             resultScore += crownCount;
         }
@@ -77,7 +112,30 @@ export default class DataMgr extends cc.Component {
         return resultScore;
     };
 
-    
+    getCoinCount() {
+        return parseInt(cc.sys.localStorage.getItem("coinCount"));
+    };
+
+    addCoinCount(coinCount) {
+
+        cc.sys.localStorage.setItem("coinCount", this.getCoinCount() + coinCount);
+
+        return this.getCoinCount();
+    };
+
+
+    submitScore() {
+        let self = this;
+        if (CC_WECHATGAME) {
+            window.wx.postMessage({
+                messageType: 2,
+                MAIN_MENU_NUM: "score",
+                myScore: self.currentScore()
+            });
+        }
+    };
+
+
 
 
     // getRigidBodyColorByTag(tag) {

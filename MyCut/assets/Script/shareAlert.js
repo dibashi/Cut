@@ -18,6 +18,12 @@ cc.Class({
             default: null,
             type: cc.Prefab,
         },
+
+        coinTips: cc.Node,
+    },
+
+    showTips:function() {
+        this.coinTips.active = true;
     },
 
     // LIFE-CYCLE CALLBACKS:
