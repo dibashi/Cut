@@ -48,9 +48,11 @@ cc.Class({
    
     onInviteClick: function () {
 
-        return;
+        
 
         this.onFadeOutFinish();
+
+        cc.dataMgr.shareByTag("Invite");
 
         //邀请好友
         let query_string = cc.sys.localStorage.getItem("openid");
