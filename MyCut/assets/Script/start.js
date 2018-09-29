@@ -10,7 +10,7 @@ cc.Class({
         progressLabel: cc.Label,
         coinLabel: cc.Label,
 
-        inviteAlert:cc.Prefab,
+        inviteAlert: cc.Prefab,
 
 
         onMusicSpriteFrame: {
@@ -75,14 +75,14 @@ cc.Class({
 
         this.crownLabel.string = "X" + cc.dataMgr.currentScore();
 
-       
+
 
         this.rankingView.active = false;
         this.initSubCanvas();
         cc.dataMgr.submitScore();
 
 
-        
+
         if (CC_WECHATGAME) {
             let obj = wx.getLaunchOptionsSync();
             console.log(obj);
@@ -96,27 +96,37 @@ cc.Class({
                 path = "";
         }
 
-        
+
     },
 
     initSubCanvas() {
         if (!this.tex)
             this.tex = new cc.Texture2D();
         if (CC_WECHATGAME) {
-            //console.log("-- WECHAT Start.js initSubCanvas --");
             window.sharedCanvas.width = 720;
             window.sharedCanvas.height = 1280;
         }
     },
 
 
+    start() {
+        if (CC_WECHATGAME) {
+            wx.onShareAppMessage(function () {
+                // 用户点击了“转发”按钮
+                return {
+                    title: cc.dataMgr.getShareTitle(),
+                    imageUrl: cc.dataMgr.getShareImgeUri(),
 
-  
-     
+                }
+            });
+        }
+    },
 
-  
 
-   
+
+
+
+
 
 
     // called every frame
@@ -124,10 +134,7 @@ cc.Class({
 
     },
 
-    goMainLayer: function () {
 
-        cc.director.loadScene('start');
-    },
 
     musicClick: function () {
         if (cc.audioMgr.isPlay) {
@@ -161,10 +168,10 @@ cc.Class({
     },
 
     groupClick: function () {
-        
+
         let self = this;
 
-    
+
 
 
         if (CC_WECHATGAME) {
@@ -223,26 +230,26 @@ cc.Class({
     },
 
 
-    inviteClick:function() {
+    inviteClick: function () {
         console.log("invite click!~");
         let ss = cc.instantiate(this.inviteAlert);
         ss.zIndex = 1000;
         ss.getComponent("inviteAlert").onWho = this.node;
         this.node.addChild(ss);
-        
+
     },
 
-    goGame:function() {
+    goGame: function () {
         console.log("go game click!~");
 
         cc.dataMgr.currentCheckPoint = cc.dataMgr.getRandomCheckpoint();
-        console.log( cc.dataMgr.currentCheckPoint );
+        console.log(cc.dataMgr.currentCheckPoint);
         cc.director.loadScene('gameScene');
-    },  
-    goSelectCheckpoint:function() {
+    },
+    goSelectCheckpoint: function () {
         console.log("go game click!~");
-        
+
         cc.director.loadScene('selectCheckpoint');
-    },  
+    },
 
 });
