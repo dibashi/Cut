@@ -66,39 +66,41 @@ export default class DataMgr extends cc.Component {
             //   console.log(a);
             cc.sys.localStorage.setItem("checkPointJsonData", a);
         }
+        if (CC_WECHATGAME) {
+            let rc = cc.sys.localStorage.getItem("recommendedCurrency");
+            if (!rc) {
+                cc.sys.localStorage.setItem("recommendedCurrency", 0);
+            }
 
-        let rc = cc.sys.localStorage.getItem("recommendedCurrency");
-        if (!rc) {
-            cc.sys.localStorage.setItem("recommendedCurrency", 0);
+            let coinCount = cc.sys.localStorage.getItem("coinCount");
+            if (!coinCount) {
+                cc.sys.localStorage.setItem("coinCount", 0);
+            }
+
+            let openid = cc.sys.localStorage.getItem("openid");
+            if (!openid) {
+                cc.sys.localStorage.setItem("openid", "0");
+                this.getUerOpenID();
+            }
+
+
+
+            //版本比较 是否重置数据
+            // this.nickName = cc.sys.localStorage.getItem("nickName");
+            // if (!this.nickName)
+            //     this.nickName = "***";
+
+            console.log("--- DataMgr 获取启动参数 并对参数进行存储 ---");
+            let obj = wx.getLaunchOptionsSync();
+            console.log(obj);
+            let query = obj.query;
+            console.log("--- 重要信息 游戏 query --" + query);
+            if (!query)
+                this.query = query;
+            // if (obj.referrerInfo && obj.referrerInfo.appId)
+            //     this.scoreAppId = obj.referrerInfo.appId;
         }
 
-        let coinCount = cc.sys.localStorage.getItem("coinCount");
-        if (!coinCount) {
-            cc.sys.localStorage.setItem("coinCount", 0);
-        }
-
-        let openid = cc.sys.localStorage.getItem("openid");
-        if (!openid) {
-            cc.sys.localStorage.setItem("openid", "0");
-            this.getUerOpenID();
-        }
-
-       
-
-        //版本比较 是否重置数据
-        this.nickName = cc.sys.localStorage.getItem("nickName");
-        if (!this.nickName)
-            this.nickName = "***";
-
-        console.log("--- DataMgr 获取启动参数 并对参数进行存储 ---");
-        let obj = wx.getLaunchOptionsSync();
-        console.log(obj);
-        let query = obj.query;
-        console.log("--- 重要信息 游戏 query --" + query);
-        if (!query)
-            this.query = query;
-        if (obj.referrerInfo && obj.referrerInfo.appId)
-            this.scoreAppId = obj.referrerInfo.appId;
     };
 
     getRandomCheckpoint() {
@@ -169,27 +171,29 @@ export default class DataMgr extends cc.Component {
     };
 
 
-    //tag 对此次分享的标示 用于不同处理
-    shareByTag(tag) {
-        if (CC_WECHATGAME) {
-            var str_imageUrl = null;
-            var str_index = Math.floor(Math.random() * 2);
-            var str_title = null;
-            var query_string = null;
-            if (str_index == 0) {
-                str_imageUrl = "https://bpw.blyule.com/res/raw-assets/Texture/shareImage0.5f075.jpg";
-                str_title = "走开，别碰我！萌哭了";
-            } else {
-                str_imageUrl = "https://bpw.blyule.com/res/raw-assets/Texture/shareImage1.678a4.jpg";
-                str_title = "萌翻全场，好想都抱回家!";
-            }
 
-            wx.shareAppMessage({
-                title: str_title,
-                imageUrl: str_imageUrl,
-                query: query_string
-            });
+    getShareImgeUri() {
+        var str_imageUrl = null;
+        var str_index = Math.floor(Math.random() * 2);
+        if (str_index == 0) {
+            str_imageUrl = "https://bpw.blyule.com/res/raw-assets/Texture/shareImage0.5f075.jpg";
+        } else {
+            str_imageUrl = "https://bpw.blyule.com/res/raw-assets/Texture/shareImage1.678a4.jpg";
         }
+        return str_imageUrl;
+    };
+
+    getShareTitle() {
+        var str_title = null;
+        var str_index = Math.floor(Math.random() * 2);
+
+        if (str_index == 0) {
+            str_title = "走开，别碰我！萌哭了";
+        } else {
+            str_title = "萌翻全场，好想都抱回家!";
+        }
+
+        return str_title;
     };
 
 
@@ -199,9 +203,11 @@ export default class DataMgr extends cc.Component {
             let self = this;
             self.openid = cc.sys.localStorage.getItem("openid");
             if (self.openid == "0") {//保证用户是第一次进游戏
+                // console.log("发送wx.login请求!");
                 wx.login({
                     success: (res) => {
                         let codeInfo = res.code;
+                        console.log('datamgr，codeInfo：--->', codeInfo);
                         if (res.code) {
                             //发起网络请求
                             wx.request({
@@ -210,13 +216,23 @@ export default class DataMgr extends cc.Component {
                                     code: res.code,
                                 },
                                 success: (obj, statusCode, header) => {
+                                    console.log("请求openid,服务器返回的数据！！--> " + obj);
+                                    console.log(obj);
+                                    console.log(obj.data.openid);
+    
                                     self.openid = obj.data.openid;
                                     cc.sys.localStorage.setItem("openid", obj.data.openid);//之所以要存，是在分享的时候放入query中
                                     //微信官方文档那里写的调用函数是getLaunchInfoSync，但是根本搜不到这个API，应该是下面这个。
                                     var launchOption = wx.getLaunchOptionsSync();
+                                    //  console.log(launchOption);
+                                    //  self.otherOpenIDLabel.string = JSON.stringify(launchOption.query) + "query.otherID-->" + launchOption.query.otherID;
+    
                                     if (launchOption.query.otherID == null || launchOption.query.otherID == undefined) {
                                         launchOption.query.otherID = 0;
                                     }
+                                    console.log("看下 自己的openid 和 推荐方的openid");
+                                    console.log(self.openid);
+                                    console.log(launchOption.query.otherID);
                                     wx.request({
                                         url: 'https://bpw.blyule.com/game_3/public/index.php/index/index/add?userid=' + self.openid + "&" + "cuid=" + launchOption.query.otherID,
                                         data: {
@@ -224,9 +240,14 @@ export default class DataMgr extends cc.Component {
                                             cuid: launchOption.query.otherID,
                                         },
                                         success: (data, statusCode, header) => {
+                                             console.log("添加用户成功！ 服务器返回的数据！！--> ");
+                                             console.log(data);
+    
+                                             console.log("看下自己的openid数据！！--> ");
+                                             console.log(self.openid);
                                         },
                                     });
-                                    // //调用 SDK 登陆成功
+                                    //调用 SDK 登陆成功
                                     // cc.dataMgr.adgivelog();
                                     // cc.dataMgr.adarrivelog();
                                     // cc.dataMgr.createUserInfoButton();

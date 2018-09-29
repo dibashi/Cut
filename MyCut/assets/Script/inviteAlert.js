@@ -52,25 +52,15 @@ cc.Class({
 
         this.onFadeOutFinish();
 
-        cc.dataMgr.shareByTag("Invite");
+      //  cc.dataMgr.shareByTag("invite");
 
         //邀请好友
         let query_string = cc.sys.localStorage.getItem("openid");
-        //console.log("准备发送请求的 query " + query_string);
-        var str_imageUrl = null;
-        var str_index=   Math.floor(Math.random()*2);
-        var str_title = null;
-        if(str_index == 0) {
-            str_imageUrl = "https://bpw.blyule.com/res/raw-assets/Texture/shareImage0.5f075.jpg";
-            str_title = "走开，别碰我！萌哭了";
-        } else {
-            str_imageUrl = "https://bpw.blyule.com/res/raw-assets/Texture/shareImage1.678a4.jpg";
-            str_title = "萌翻全场，好想都抱回家!";
-        } 
-        
+        console.log("准备发送请求的 query " + query_string);
+      
         wx.shareAppMessage({
-            title: str_title,
-            imageUrl: str_imageUrl, query: "otherID=" + query_string
+            title: cc.dataMgr.getShareTitle(),
+            imageUrl: cc.dataMgr.getShareImgeUri(), query: "otherID=" + query_string
         });
     },
     
