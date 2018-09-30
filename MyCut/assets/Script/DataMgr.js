@@ -225,7 +225,7 @@ export default class DataMgr extends cc.Component {
 
     getShareImgeUri(tag) {
 
-
+        var str_imageUrl = null;
         if (tag && tag == "game") {
             str_imageUrl = "https://bpw.blyule.com/cutRes/game_help.jpg";
         } else {
@@ -236,6 +236,7 @@ export default class DataMgr extends cc.Component {
 
     getShareTitle(tag) {
 
+        var str_title = null;
         if (tag && tag == "game") {
             str_title = "这题太难了，心态已崩！";
         } else {
