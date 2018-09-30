@@ -14,7 +14,7 @@ export default class AudioMgr extends cc.Component {
         eatStar:null,
         over:null,
     };
-    isPlay = true;
+   
 
     _jumpID = null;
 
@@ -92,9 +92,9 @@ export default class AudioMgr extends cc.Component {
 
     //type_s 为这个音乐的名称
     playEffect(type_s) {
-        if(this.isPlay) {
+        if(this.isPlay()) {
             let source = this._audioSource_o[type_s];
-            cc.audioEngine.setEffectsVolume(1.0);
+            cc.audioEngine.setEffectsVolume(0.4);
             cc.audioEngine.playEffect(source, false);
         }
      
@@ -117,63 +117,67 @@ export default class AudioMgr extends cc.Component {
 
 
     playBegin() {
-        let source = this._audioSource_o["begin"];
-        if (source) {
-            cc.audioEngine.playEffect(source, false);
-            cc.audioEngine.setMusicVolume(0.64);
-        }
+        // let source = this._audioSource_o["begin"];
+        // if (source) {
+        //     cc.audioEngine.playEffect(source, false);
+        //     cc.audioEngine.setMusicVolume(0.64);
+        // }
+        this.playEffect("begin");
     }
 
     playBgm() {
         let source = this._audioSource_o["bgm"];
         if (source) {
             cc.audioEngine.playMusic(source, true);
-            cc.audioEngine.setMusicVolume(0.64);
+            cc.audioEngine.setMusicVolume(0.4);
         }
     }
 
     playBtn() {
-        let source = this._audioSource_o["btn"];
-        if (source) {
-            cc.audioEngine.playEffect(source, false);
-            cc.audioEngine.setMusicVolume(0.64);
-        }
+        // let source = this._audioSource_o["btn"];
+        // if (source) {
+        //     cc.audioEngine.playEffect(source, false);
+        //     cc.audioEngine.setMusicVolume(0.64);
+        // }
+        this.playEffect("btn");
     }
 
     playCut() {
-        let source = this._audioSource_o["cut"];
-        if (source) {
-            cc.audioEngine.playEffect(source, false);
-            cc.audioEngine.setMusicVolume(0.64);
-        }
+        // let source = this._audioSource_o["cut"];
+        // if (source) {
+        //     cc.audioEngine.playEffect(source, false);
+        //     cc.audioEngine.setMusicVolume(0.64);
+        // }
+        this.playEffect("cut");
     }
 
     playEatStar() {
-        let source = this._audioSource_o["eatStar"];
-        if (source) {
-            cc.audioEngine.playEffect(source, false);
-            cc.audioEngine.setMusicVolume(0.64);
-        }
+        // let source = this._audioSource_o["eatStar"];
+        // if (source) {
+        //     cc.audioEngine.playEffect(source, false);
+        //     cc.audioEngine.setMusicVolume(0.64);
+        // }
+        this.playEffect("eatStar");
     }
 
     playOver() {
-        let source = this._audioSource_o["over"];
-        if (source) {
-            cc.audioEngine.playEffect(source, false);
-            cc.audioEngine.setMusicVolume(0.64);
-        }
+        // let source = this._audioSource_o["over"];
+        // if (source) {
+        //     cc.audioEngine.playEffect(source, false);
+        //     cc.audioEngine.setMusicVolume(0.64);
+        // }
+        this.playEffect("over");
     }
 
 
-    // pauseBgm() {
-    //     cc.audioEngine.pause();
-    // }
+    pauseBgm() {
+        cc.audioEngine.pause();
+    }
     
 
-    // stopBgm() {
-    //     cc.audioEngine.stopMusic();
-    //     this.isPlay = false;
-    // }
+    stopBgm() {
+        cc.audioEngine.stopMusic();
+    }
 
     pauseAll() {
         cc.audioEngine.pauseAll();
