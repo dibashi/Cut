@@ -68,10 +68,26 @@ export default class AudioMgr extends cc.Component {
             }
         });
        
-      
+        cc.sys.localStorage.setItem("isPlay",1);
 
         cc.audioEngine.setMaxAudioInstance(10);
         //this.init();
+    }
+
+    isPlay() {
+        if(cc.sys.localStorage.getItem("isPlay") == 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    setIsPlay(bVal) {
+        if(bVal) {
+            cc.sys.localStorage.setItem("isPlay",1);
+        } else {
+            cc.sys.localStorage.setItem("isPlay",0);
+        }
     }
 
     //type_s 为这个音乐的名称
@@ -90,12 +106,12 @@ export default class AudioMgr extends cc.Component {
     }
 
     stopAll() {
-        this.isPlay = false;
+        this.setIsPlay(false);
         this.stopBgm();
     }
 
     openAll() {
-        this.isPlay = true;
+        this.setIsPlay(true);
         this.playBgm();
     }
 
@@ -149,15 +165,15 @@ export default class AudioMgr extends cc.Component {
     }
 
 
-    pauseBgm() {
-        cc.audioEngine.pause();
-    }
+    // pauseBgm() {
+    //     cc.audioEngine.pause();
+    // }
     
 
-    stopBgm() {
-        cc.audioEngine.stopMusic();
-        this.isPlay = false;
-    }
+    // stopBgm() {
+    //     cc.audioEngine.stopMusic();
+    //     this.isPlay = false;
+    // }
 
     pauseAll() {
         cc.audioEngine.pauseAll();

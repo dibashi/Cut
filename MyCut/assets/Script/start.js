@@ -65,7 +65,7 @@ cc.Class({
             cc.audioMgr.init();
         }
 
-        if (cc.audioMgr.isPlay) {
+        if (cc.audioMgr.isPlay()) {
             this.musicSprite.spriteFrame = this.onMusicSpriteFrame;
             cc.audioMgr.playBgm();
         } else {
@@ -171,7 +171,7 @@ cc.Class({
 
     musicClick: function () {
         cc.audioMgr.playBtn();
-        if (cc.audioMgr.isPlay) {
+        if (cc.audioMgr.isPlay()) {
             cc.audioMgr.stopAll();
             this.musicSprite.spriteFrame = this.offMusicSpriteFrame;
         } else {
