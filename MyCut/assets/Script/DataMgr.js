@@ -106,6 +106,7 @@ export default class DataMgr extends cc.Component {
             if (!ic) {
 
                 this._setInviteCount(0);
+                cc.sys.localStorage.setItem("isReceiveGift",false);//初始化 没有领取礼物
             }
         }
 
@@ -125,11 +126,12 @@ export default class DataMgr extends cc.Component {
         var preCount = 0;
         if (preObj.currentDay != cd) {
             preCount = 0;
-            this._setInviteCount(r);
+            this._setInviteCount(curCount);
+            cc.sys.localStorage.setItem("isReceiveGift",false);
         } else {
             preCount = parseInt(preObj.inviteCount);
             curCount = count + preCount;
-            this._setInviteCount(r);
+            this._setInviteCount(curCount);
         }
 
         return {"preCount":preCount,"curCount":curCount};
