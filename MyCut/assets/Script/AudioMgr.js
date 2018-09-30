@@ -82,7 +82,7 @@ export default class AudioMgr extends cc.Component {
             cc.audioEngine.playEffect(source, false);
         }
      
-      
+       
     }
 
     stopEffect() {
