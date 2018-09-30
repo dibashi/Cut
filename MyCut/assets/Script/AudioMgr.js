@@ -7,12 +7,8 @@ const {
 export default class AudioMgr extends cc.Component {
 
     _audioSource_o = {
-        begin:null,
-        bgm: null,
-        btn:null,
-        cut:null,
+        bg: null,
         eatStar:null,
-        over:null,
     };
     isPlay = true;
 
@@ -30,44 +26,17 @@ export default class AudioMgr extends cc.Component {
         });
 
         let self = this;
-
-        cc.loader.loadRes("sound/begin", cc.AudioClip, function (err, clip) {
-            if (!err) {
-                self._audioSource_o.begin = clip;
-                
-            }
-        });
-
-
         cc.loader.loadRes("sound/bgm", cc.AudioClip, function (err, clip) {
             if (!err) {
                 self._audioSource_o.bgm = clip;
-                self.playBgm();
+                self.playBg();
                 
             }
         });
-        cc.loader.loadRes("sound/btn", cc.AudioClip, function (err, clip) {
-            if (!err)
-                self._audioSource_o.btn = clip;
-        });
-
-       
-        cc.loader.loadRes("sound/cut", cc.AudioClip, function (err, clip) {
-            if (!err)
-                self._audioSource_o.cut = clip;
-        });
-
         cc.loader.loadRes("sound/eatStar", cc.AudioClip, function (err, clip) {
             if (!err)
                 self._audioSource_o.eatStar = clip;
         });
-
-        cc.loader.loadRes("sound/over", cc.AudioClip, function (err, clip) {
-            if (!err) {
-                self._audioSource_o.over = clip;
-            }
-        });
-       
       
 
         cc.audioEngine.setMaxAudioInstance(10);
@@ -91,24 +60,15 @@ export default class AudioMgr extends cc.Component {
 
     stopAll() {
         this.isPlay = false;
-        this.stopBgm();
+        this.stopBg();
     }
 
     openAll() {
         this.isPlay = true;
-        this.playBgm();
+        this.playBg();
     }
 
-
-    playBegin() {
-        let source = this._audioSource_o["begin"];
-        if (source) {
-            cc.audioEngine.playEffect(source, false);
-            cc.audioEngine.setMusicVolume(0.64);
-        }
-    }
-
-    playBgm() {
+    playBg() {
         let source = this._audioSource_o["bgm"];
         if (source) {
             cc.audioEngine.playMusic(source, true);
@@ -116,41 +76,7 @@ export default class AudioMgr extends cc.Component {
         }
     }
 
-    playBtn() {
-        let source = this._audioSource_o["btn"];
-        if (source) {
-            cc.audioEngine.playEffect(source, true);
-            cc.audioEngine.setMusicVolume(0.64);
-        }
-    }
-
-    playCut() {
-        let source = this._audioSource_o["cut"];
-        if (source) {
-            cc.audioEngine.playEffect(source, true);
-            cc.audioEngine.setMusicVolume(0.64);
-        }
-    }
-
-    playEatStar() {
-        let source = this._audioSource_o["eatStar"];
-        if (source) {
-            cc.audioEngine.playEffect(source, true);
-            cc.audioEngine.setMusicVolume(0.64);
-        }
-    }
-
-    playOver() {
-        let source = this._audioSource_o["over"];
-        if (source) {
-            cc.audioEngine.playEffect(source, true);
-            cc.audioEngine.setMusicVolume(0.64);
-        }
-    }
-
-    
-
-    stopBgm() {
+    stopBg() {
         cc.audioEngine.stopMusic();
         this.isPlay = false;
     }
