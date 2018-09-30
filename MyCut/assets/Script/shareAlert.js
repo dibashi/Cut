@@ -29,6 +29,7 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
+        this.coinTips.active =false;
         this.startFadeIn();
     },
 
