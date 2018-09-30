@@ -84,7 +84,6 @@ cc.Class({
         this.currentNode.setPosition(cc.v2(0, 0));
 
 
-
     },
 
     reNew: function () {

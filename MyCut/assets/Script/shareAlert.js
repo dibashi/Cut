@@ -56,7 +56,7 @@ cc.Class({
 
     //可以点击代表其值为1
     onGuangGaoClick: function () {
-
+        cc.audioMgr.playBtn();
         // cc.videoAd.show();
         // cc.director.getScheduler().pauseTarget(this);
         cc.eventManager.pauseTarget(this.node, true);
@@ -81,7 +81,7 @@ cc.Class({
 
 
     shareClick: function () {
-        console.log("分享提示");
+        cc.audioMgr.playBtn();
         let self = this;
        
         
@@ -121,7 +121,7 @@ cc.Class({
     },
 
     onCancelClick: function () {
-
+        cc.audioMgr.playBtn();
         let cbFadeOut = cc.callFunc(this.onFadeOutFinish, this);
         let actionFadeOut = cc.sequence(cc.spawn(cc.fadeTo(0.3, 0), cc.scaleTo(0.3, 2.0)), cbFadeOut);
         this.node.runAction(actionFadeOut);

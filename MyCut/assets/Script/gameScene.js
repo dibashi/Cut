@@ -63,7 +63,7 @@ cc.Class({
    
     
     start: function () {
-
+        cc.audioMgr.playBegin();
         // console.log("game scenen on start");
     },
 

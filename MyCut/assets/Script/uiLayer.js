@@ -216,10 +216,12 @@ cc.Class({
     },
 
     backClick: function () {
+        cc.audioMgr.playBtn();
         cc.director.loadScene('start');
     },
 
     reNewClick: function () {
+        
         this.showNextFriend();
         this.gameLayer.getComponent("gameLayer").reNew();
         //this.nextNode.getComponent(cc.Animation).play("nextNodeBackAni");
@@ -230,7 +232,7 @@ cc.Class({
     },
 
     helpClick: function () {
-
+        cc.audioMgr.playBtn();
 
         let ss = cc.instantiate(this.shareAlert);
         ss.zIndex = 1000;
@@ -246,7 +248,8 @@ cc.Class({
 
     nextCheckpointClick: function () {
         //todo 这里没有检测是否越界！！！
-
+        cc.audioMgr.playBegin();
+        cc.audioMgr.playBtn();
 
         cc.dataMgr.currentCheckPoint = cc.dataMgr.getRandomCheckpoint();
 
@@ -255,6 +258,7 @@ cc.Class({
     },
 
     onCheckpointSuccess: function (event) {
+        cc.audioMgr.playOver();
 
         //  console.log(event);
         for (let i = 0; i < this.honors.children.length; i++) {
@@ -304,6 +308,7 @@ cc.Class({
     },
 
     tipsClick:function() {
+        cc.audioMgr.playBtn();
         //如果金币够 则提示
         if( cc.dataMgr.getCoinCount() >= 50) {
             this.coinLabel.string = "x" + cc.dataMgr.addCoinCount(-50);
@@ -319,6 +324,7 @@ cc.Class({
     },
 
     onLeaderboardClick:function() {
+        cc.audioMgr.playBtn();
         if (CC_WECHATGAME) {
             this.rankingView.active = true;
           
@@ -344,6 +350,7 @@ cc.Class({
     },
 
     onBackClick: function () {
+        cc.audioMgr.playBtn();
         this.rankingView.active = false;
     },
 
