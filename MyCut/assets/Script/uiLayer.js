@@ -299,6 +299,7 @@ cc.Class({
     },
 
     closeNextNode:function() {
+        cc.audioMgr.playBtn();
         if (!this.dirDown) {
             this.dirDown = true;
             let ac = cc.moveTo(1.0, cc.v2(0, -1500));

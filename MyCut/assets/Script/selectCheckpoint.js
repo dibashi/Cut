@@ -28,7 +28,7 @@ cc.Class({
 
     goCheckpoint: function (event, eventData) {
 
-
+        cc.audioMgr.playBtn();
         //  console.log(eventData);
         cc.dataMgr.currentCheckPoint = parseInt(eventData);
         cc.director.loadScene('gameScene');
@@ -130,7 +130,7 @@ cc.Class({
     },
 
     goMainLayer: function () {
-
+        cc.audioMgr.playBtn();
         cc.director.loadScene('start');
     },
 

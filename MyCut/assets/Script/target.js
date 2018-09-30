@@ -56,7 +56,7 @@ cc.Class({
        // let isWin = cc.find("Canvas").getComponent("gameScene").guanKaWin;
         if (otherCollider.node.group === "cutSquare" && this.isDeadFlag == false) {
             this.isDeadFlag = true;
-            cc.audioMgr.playEffect("eatStar");
+            cc.audioMgr.playEatStar();
 
            
             let ac = cc.spawn(cc.scaleTo(0.3,3),cc.fadeOut(0.3));
