@@ -84,9 +84,9 @@
     "_enabled": true,
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
-    "_fadeTime": 1,
-    "_minSeg": 0,
-    "_stroke": 50,
+    "_fadeTime": 0.15,
+    "_minSeg": 100,
+    "_stroke": 30,
     "_texture": {
       "__uuid__": "d06e639a-e6b3-43e1-8681-54ae9bbde32e"
     },
@@ -99,7 +99,7 @@
     },
     "_fastMode": false,
     "_N$preview": false,
-    "_id": "bcdrVfDflDHqreQqLb9HdZ"
+    "_id": "15v+dBeRlIlaJFLCgU9nha"
   },
   {
     "__type__": "cc.AudioSource",
@@ -117,7 +117,7 @@
     "_loop": false,
     "playOnLoad": true,
     "preload": false,
-    "_id": "b43s0Hb8xBca2DGdN/LOF4"
+    "_id": "b8ZX1FuxtKXqeWuNSyL929"
   },
   {
     "__type__": "cc.PrefabInfo",
