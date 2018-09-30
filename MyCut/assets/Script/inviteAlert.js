@@ -22,6 +22,9 @@ cc.Class({
         giftBagTips: cc.SpriteFrame,
         giftBagComplete: cc.SpriteFrame,
 
+        coinTipsAlert:cc.Prefab,
+        giftBagTipsAlert:cc.Prefab,
+
         inviteBtnNodes: {
             default: [],
             type: cc.Node,
@@ -38,7 +41,7 @@ cc.Class({
 
         console.log("向服务器发送请求，获得当前邀请数");
 
-        this.prizeCoinList = [0, , 30, 40, 60, 80, 100];
+        this.prizeCoinList = [0, 30, 40, 60, 80, 100];
 
         this.enableColor = new cc.Color(255, 245, 0, 255);
         this.disableColor = new cc.Color(108, 106, 117, 255);
@@ -107,22 +110,44 @@ cc.Class({
 
         if (curCount > preCount) {
             let prizeCount = 0;
+            if(curCount>5) {
+                curCount = 5;
+            }
             for (let i = preCount + 1; i <= curCount; i++) {
                 prizeCount += this.prizeCoinList[i];
+                console.log("给用户的金币数计算---》"  + prizeCount);
             }
-            this.givePrize(prizeCount);
+            if(prizeCount>0) {
+                this.givePrize(prizeCount);
+            }
+            
         }
     },
 
     giftBagPrize:function() {
+
+        cc.dataMgr.addCoinCount(300);
+
         console.log("弹出大礼包！");
+
+       
+        let ss = cc.instantiate(this.giftBagTipsAlert);
+        ss.zIndex = 1002;
+        ss.getComponent("tipsAlert").onWho = this.node;
+        this.node.addChild(ss);
     },
 
     givePrize: function (prizeCount) {
 
+        cc.dataMgr.addCoinCount(prizeCount);
         console.log("弹出 奖励金币！");
 
-
+       
+        let ss = cc.instantiate(this.coinTipsAlert);
+        ss.zIndex = 1001;
+        ss.getComponent("tipsAlert").onWho = this.node;
+        ss.getComponent("tipsAlert").setCountLabel(prizeCount);
+        this.node.addChild(ss);
     },
 
     startFadeIn: function () {
@@ -171,6 +196,8 @@ cc.Class({
         let cbFadeOut = cc.callFunc(this.onFadeOutFinish, this);
         let actionFadeOut = cc.sequence(cc.spawn(cc.fadeTo(0.3, 0), cc.scaleTo(0.3, 2.0)), cbFadeOut);
         this.node.runAction(actionFadeOut);
+
+        this.onWho.getComponent("start").refreshCoin();
     },
 
 });

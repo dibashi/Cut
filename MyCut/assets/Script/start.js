@@ -262,6 +262,10 @@ cc.Class({
 
     },
 
+    refreshCoin:function() {
+        this.coinLabel.string = "x" + cc.dataMgr.getCoinCount();
+    },  
+
     goGame: function () {
         console.log("go game click!~");
 

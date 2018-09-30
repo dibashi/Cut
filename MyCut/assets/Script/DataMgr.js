@@ -45,7 +45,7 @@ export default class DataMgr extends cc.Component {
             return cc.color(139, 209, 63, 255);
         } else if (tag == this.OBJECT_COLOR.NAN_SEPARABLE_BLACK) {
             return cc.color(40, 40, 40, 255);
-        }else if (tag == this.OBJECT_COLOR.INDIRECT_Col) {
+        } else if (tag == this.OBJECT_COLOR.INDIRECT_Col) {
             return cc.color(255, 221, 32, 255);
         }
     };
@@ -82,7 +82,7 @@ export default class DataMgr extends cc.Component {
                 cc.sys.localStorage.setItem("recommendedCurrency", 0);
             }
 
-           
+
 
             let openid = cc.sys.localStorage.getItem("openid");
             if (!openid) {
@@ -107,16 +107,17 @@ export default class DataMgr extends cc.Component {
             // if (obj.referrerInfo && obj.referrerInfo.appId)
             //     this.scoreAppId = obj.referrerInfo.appId;
 
-            let ic = cc.sys.localStorage.getItem("inviteCountObj");
-           
-            if (!ic) {
 
-                this._setInviteCount(0);
-                cc.sys.localStorage.setItem("isReceiveGift",0);//初始化 没有领取礼物
-            }
         }
-      
-      
+
+        let ic = cc.sys.localStorage.getItem("inviteCountObj");
+
+        if (!ic) {
+
+            this._setInviteCount(0);
+            cc.sys.localStorage.setItem("isReceiveGift", 0);//初始化 没有领取礼物
+        }
+
 
     };
 
@@ -136,19 +137,19 @@ export default class DataMgr extends cc.Component {
         if (preObj.currentDay != cd) {
             preCount = 0;
             this._setInviteCount(curCount);
-            cc.sys.localStorage.setItem("isReceiveGift",0);
+            cc.sys.localStorage.setItem("isReceiveGift", 0);
         } else {
             preCount = parseInt(preObj.inviteCount);
             curCount = count + preCount;
             this._setInviteCount(curCount);
         }
 
-        return {"preCount":preCount,"curCount":curCount};
+        return { "preCount": preCount, "curCount": curCount };
     };
 
     getCurrentDay() {
         var date = new Date();
-        var r =  date.getFullYear() +"" + date.getMonth() + date.getDate();
+        var r = date.getFullYear() + "" + date.getMonth() + date.getDate();
         console.log("getCurrentDay 当前天：" + r);
         return r;
     };
@@ -244,13 +245,13 @@ export default class DataMgr extends cc.Component {
         return str_title;
     };
 
-      //从服务器获得用户的推荐奖励
-      refreshrecommended (callback,selector) {
-          return callback.call(selector,3);
+    //从服务器获得用户的推荐奖励
+    refreshrecommended(callback, selector) {
+       
         let self = this;
         let openid = cc.sys.localStorage.getItem("openid");
         if (openid == "0") {
-            callback.call(selector,0);
+            callback.call(selector, 0);
         }
 
         if (cc.myDebugMode) {
@@ -263,9 +264,9 @@ export default class DataMgr extends cc.Component {
                     console.log("成功获得服务器那边的用户奖励数据！！！！ 服务器返回的数据！！--> ");
                     console.log(obj);
                     if (obj.data.code > 0) {
-                        callback.call(selector,obj.data.code);
+                        callback.call(selector, obj.data.code);
                     } else {
-                        callback.call(selector,0);
+                        callback.call(selector, 0);
                     }
                 },
             });
