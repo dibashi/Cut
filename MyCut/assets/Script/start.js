@@ -71,9 +71,9 @@ cc.Class({
             this.musicSprite.spriteFrame = this.offMusicSpriteFrame;
         }
 
-        this.coinLabel.string = "X" + cc.dataMgr.getCoinCount();
+        this.coinLabel.string = "x" + cc.dataMgr.getCoinCount();
 
-        this.crownLabel.string = "X" + cc.dataMgr.currentScore();
+        this.crownLabel.string = "x" + cc.dataMgr.currentScore();
 
 
 

@@ -93,7 +93,7 @@ cc.Class({
 
         console.log("UI ONLOAD");
 
-        this.coinLabel.string = "X" + cc.dataMgr.getCoinCount();
+        this.coinLabel.string = "x" + cc.dataMgr.getCoinCount();
         this.refreash();
 
         this.rankingView.active = false;
@@ -268,7 +268,7 @@ cc.Class({
         if(event.detail.givePrize == true) {
            this.prizeNode.active = true;
            
-           this.coinLabel.string = "X" + cc.dataMgr.addCoinCount(5);
+           this.coinLabel.string = "x" + cc.dataMgr.addCoinCount(5);
         } else {
             this.prizeNode.active = false;
         }
@@ -306,7 +306,7 @@ cc.Class({
     tipsClick:function() {
         //如果金币够 则提示
         if( cc.dataMgr.getCoinCount() >= 50) {
-            this.coinLabel.string = "X" + cc.dataMgr.addCoinCount(-50);
+            this.coinLabel.string = "x" + cc.dataMgr.addCoinCount(-50);
             this.helpCallback();
         } else {
             let ss = cc.instantiate(this.shareAlert);
