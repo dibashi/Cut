@@ -146,7 +146,7 @@ cc.Class({
 
 
     onShareClick: function () {
-        console.log("点击分享");
+        cc.audioMgr.playBtn();
 
      
         wx.shareAppMessage({
@@ -167,6 +167,7 @@ cc.Class({
 
 
     musicClick: function () {
+        cc.audioMgr.playBtn();
         if (cc.audioMgr.isPlay) {
             cc.audioMgr.stopAll();
             this.musicSprite.spriteFrame = this.offMusicSpriteFrame;
@@ -177,11 +178,13 @@ cc.Class({
     },
 
     onLeaderboardClick: function () {
-        console.log("onLeaderboardClick~");
+       
         this.showFriend();
+        
     },
 
     showFriend: function () {
+        cc.audioMgr.playBtn();
         if (CC_WECHATGAME) {
             this.rankingView.active = true;
             this.rankingView.getChildByName("spr_friend").active = true;
@@ -199,6 +202,7 @@ cc.Class({
 
     groupClick: function () {
         let self = this;
+        cc.audioMgr.playBtn();
         if (CC_WECHATGAME) {
             window.wx.updateShareMenu({
                 withShareTicket: true,
@@ -249,12 +253,13 @@ cc.Class({
     },
 
     onBackClick: function () {
+        cc.audioMgr.playBtn();
         this.rankingView.active = false;
     },
 
 
     inviteClick: function () {
-        console.log("invite click!~");
+        cc.audioMgr.playBtn();
         let ss = cc.instantiate(this.inviteAlert);
         ss.zIndex = 1000;
         ss.getComponent("inviteAlert").onWho = this.node;
@@ -267,15 +272,13 @@ cc.Class({
     },  
 
     goGame: function () {
-        console.log("go game click!~");
-
+        cc.audioMgr.playBtn();
         cc.dataMgr.currentCheckPoint = cc.dataMgr.getRandomCheckpoint();
-        console.log(cc.dataMgr.currentCheckPoint);
         cc.director.loadScene('gameScene');
     },
     goSelectCheckpoint: function () {
-        console.log("go game click!~");
-
+       
+        cc.audioMgr.playBtn();
         cc.director.loadScene('selectCheckpoint');
     },
 

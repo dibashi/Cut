@@ -99,7 +99,7 @@
     },
     "_fastMode": false,
     "_N$preview": false,
-    "_id": "3dsOJNpgBNUpL/K492MWCc"
+    "_id": "bcdrVfDflDHqreQqLb9HdZ"
   },
   {
     "__type__": "cc.AudioSource",
@@ -110,14 +110,14 @@
     },
     "_enabled": true,
     "_clip": {
-      "__uuid__": "ea55d534-b791-4f4f-afcb-295ad8a3584c"
+      "__uuid__": "9401c3a3-9c58-4796-802c-8ec4c56c974e"
     },
     "_volume": 1,
     "_mute": false,
     "_loop": false,
     "playOnLoad": true,
     "preload": false,
-    "_id": "112nRh7SdGZaSpAsinSBiU"
+    "_id": "b43s0Hb8xBca2DGdN/LOF4"
   },
   {
     "__type__": "cc.PrefabInfo",

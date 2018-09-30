@@ -119,7 +119,7 @@ export default class AudioMgr extends cc.Component {
     playBtn() {
         let source = this._audioSource_o["btn"];
         if (source) {
-            cc.audioEngine.playEffect(source, true);
+            cc.audioEngine.playEffect(source, false);
             cc.audioEngine.setMusicVolume(0.64);
         }
     }
@@ -127,7 +127,7 @@ export default class AudioMgr extends cc.Component {
     playCut() {
         let source = this._audioSource_o["cut"];
         if (source) {
-            cc.audioEngine.playEffect(source, true);
+            cc.audioEngine.playEffect(source, false);
             cc.audioEngine.setMusicVolume(0.64);
         }
     }
@@ -135,7 +135,7 @@ export default class AudioMgr extends cc.Component {
     playEatStar() {
         let source = this._audioSource_o["eatStar"];
         if (source) {
-            cc.audioEngine.playEffect(source, true);
+            cc.audioEngine.playEffect(source, false);
             cc.audioEngine.setMusicVolume(0.64);
         }
     }
@@ -143,7 +143,7 @@ export default class AudioMgr extends cc.Component {
     playOver() {
         let source = this._audioSource_o["over"];
         if (source) {
-            cc.audioEngine.playEffect(source, true);
+            cc.audioEngine.playEffect(source, false);
             cc.audioEngine.setMusicVolume(0.64);
         }
     }
