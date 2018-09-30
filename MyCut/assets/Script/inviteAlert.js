@@ -56,8 +56,8 @@ cc.Class({
         console.log("准备发送请求的 query " + query_string);
       
         wx.shareAppMessage({
-            title: cc.dataMgr.getShareTitle(),
-            imageUrl: cc.dataMgr.getShareImgeUri(), query: "otherID=" + query_string + "&guanka="+10
+            title: cc.dataMgr.getShareTitle("game"),
+            imageUrl: cc.dataMgr.getShareImgeUri("game"), query: "otherID=" + query_string + "&guanka="+10
         });
     },
     

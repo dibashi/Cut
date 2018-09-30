@@ -99,8 +99,26 @@ export default class DataMgr extends cc.Component {
                 this.query = query;
             // if (obj.referrerInfo && obj.referrerInfo.appId)
             //     this.scoreAppId = obj.referrerInfo.appId;
+
+            let ic = cc.sys.localStorage.getItem("inviteCountObj");
+            if (!ic) {
+
+                this.setInviteCount(0);
+            } else {
+                var cd = this.getCurrentDay();
+                let preObj = JSON.parse(ic);
+                if (preObj.currentDay != cd) {
+                   this.setInviteCount(0);
+                }
+            }
         }
 
+    };
+
+    setInviteCount(count) {
+        var icObj = { "inviteCount": count, "currentDay": this.getCurrentDay() };
+        var icObjStr = JSON.stringify(icObj);
+        cc.sys.localStorage.setItem("inviteCountObj", icObjStr);
     };
 
     getRandomCheckpoint() {
@@ -172,25 +190,23 @@ export default class DataMgr extends cc.Component {
 
 
 
-    getShareImgeUri() {
-        var str_imageUrl = null;
-        var str_index = Math.floor(Math.random() * 2);
-        if (str_index == 0) {
-            str_imageUrl = "https://bpw.blyule.com/res/raw-assets/Texture/shareImage0.5f075.jpg";
+    getShareImgeUri(tag) {
+       
+       
+        if (tag && tag == "game") {
+            str_imageUrl = "https://bpw.blyule.com/cutRes/game_help.jpg";
         } else {
-            str_imageUrl = "https://bpw.blyule.com/res/raw-assets/Texture/shareImage1.678a4.jpg";
+            str_imageUrl = "https://bpw.blyule.com/cutRes/share.jpg";
         }
         return str_imageUrl;
     };
 
-    getShareTitle() {
-        var str_title = null;
-        var str_index = Math.floor(Math.random() * 2);
-
-        if (str_index == 0) {
-            str_title = "走开，别碰我！萌哭了";
+    getShareTitle(tag) {
+       
+        if (tag && tag == "game") {
+            str_title = "这题太难了，心态已崩！";
         } else {
-            str_title = "萌翻全场，好想都抱回家!";
+            str_title = "你点一下我就能拿红包了，快帮我！";
         }
 
         return str_title;
@@ -219,14 +235,14 @@ export default class DataMgr extends cc.Component {
                                     console.log("请求openid,服务器返回的数据！！--> " + obj);
                                     console.log(obj);
                                     console.log(obj.data.openid);
-    
+
                                     self.openid = obj.data.openid;
                                     cc.sys.localStorage.setItem("openid", obj.data.openid);//之所以要存，是在分享的时候放入query中
                                     //微信官方文档那里写的调用函数是getLaunchInfoSync，但是根本搜不到这个API，应该是下面这个。
                                     var launchOption = wx.getLaunchOptionsSync();
                                     //  console.log(launchOption);
                                     //  self.otherOpenIDLabel.string = JSON.stringify(launchOption.query) + "query.otherID-->" + launchOption.query.otherID;
-    
+
                                     if (launchOption.query.otherID == null || launchOption.query.otherID == undefined) {
                                         launchOption.query.otherID = 0;
                                     }
@@ -240,11 +256,11 @@ export default class DataMgr extends cc.Component {
                                             cuid: launchOption.query.otherID,
                                         },
                                         success: (data, statusCode, header) => {
-                                             console.log("添加用户成功！ 服务器返回的数据！！--> ");
-                                             console.log(data);
-    
-                                             console.log("看下自己的openid数据！！--> ");
-                                             console.log(self.openid);
+                                            console.log("添加用户成功！ 服务器返回的数据！！--> ");
+                                            console.log(data);
+
+                                            console.log("看下自己的openid数据！！--> ");
+                                            console.log(self.openid);
                                         },
                                     });
                                     //调用 SDK 登陆成功
