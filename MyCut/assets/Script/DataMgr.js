@@ -68,16 +68,21 @@ export default class DataMgr extends cc.Component {
             //   console.log(a);
             cc.sys.localStorage.setItem("checkPointJsonData", a);
         }
+
+        let coinCount = cc.sys.localStorage.getItem("coinCount");
+        if (!coinCount) {
+            cc.sys.localStorage.setItem("coinCount", 0);
+        }
+
+
+
         if (CC_WECHATGAME) {
             let rc = cc.sys.localStorage.getItem("recommendedCurrency");
             if (!rc) {
                 cc.sys.localStorage.setItem("recommendedCurrency", 0);
             }
 
-            let coinCount = cc.sys.localStorage.getItem("coinCount");
-            if (!coinCount) {
-                cc.sys.localStorage.setItem("coinCount", 0);
-            }
+           
 
             let openid = cc.sys.localStorage.getItem("openid");
             if (!openid) {
@@ -103,12 +108,15 @@ export default class DataMgr extends cc.Component {
             //     this.scoreAppId = obj.referrerInfo.appId;
 
             let ic = cc.sys.localStorage.getItem("inviteCountObj");
+           
             if (!ic) {
 
                 this._setInviteCount(0);
-                cc.sys.localStorage.setItem("isReceiveGift",false);//初始化 没有领取礼物
+                cc.sys.localStorage.setItem("isReceiveGift",0);//初始化 没有领取礼物
             }
         }
+      
+      
 
     };
 
@@ -121,13 +129,14 @@ export default class DataMgr extends cc.Component {
     //外部只需要将当前的邀请数 传入，会返回一个当前进度，即今天邀请的玩家数 以及之前邀请多少 ，方便调用者计算奖励金币
     addInviteCount(count) {
         var cd = this.getCurrentDay();
+        let ic = cc.sys.localStorage.getItem("inviteCountObj");
         let preObj = JSON.parse(ic);
         var curCount = count;
         var preCount = 0;
         if (preObj.currentDay != cd) {
             preCount = 0;
             this._setInviteCount(curCount);
-            cc.sys.localStorage.setItem("isReceiveGift",false);
+            cc.sys.localStorage.setItem("isReceiveGift",0);
         } else {
             preCount = parseInt(preObj.inviteCount);
             curCount = count + preCount;
@@ -139,7 +148,7 @@ export default class DataMgr extends cc.Component {
 
     getCurrentDay() {
         var date = new Date();
-        var r =  date.getFullYear() + date.getMonth() + date.getDate();
+        var r =  date.getFullYear() +"" + date.getMonth() + date.getDate();
         console.log("getCurrentDay 当前天：" + r);
         return r;
     };
@@ -236,11 +245,12 @@ export default class DataMgr extends cc.Component {
     };
 
       //从服务器获得用户的推荐奖励
-      refreshrecommended (callback) {
+      refreshrecommended (callback,selector) {
+          return callback.call(selector,3);
         let self = this;
         let openid = cc.sys.localStorage.getItem("openid");
         if (openid == "0") {
-            callback(0);
+            callback.call(selector,0);
         }
 
         if (cc.myDebugMode) {
@@ -253,12 +263,9 @@ export default class DataMgr extends cc.Component {
                     console.log("成功获得服务器那边的用户奖励数据！！！！ 服务器返回的数据！！--> ");
                     console.log(obj);
                     if (obj.data.code > 0) {
-                        // let rc = parseInt(cc.sys.localStorage.getItem('recommendedCurrency')) + obj.data.code;
-                        // cc.sys.localStorage.setItem('recommendedCurrency', rc);
-                        // self.recommendedLabel.getComponent(cc.Label).string = rc;
-                        callback(obj.data.code);
+                        callback.call(selector,obj.data.code);
                     } else {
-                        callback(0);
+                        callback.call(selector,0);
                     }
                 },
             });

@@ -19,14 +19,17 @@ cc.Class({
         inviteSpriteFrame: cc.SpriteFrame,
         invitedSpriteFrame: cc.SpriteFrame,
 
+        giftBagTips: cc.SpriteFrame,
+        giftBagComplete: cc.SpriteFrame,
+
         inviteBtnNodes: {
             default: [],
             type: cc.Node,
         },
 
-        giftBagBtnNode: {
+        giftBagSpr: {
             default: null,
-            type: cc.Node,
+            type: cc.Sprite,
         }
     },
 
@@ -35,19 +38,22 @@ cc.Class({
 
         console.log("向服务器发送请求，获得当前邀请数");
 
-        cc.dataMgr.refreshrecommended(this.prizeCallback);
-
         this.prizeCoinList = [0, , 30, 40, 60, 80, 100];
 
-        this.enableColor = cc.color(255, 245, 0, 255);
-        this.disableColor = cc.color(108, 106, 117, 255);
+        this.enableColor = new cc.Color(255, 245, 0, 255);
+        this.disableColor = new cc.Color(108, 106, 117, 255);
+        console.log(this.disableColor);
 
         this.initUI();
+
+        cc.dataMgr.refreshrecommended(this.prizeCallback,this);
+
+        
     },
 
     initUI() {
-        this.giftBagBtnNode.color = this.disableColor;
-        this.giftBagBtnNode.getComponent(cc.Button).interactable = false;
+
+        this.giftBagSpr.spriteFrame = this.giftBagTips;
         for (let i = 1; i < this.inviteBtnNodes.length; i++) {
             this.inviteBtnNodes[i].color = this.disableColor;
             this.inviteBtnNodes[i].getComponent(cc.Button).interactable = false;
@@ -63,6 +69,7 @@ cc.Class({
 
         let inviteCountObj = cc.dataMgr.addInviteCount(count);
         console.log(inviteCountObj);
+        console.log(this);
         this.refreshUIandGivePrize(inviteCountObj.preCount, inviteCountObj.curCount);
     },
 
@@ -73,51 +80,50 @@ cc.Class({
             if (i < curCount) {
                 this.inviteBtnNodes[i].color = this.disableColor;
                 this.inviteBtnNodes[i].getComponent(cc.Button).interactable = false;
-                this.inviteBtnNodes[i].getComponent(cc.Sprite).spriteFrame = this.invitedSpriteFrame;
+                this.inviteBtnNodes[i].getChildByName("inviteLabel").getComponent(cc.Sprite).spriteFrame = this.invitedSpriteFrame;
             } else if (i == curCount) {
                 this.inviteBtnNodes[i].color = this.enableColor;
                 this.inviteBtnNodes[i].getComponent(cc.Button).interactable = true;
-                this.inviteBtnNodes[i].getComponent(cc.Sprite).spriteFrame = this.inviteSpriteFrame;
+                this.inviteBtnNodes[i].getChildByName("inviteLabel").getComponent(cc.Sprite).spriteFrame = this.inviteSpriteFrame;
             } else if (i > curCount) {
                 this.inviteBtnNodes[i].color = this.disableColor;
                 this.inviteBtnNodes[i].getComponent(cc.Button).interactable = false;
-                this.inviteBtnNodes[i].getComponent(cc.Sprite).spriteFrame = this.inviteSpriteFrame;
+                this.inviteBtnNodes[i].getChildByName("inviteLabel").getComponent(cc.Sprite).spriteFrame = this.inviteSpriteFrame;
             }
         }
-        if (curCount >4) {//>=5
-            let isReceiveGift = cc.sys.localStorage.getItem("isReceiveGift");
-            if(!isReceiveGift) {//true 领取过了 false 没有领取
-                this.giftBagBtnNode.color = this.enableColor;
-                this.giftBagBtnNode.getComponent(cc.Button).interactable = true;
-                //纹理设置为领取todo
-            } else {
-                console.log("领取过了");
-                this.giftBagBtnNode.color = this.disableColor;
-                this.giftBagBtnNode.getComponent(cc.Button).interactable = false;
-                //纹理设置为已领取todo
+        if (curCount > 4) {//>=5
+            let isReceiveGift =  cc.sys.localStorage.getItem("isReceiveGift");
+            this.giftBagSpr.spriteFrame = this.giftBagComplete;
+
+
+            if (isReceiveGift == 0) {//1 领取过了 0 没有领取
+                cc.sys.localStorage.setItem("isReceiveGift", 1)
+                this.giftBagPrize();
             }
-           
+
         } else {
-            this.giftBagBtnNode.color = this.disableColor;
-            this.giftBagBtnNode.getComponent(cc.Button).interactable = false;
-            //纹理设置为领取 todo
+            this.giftBagSpr.spriteFrame = this.giftBagTips;
         }
 
-        if(curCount>preCount) {
+        if (curCount > preCount) {
             let prizeCount = 0;
-            for(let i = preCount + 1; i<=curCount;i++) {
-                prizeCount+= this.prizeCoinList[i];
+            for (let i = preCount + 1; i <= curCount; i++) {
+                prizeCount += this.prizeCoinList[i];
             }
             this.givePrize(prizeCount);
         }
     },
 
-    givePrize:function(prizeCount) {
-        
+    giftBagPrize:function() {
+        console.log("弹出大礼包！");
+    },
+
+    givePrize: function (prizeCount) {
+
+        console.log("弹出 奖励金币！");
 
 
-
-    },  
+    },
 
     startFadeIn: function () {
         cc.eventManager.pauseTarget(this.node, true);
