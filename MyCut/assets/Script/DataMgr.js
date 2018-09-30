@@ -254,7 +254,7 @@ export default class DataMgr extends cc.Component {
             callback.call(selector, 0);
         }
 
-        if (cc.myDebugMode) {
+        if (CC_WECHATGAME) {
             wx.request({
                 url: 'https://bpw.blyule.com/game_3/public/index.php/index/index/getprise?userid=' + openid,
                 data: {
