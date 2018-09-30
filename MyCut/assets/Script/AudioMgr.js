@@ -87,5 +87,5 @@ export default class AudioMgr extends cc.Component {
 
     resumeAll() {
         cc.audioEngine.resumeAll();
-    }
+    } 
 }
