@@ -182,7 +182,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": ""
+    "_id": "b7sDL/Yh1JvLu96k1RAA8o"
   },
   {
     "__type__": "cc.Widget",
@@ -209,7 +209,7 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 2,
     "_originalHeight": 2,
-    "_id": ""
+    "_id": "a0vlIqefpFcryeIhgZVhnW"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -343,7 +343,7 @@
     "_N$target": {
       "__id__": 6
     },
-    "_id": ""
+    "_id": "fakjyy1ttJxKa4QX8n7qyU"
   },
   {
     "__type__": "cc.ClickEvent",
@@ -380,7 +380,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": ""
+    "_id": "06FPdboCZM+qkcLDxBRUo4"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -592,7 +592,7 @@
     "_N$target": {
       "__id__": 12
     },
-    "_id": ""
+    "_id": "b7/Bxu1sdDnahUQSOLgtjc"
   },
   {
     "__type__": "cc.ClickEvent",
@@ -629,7 +629,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": ""
+    "_id": "44QPF/MG9Jnbs3qTRaPK97"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -763,7 +763,7 @@
     "_N$target": {
       "__id__": 17
     },
-    "_id": ""
+    "_id": "b0+uFKbApAya7VTSy48WXX"
   },
   {
     "__type__": "cc.ClickEvent",
@@ -800,7 +800,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": ""
+    "_id": "f7XpSP2jdE8YLoYbRjKbnE"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -910,7 +910,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": ""
+    "_id": "c8II0RRlZDmLD2V1s5/+bS"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -938,7 +938,7 @@
         "__id__": 30
       }
     ],
-    "_active": true,
+    "_active": false,
     "_level": 2,
     "_components": [],
     "_prefab": {
@@ -1078,7 +1078,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": ""
+    "_id": "9d4RrF5h5Jb56eQAaUDIzJ"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1180,7 +1180,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": ""
+    "_id": "bfpJEFQHFNCYw5uimR6HaP"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1219,7 +1219,7 @@
     "coinTips": {
       "__id__": 26
     },
-    "_id": ""
+    "_id": "51LoDuNZRNoJr1VZpjYCJC"
   },
   {
     "__type__": "cc.Button",
@@ -1272,7 +1272,7 @@
     "_N$target": {
       "__id__": 1
     },
-    "_id": ""
+    "_id": "21rFVirOtKJ6XQa0UHr8tM"
   },
   {
     "__type__": "cc.PrefabInfo",

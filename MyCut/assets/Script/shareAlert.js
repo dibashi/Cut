@@ -23,13 +23,14 @@ cc.Class({
     },
 
     showTips:function() {
+        console.log("showTips call!");
         this.coinTips.active = true;
     },
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
-        this.coinTips.active =false;
+        
         this.startFadeIn();
     },
 
@@ -60,7 +61,7 @@ cc.Class({
         // cc.videoAd.show();
         // cc.director.getScheduler().pauseTarget(this);
         cc.eventManager.pauseTarget(this.node, true);
-        this.onWho.getComponent("uiLayer").helpCallback();
+      //  this.onWho.getComponent("uiLayer").helpCallback();
 
         let cbFadeOut = cc.callFunc(this.onFadeOutFinish, this);
         let actionFadeOut = cc.sequence(cc.spawn(cc.fadeTo(0.3, 0), cc.scaleTo(0.3, 2.0)), cbFadeOut);
