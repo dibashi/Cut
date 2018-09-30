@@ -48,7 +48,7 @@ cc.Class({
    
 
     onCancelClick: function () {
-
+        cc.audioMgr.playBtn();
         let cbFadeOut = cc.callFunc(this.onFadeOutFinish, this);
         let actionFadeOut = cc.sequence(cc.spawn(cc.fadeTo(0.3, 0), cc.scaleTo(0.3, 2.0)), cbFadeOut);
         this.node.runAction(actionFadeOut);

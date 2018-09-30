@@ -148,6 +148,10 @@ export default class AudioMgr extends cc.Component {
         }
     }
 
+
+    pauseBgm() {
+        cc.audioEngine.pause();
+    }
     
 
     stopBgm() {

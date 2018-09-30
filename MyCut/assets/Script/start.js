@@ -67,8 +67,10 @@ cc.Class({
 
         if (cc.audioMgr.isPlay) {
             this.musicSprite.spriteFrame = this.onMusicSpriteFrame;
+            cc.audioMgr.playBgm();
         } else {
             this.musicSprite.spriteFrame = this.offMusicSpriteFrame;
+            cc.audioMgr.stopBgm();
         }
 
         this.coinLabel.string = "x" + cc.dataMgr.getCoinCount();
@@ -113,6 +115,7 @@ cc.Class({
             //         cc.director.loadScene('gameScene');
             //     }
             // });
+
           
         }
 
@@ -272,13 +275,16 @@ cc.Class({
     },  
 
     goGame: function () {
+        cc.audioMgr.stopBgm();
         cc.audioMgr.playBtn();
+        
         cc.dataMgr.currentCheckPoint = cc.dataMgr.getRandomCheckpoint();
         cc.director.loadScene('gameScene');
     },
     goSelectCheckpoint: function () {
-       
+        cc.audioMgr.stopBgm();
         cc.audioMgr.playBtn();
+        
         cc.director.loadScene('selectCheckpoint');
     },
 
