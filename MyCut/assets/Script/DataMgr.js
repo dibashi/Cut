@@ -247,7 +247,7 @@ export default class DataMgr extends cc.Component {
 
     //从服务器获得用户的推荐奖励
     refreshrecommended(callback, selector) {
-       
+       // return callback.call(selector, 3);
         let self = this;
         let openid = cc.sys.localStorage.getItem("openid");
         if (openid == "0") {
