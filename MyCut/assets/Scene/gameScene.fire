@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.42968749999999534,
-      "y": 0.42968749999999534,
+      "x": 0.21847418816441413,
+      "y": 0.21847418816441413,
       "z": 1
     },
     "_quat": {
@@ -635,7 +635,56 @@
       },
       {
         "__uuid__": "8120c7a2-b43f-484c-beef-e6bf9a2df142"
-      }
+      },
+      {
+        "__uuid__": "f1b15796-d07d-4a97-b6b5-862e1815410a"
+      },
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
     ],
     "uiLayer": {
       "__id__": 11
@@ -5450,6 +5499,9 @@
       "__id__": 112
     },
     "_enabled": true,
+    "content": {
+      "__id__": 118
+    },
     "horizontal": false,
     "vertical": true,
     "inertia": true,
@@ -5458,12 +5510,6 @@
     "bounceDuration": 0,
     "scrollEvents": [],
     "cancelInnerEvents": true,
-    "_N$content": {
-      "__id__": 118
-    },
-    "content": {
-      "__id__": 118
-    },
     "_N$horizontalScrollBar": null,
     "_N$verticalScrollBar": {
       "__id__": 116
