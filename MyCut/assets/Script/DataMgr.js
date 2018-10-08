@@ -18,7 +18,7 @@ export default class DataMgr extends cc.Component {
     //当前玩家选择的关卡 游戏中的关卡
     currentCheckPoint = -1;
     //一共关卡数
-    MAX_CHECKPOINT_COUNT = 52;
+    MAX_CHECKPOINT_COUNT = 99;
 
     //根据tag设置颜色,还要根据tag来确定哪些可切，哪些不可切， 约定！！可切的tag<100 不可切的 100< tag <200
     //target tag = 102； 
