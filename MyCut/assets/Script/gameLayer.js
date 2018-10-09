@@ -57,6 +57,7 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
+        this.singleTouchID = -1;
         this.checkpointInit();
         this.touchOpen();
 
@@ -75,7 +76,7 @@ cc.Class({
 
     checkpointInit: function () {
         let checkpointIndex = cc.dataMgr.currentCheckPoint - 1;
-        
+
         this.currentNode = cc.instantiate(this.checkpoints[checkpointIndex]);
 
         this.node.addChild(this.currentNode);
@@ -132,16 +133,29 @@ cc.Class({
 
 
     onTouchStart: function (event) {
+        if (this.singleTouchID == -1) {
+            this.singleTouchID = event.getID();
+        } else {
+            //已经被触摸设置了，那就不处理
+            return;
+        }
+
         this.ctx.clear();
         this.touching = true;
         this.r1 = this.r2 = this.results = null;
         this.touchStartPoint = this.touchPoint = cc.v2(event.touch.getLocation());
 
-        console.log("touchStart");
-        console.log(this.node.convertToNodeSpaceAR(this.touchStartPoint));
+
+
+        // console.log("touchStart");
+        // console.log(this.node.convertToNodeSpaceAR(this.touchStartPoint));
     },
 
     onTouchMove: function (event) {
+        if (event.getID() != this.singleTouchID) {
+            return;
+        }
+
         this.touchPoint = cc.v2(event.touch.getLocation());
 
         //this.node_streak.position = cc.v2( this.touchPoint.x - this.halfWinWidth,  this.touchPoint.y - this.halfWinHeight);
@@ -154,6 +168,7 @@ cc.Class({
     },
 
     onTouchEnd: function (event) {
+        this.singleTouchID = -1;
         console.log("touchend");
         console.log(this.node.convertToNodeSpaceAR(this.touchPoint));
         this.touchPoint = cc.v2(event.touch.getLocation());
@@ -185,10 +200,10 @@ cc.Class({
             streakTemp.parent = this.graphicsLayer;
             streakTemp.position = cc.v2(this.touchStartPoint.x - this.halfWinWidth, this.touchStartPoint.y - this.halfWinHeight);
 
-            let acts = cc.sequence(cc.moveTo(0.2,cc.v2(this.touchPoint.x - this.halfWinWidth, this.touchPoint.y - this.halfWinHeight)), cc.callFunc(this.removeStreak, this, streakTemp));
+            let acts = cc.sequence(cc.moveTo(0.2, cc.v2(this.touchPoint.x - this.halfWinWidth, this.touchPoint.y - this.halfWinHeight)), cc.callFunc(this.removeStreak, this, streakTemp));
             streakTemp.runAction(acts);
 
-          
+
 
         } else {
             console.log("无效的切割");
