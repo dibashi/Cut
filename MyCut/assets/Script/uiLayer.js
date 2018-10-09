@@ -355,5 +355,17 @@ cc.Class({
         this.rankingView.active = false;
     },
 
+    showOffClick:function() {
+       
+        cc.audioMgr.playBtn();
+        if (CC_WECHATGAME) {
+
+            wx.shareAppMessage({
+                title: cc.dataMgr.getShareTitle("gameOver"),
+                imageUrl: cc.dataMgr.getShareImgeUri("gameOver")
+            });
+        }
+    },
+
 
 });

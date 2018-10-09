@@ -227,7 +227,9 @@ export default class DataMgr extends cc.Component {
 
         var str_imageUrl = null;
         if (tag && tag == "game") {
-            str_imageUrl = "https://bpw.blyule.com/cutRes/game_help.jpg";
+            str_imageUrl = "https://bpw.blyule.com/cutRes/cp"+this.currentCheckPoint+".jpg";
+        } else if (tag && tag == "gameOver") {
+            str_imageUrl = "https://bpw.blyule.com/cutRes/cp"+this.currentCheckPoint+".jpg";
         } else {
             str_imageUrl = "https://bpw.blyule.com/cutRes/share.jpg";
         }
@@ -238,7 +240,9 @@ export default class DataMgr extends cc.Component {
 
         var str_title = null;
         if (tag && tag == "game") {
-            str_title = "这题太难了，心态已崩！";
+            str_title = "怎么才能一刀切掉所有方块？";
+        } else if (tag && tag == "gameOver") {
+            str_title = "一刀砍掉四颗星，你可以吗？";
         } else {
             str_title = "你点一下我就能拿红包了，快帮我！";
         }
@@ -248,7 +252,7 @@ export default class DataMgr extends cc.Component {
 
     //从服务器获得用户的推荐奖励
     refreshrecommended(callback, selector) {
-       // return callback.call(selector, 3);
+        // return callback.call(selector, 3);
         let self = this;
         let openid = cc.sys.localStorage.getItem("openid");
         if (openid == "0") {
