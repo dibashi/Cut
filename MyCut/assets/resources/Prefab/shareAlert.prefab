@@ -169,7 +169,7 @@
     "_spriteFrame": {
       "__uuid__": "410fb916-8721-4663-bab8-34397391ace7"
     },
-    "_type": 0,
+    "_type": 1,
     "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
@@ -182,7 +182,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "a33s3YblNKy6Y/INAOQIyL"
+    "_id": "d9qVxd39VHU6AABPETVrn9"
   },
   {
     "__type__": "cc.Widget",
@@ -209,7 +209,7 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 2,
     "_originalHeight": 2,
-    "_id": "d1IvA+1vhO8LidatLYb3mr"
+    "_id": "c65L5HH5xAK7wPuR9UWCG9"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -343,7 +343,7 @@
     "_N$target": {
       "__id__": 6
     },
-    "_id": "1bf1GdDO1OCI3nzuA3Bdhp"
+    "_id": "2c64gmDotG87y4QMwdP95a"
   },
   {
     "__type__": "cc.ClickEvent",
@@ -380,7 +380,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "00f+/oXcpBr7ciaGpc5mPG"
+    "_id": "79hicG57NJloSJxHfbvUKa"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -590,7 +590,7 @@
     "_N$target": {
       "__id__": 12
     },
-    "_id": "34NKS2FoZJJKWgeZywX7l8"
+    "_id": "07/UubS6xEr5xvMiCAEU2u"
   },
   {
     "__type__": "cc.ClickEvent",
@@ -627,7 +627,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "10fc3NZR5KCZKC0V4/omvS"
+    "_id": "d9gKAfkMlDuaxynN7wfCUH"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -761,7 +761,7 @@
     "_N$target": {
       "__id__": 17
     },
-    "_id": "eeT1XWb7FLzpQehLgS3N0T"
+    "_id": "f2YV91ew1D8qoYSeaTV34g"
   },
   {
     "__type__": "cc.ClickEvent",
@@ -798,7 +798,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "8aNv4WxW1NNpDwGmGp89x+"
+    "_id": "c4LNPoC0VIEIcOi8RbH066"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -908,7 +908,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "4f0kPLyx5Cbby4xOTJxOx6"
+    "_id": "bdaQ4zvrVKI76VOVCT1jUz"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1076,7 +1076,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "b7r/01q1pMDJD/Bri8ma0W"
+    "_id": "bcKhrdtCRNoYxG6p6r1xhG"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1178,7 +1178,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "05DNCyDr9E2JsNblemGC1J"
+    "_id": "9aUnsqEhJAn65gr3crb7Kl"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1217,7 +1217,7 @@
     "coinTips": {
       "__id__": 26
     },
-    "_id": "59qJrLH7pFvbsRSHP1F/jG"
+    "_id": "123dAArBpCjLLZCKBC7ssj"
   },
   {
     "__type__": "cc.Button",
@@ -1270,7 +1270,7 @@
     "_N$target": {
       "__id__": 1
     },
-    "_id": "04AU8O0nNGfafTWIRHrR8i"
+    "_id": "86Nm22pnRBh7RRe6rNn2pv"
   },
   {
     "__type__": "cc.PrefabInfo",

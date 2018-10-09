@@ -172,7 +172,7 @@
     "_spriteFrame": {
       "__uuid__": "410fb916-8721-4663-bab8-34397391ace7"
     },
-    "_type": 0,
+    "_type": 1,
     "_sizeMode": 0,
     "_fillType": 0,
     "_fillCenter": {
@@ -185,7 +185,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "05lL/vs/BPVImBdYrECsTt"
+    "_id": "1bFsHhvbZH67YFOHMVD2sz"
   },
   {
     "__type__": "cc.Widget",
@@ -212,7 +212,7 @@
     "_isAbsVerticalCenter": true,
     "_originalWidth": 2,
     "_originalHeight": 2,
-    "_id": "77wWpecCJFbKbalpUtG/Tc"
+    "_id": "47x4ZDsNtCv5AT3+YLAGiF"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -346,7 +346,7 @@
     "_N$target": {
       "__id__": 6
     },
-    "_id": "c7/24ILqdOaJ8eRG32FYun"
+    "_id": "b9HBkNM/pFtaP+YzqWYn8c"
   },
   {
     "__type__": "cc.ClickEvent",
@@ -383,7 +383,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "56OQWMyNNBIaa2Kj4CWagW"
+    "_id": "0et+Nq90lFjrZXcgdML2g4"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -482,7 +482,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "7amHl/Wc5Pd5fS+1XgHjpx"
+    "_id": "4diEZYIPlMkLv9+0owxcpE"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -581,7 +581,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "caVLymIixDKI+BzRJ6GEXB"
+    "_id": "b6FVjOZj5Ha60CyhDi/nHH"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -683,7 +683,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "68jG9I/stHT6DqBdIk4gip"
+    "_id": "4bkGy6V8xFCq7HYZ4S8oTs"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -782,7 +782,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "69xAAmlftHxqtME9zgL3tq"
+    "_id": "9cjmnKDqZAAIj6n1Otjzqr"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -850,7 +850,7 @@
     "_N$target": {
       "__id__": 1
     },
-    "_id": "f9Pg2uvdxPP5x0RCbPJC7e"
+    "_id": "ccKE5SZ4lO9bJuglzSSeXJ"
   },
   {
     "__type__": "cc.ClickEvent",
@@ -873,7 +873,7 @@
     "countLabel": {
       "__id__": 21
     },
-    "_id": "4czDPyKpxFKa1oYweyBDML"
+    "_id": "2a+zQuYbFDTYysk8Yd2yad"
   },
   {
     "__type__": "cc.PrefabInfo",
