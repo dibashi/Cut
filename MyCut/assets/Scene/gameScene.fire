@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.425,
-      "y": 0.425,
+      "x": 0.42432861328125,
+      "y": 0.42432861328125,
       "z": 1
     },
     "_quat": {
@@ -671,42 +671,7 @@
       },
       {
         "__uuid__": "cc904170-580a-4c88-a1ed-277460bac46a"
-      },
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null
+      }
     ],
     "uiLayer": {
       "__id__": 11
