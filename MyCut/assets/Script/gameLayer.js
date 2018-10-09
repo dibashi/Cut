@@ -168,6 +168,9 @@ cc.Class({
     },
 
     onTouchEnd: function (event) {
+        if (event.getID() != this.singleTouchID) {
+            return;
+        }
         this.singleTouchID = -1;
         console.log("touchend");
         console.log(this.node.convertToNodeSpaceAR(this.touchPoint));
