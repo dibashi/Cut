@@ -94,8 +94,8 @@ cc.Class({
 
         console.log("otherID=" + cc.sys.localStorage.getItem("openid") + "&checkpoint=" + cc.dataMgr.currentCheckPoint);
         wx.shareAppMessage({
-            title: cc.dataMgr.getShareTitle(),
-            imageUrl: cc.dataMgr.getShareImgeUri(), 
+            title: cc.dataMgr.getShareTitle("game"),
+            imageUrl: cc.dataMgr.getShareImgeUri("game"), 
             query:"otherID=" + cc.sys.localStorage.getItem("openid") + "&checkpoint=" + cc.dataMgr.currentCheckPoint,
             
             success: (obj) => {
