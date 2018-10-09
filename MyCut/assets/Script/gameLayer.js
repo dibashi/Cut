@@ -71,6 +71,8 @@ cc.Class({
         this.node.on("touchstart", this.onTouchStart, this);
         this.node.on('touchmove', this.onTouchMove, this);
         this.node.on('touchend', this.onTouchEnd, this);
+
+        this.node.on('touchcancel', this.onTouchCancel, this);
     },
 
 
@@ -165,6 +167,11 @@ cc.Class({
 
     removeStreak: function (streakTemp) {
         streakTemp.parent = null;
+    },
+
+    onTouchCancel:function(event) {
+        console.log("onTouchCancel");
+        this.onTouchEnd(event);
     },
 
     onTouchEnd: function (event) {
