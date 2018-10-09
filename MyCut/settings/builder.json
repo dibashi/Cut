@@ -29,7 +29,7 @@
   "title": "cut",
   "webOrientation": "auto",
   "wechatgame": {
-    "REMOTE_SERVER_ROOT": "",
+    "REMOTE_SERVER_ROOT": "https://bpw.blyule.com/Cut",
     "appid": "wx0ec0bb47f5b89ac1",
     "isSubdomain": false,
     "orientation": "portrait",
