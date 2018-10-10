@@ -91,6 +91,12 @@ export default class DataMgr extends cc.Component {
             }
 
 
+            //三关三星 限制变量
+
+            let sl = cc.sys.localStorage.getItem("starLimit");
+            if (!sl) {
+                cc.sys.localStorage.setItem("starLimit", 3);
+            }
 
             //版本比较 是否重置数据
             // this.nickName = cc.sys.localStorage.getItem("nickName");
@@ -119,6 +125,52 @@ export default class DataMgr extends cc.Component {
         }
 
 
+    };
+
+    //用于检测用户当时是否可以继续往下玩，主要根据三星的关卡数量与starLimit的关系来进行
+    isCanPlay() {
+        if (CC_WECHATGAME) {
+            let jsons = cc.sys.localStorage.getItem("checkPointJsonData");
+            let jsonObj = JSON.parse(jsons);
+
+            //三星 关卡数量
+            var threeStarCPCount = 0;
+
+            for (let i = 0; i < this.MAX_CHECKPOINT_COUNT; i++) {
+                let crownCount = parseInt(jsonObj[i].crownCount);
+                if (crownCount >= 3) {
+                    threeStarCPCount++;
+                }
+            }
+            let sl = parseInt(cc.sys.localStorage.getItem("starLimit"));
+            //不可玩，要对照下时间来继续判断
+            if (threeStarCPCount >= sl) {
+                let slt = cc.sys.localStorage.getItem("starLimitTime");
+                if (!slt) {
+                    return false;
+                } else {
+                    let preTime = parseInt(slt);
+                    let curTime = Date.now();
+                    let dt = curTime - preTime;
+                    if (dt > 5 * 60 * 1000) { //大于5分钟
+                        this.addStarLimit(3);
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            } else {
+                return true;
+            }
+        } else {
+            return true;
+        }
+    };
+
+    addStarLimit(count) {
+        let cl = parseInt(cc.sys.localStorage.getItem("starLimit"));
+        let result = cl + count;
+        cc.sys.localStorage.setItem("starLimit", result);
     };
 
     _setInviteCount(count) {
@@ -183,7 +235,7 @@ export default class DataMgr extends cc.Component {
 
     };
 
-    //直接全部遍历 以为以后不是顺序玩关卡了
+    //直接全部遍历 因为以后不是顺序玩关卡了
     currentScore() {
         let jsons = cc.sys.localStorage.getItem("checkPointJsonData");
         let jsonObj = JSON.parse(jsons);
@@ -227,9 +279,9 @@ export default class DataMgr extends cc.Component {
 
         var str_imageUrl = null;
         if (tag && tag == "game") {
-            str_imageUrl = "https://bpw.blyule.com/cutRes/cp"+this.currentCheckPoint+".jpg";
+            str_imageUrl = "https://bpw.blyule.com/cutRes/cp" + this.currentCheckPoint + ".jpg";
         } else if (tag && tag == "gameOver") {
-            str_imageUrl = "https://bpw.blyule.com/cutRes/cp"+this.currentCheckPoint+".jpg";
+            str_imageUrl = "https://bpw.blyule.com/cutRes/cp" + this.currentCheckPoint + ".jpg";
         } else {
             str_imageUrl = "https://bpw.blyule.com/cutRes/share.jpg";
         }

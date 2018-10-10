@@ -22,16 +22,25 @@ cc.Class({
 
 
       
-
+        limitAlert: cc.Prefab,
 
     },
 
     goCheckpoint: function (event, eventData) {
 
         cc.audioMgr.playBtn();
-        //  console.log(eventData);
-        cc.dataMgr.currentCheckPoint = parseInt(eventData);
-        cc.director.loadScene('gameScene');
+    
+        let isCanPlay = cc.dataMgr.isCanPlay();
+        if (isCanPlay) {
+            cc.dataMgr.currentCheckPoint = parseInt(eventData);
+            cc.director.loadScene('gameScene');
+        } else {
+            //弹窗
+            let ss = cc.instantiate(this.limitAlert);
+            ss.zIndex = 1001;
+            ss.getComponent("limitAlert").onWho = this.node;
+            this.node.addChild(ss);
+        }
     },
 
     // use this for initialization

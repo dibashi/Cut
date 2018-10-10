@@ -52,14 +52,14 @@ cc.Class({
             type: cc.Sprite,
         },
 
-        prizeNode:{
-            default:null,
-            type:cc.Node,
+        prizeNode: {
+            default: null,
+            type: cc.Node,
         },
 
-        coinLabel:{
-            default:null,
-            type:cc.Label,
+        coinLabel: {
+            default: null,
+            type: cc.Label,
         },
 
         rankingView: {
@@ -77,7 +77,7 @@ cc.Class({
             type: cc.Node,
         },
 
-      
+        limitAlert: cc.Prefab,
     },
 
 
@@ -87,9 +87,9 @@ cc.Class({
     // use this for initialization
     onLoad: function () {
 
-          //向子域发送请求，获得所有的好友数据
-          this.sendMessageToSubdomainGetFriendDatas();
-          this.tex = new cc.Texture2D();
+        //向子域发送请求，获得所有的好友数据
+        this.sendMessageToSubdomainGetFriendDatas();
+        this.tex = new cc.Texture2D();
 
         console.log("UI ONLOAD");
 
@@ -185,11 +185,11 @@ cc.Class({
         this.showNextFriend();
     },
 
-    showNextFriend:function() {
-      
-        this.scheduleOnce(this.seeNextBeyondFriend,0.5);
-    }, 
-    
+    showNextFriend: function () {
+
+        this.scheduleOnce(this.seeNextBeyondFriend, 0.5);
+    },
+
     seeNextBeyondFriend: function () {
         if (CC_WECHATGAME) {
             let self = this;
@@ -201,13 +201,13 @@ cc.Class({
         }
     },
 
-    currentScore:function() {
+    currentScore: function () {
         return cc.dataMgr.currentScore();
     },
 
 
-     // 刷新子域的纹理
-     _updateSubDomainCanvas() {
+    // 刷新子域的纹理
+    _updateSubDomainCanvas() {
         if (window.sharedCanvas != undefined) {
             this.tex.initWithElement(window.sharedCanvas);
             this.tex.handleLoadedTexture();
@@ -221,13 +221,13 @@ cc.Class({
     },
 
     reNewClick: function () {
-        
+
         this.showNextFriend();
         this.gameLayer.getComponent("gameLayer").reNew();
         //this.nextNode.getComponent(cc.Animation).play("nextNodeBackAni");
         //this.nextNode.runAction(cc.moveTo(1.0, cc.v2(0, -1000)));
 
-       this.closeNextNode();
+        this.closeNextNode();
         this.refreash();
     },
 
@@ -247,14 +247,20 @@ cc.Class({
     },
 
     nextCheckpointClick: function () {
-        //todo 这里没有检测是否越界！！！
-        cc.audioMgr.playBegin();
         cc.audioMgr.playBtn();
 
-        cc.dataMgr.currentCheckPoint = cc.dataMgr.getRandomCheckpoint();
-
-
-        this.reNewClick();
+        let isCanPlay = cc.dataMgr.isCanPlay();
+        if (isCanPlay) {
+            cc.audioMgr.playBegin();
+            cc.dataMgr.currentCheckPoint = cc.dataMgr.getRandomCheckpoint();
+            this.reNewClick();
+        } else {
+            //弹窗
+            let ss = cc.instantiate(this.limitAlert);
+            ss.zIndex = 1001;
+            ss.getComponent("limitAlert").onWho = this.node;
+            this.node.addChild(ss);
+        }
     },
 
     onCheckpointSuccess: function (event) {
@@ -269,24 +275,24 @@ cc.Class({
             this.honors.children[i].color = cc.color(255, 255, 255, 255);
         }
 
-        if(event.detail.givePrize == true) {
-           this.prizeNode.active = true;
-           
-           this.coinLabel.string = "x" + cc.dataMgr.addCoinCount(5);
+        if (event.detail.givePrize == true) {
+            this.prizeNode.active = true;
+
+            this.coinLabel.string = "x" + cc.dataMgr.addCoinCount(5);
         } else {
             this.prizeNode.active = false;
         }
 
         //if (cc.dataMgr.currentCheckPoint < cc.dataMgr.MAX_CHECKPOINT_COUNT) {
-            //this.nextNode.getComponent(cc.Animation).play("nextNodeAni");
-            if (!this.dirUp) {
-                this.dirUp = true;
-                let ac = cc.moveTo(1.0, cc.v2(0, -this.halfWinHeight + this.nextNode.height * 0.5));
-                let fc = cc.callFunc(this.dirUped, this);
-                this.nextNode.runAction(cc.sequence(ac, fc));
-            }
+        //this.nextNode.getComponent(cc.Animation).play("nextNodeAni");
+        if (!this.dirUp) {
+            this.dirUp = true;
+            let ac = cc.moveTo(1.0, cc.v2(0, -this.halfWinHeight + this.nextNode.height * 0.5));
+            let fc = cc.callFunc(this.dirUped, this);
+            this.nextNode.runAction(cc.sequence(ac, fc));
+        }
 
-       // }
+        // }
 
     },
 
@@ -298,7 +304,7 @@ cc.Class({
         this.dirDown = false;
     },
 
-    closeNextNode:function() {
+    closeNextNode: function () {
         cc.audioMgr.playBtn();
         if (!this.dirDown) {
             this.dirDown = true;
@@ -308,10 +314,10 @@ cc.Class({
         }
     },
 
-    tipsClick:function() {
+    tipsClick: function () {
         cc.audioMgr.playBtn();
         //如果金币够 则提示
-        if( cc.dataMgr.getCoinCount() >= 50) {
+        if (cc.dataMgr.getCoinCount() >= 50) {
             this.coinLabel.string = "x" + cc.dataMgr.addCoinCount(-50);
             this.helpCallback();
         } else {
@@ -320,15 +326,15 @@ cc.Class({
             ss.getComponent("shareAlert").onWho = this.node;
             ss.getComponent("shareAlert").showTips();
             this.node.addChild(ss);
-    
+
         }
     },
 
-    onLeaderboardClick:function() {
+    onLeaderboardClick: function () {
         cc.audioMgr.playBtn();
         if (CC_WECHATGAME) {
             this.rankingView.active = true;
-          
+
             //console.log("-- WECHAT Start.js subPostMessage --");
             window.wx.postMessage({
                 messageType: 1,
@@ -355,8 +361,8 @@ cc.Class({
         this.rankingView.active = false;
     },
 
-    showOffClick:function() {
-       
+    showOffClick: function () {
+
         cc.audioMgr.playBtn();
         if (CC_WECHATGAME) {
 

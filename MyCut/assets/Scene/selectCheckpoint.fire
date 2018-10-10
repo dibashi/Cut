@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.2713208654895341,
-      "y": 0.2713208654895341,
+      "x": 0.275,
+      "y": 0.275,
       "z": 1
     },
     "_quat": {
@@ -44708,7 +44708,7 @@
     "node": {
       "__id__": 17
     },
-    "_enabled": false,
+    "_enabled": true,
     "alignMode": 1,
     "_target": null,
     "_alignFlags": 18,
@@ -44761,6 +44761,9 @@
     },
     "panelEnd": {
       "__id__": 6
+    },
+    "limitAlert": {
+      "__uuid__": "3435697e-2843-4e37-ab4a-f74749846f9b"
     },
     "_id": "aeqnGFcRVJo5D1jvPQEJ8n"
   }

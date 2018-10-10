@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.3047154902033629,
-      "y": 0.3047154902033629,
+      "x": 0.275,
+      "y": 0.275,
       "z": 1
     },
     "_quat": {
@@ -4503,6 +4503,9 @@
     },
     "inviteAlert": {
       "__uuid__": "8fd678f6-09df-44c9-a799-bb37a754a61a"
+    },
+    "limitAlert": {
+      "__uuid__": "3435697e-2843-4e37-ab4a-f74749846f9b"
     },
     "onMusicSpriteFrame": {
       "__uuid__": "a811e839-63a7-4cf0-bb80-fb5ce4bd5fb0"
