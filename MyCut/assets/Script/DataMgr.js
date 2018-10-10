@@ -151,9 +151,12 @@ export default class DataMgr extends cc.Component {
                 } else {
                     let preTime = parseInt(slt);
                     let curTime = Date.now();
+                    console.log("preTIme--> " +preTime);
+                    console.log("curTime--> " +curTime);
                     let dt = curTime - preTime;
                     if (dt > 5 * 60 * 1000) { //大于5分钟
                         this.addStarLimit(3);
+                        cc.sys.localStorage.setItem("starLimitTime","");
                         return true;
                     } else {
                         return false;

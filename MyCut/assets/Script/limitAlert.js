@@ -13,16 +13,21 @@ cc.Class({
 
     properties: {
         onWho: null,//在哪个页面上面，当当前页面消失时使得那个页面可点击
-      
-  
+
+
     },
 
 
     // LIFE-CYCLE CALLBACKS:
 
     onLoad() {
-        
+
         this.startFadeIn();
+
+        let slt = cc.sys.localStorage.getItem("starLimitTime");
+        if (!slt) {
+            cc.sys.localStorage.setItem("starLimitTime",Date.now());
+        }
     },
 
     startFadeIn: function () {
@@ -38,7 +43,7 @@ cc.Class({
         cc.eventManager.resumeTarget(this.node, true);
     },
 
-   
+
 
     //可以点击代表其值为1
     onGuangGaoClick: function () {
@@ -69,17 +74,17 @@ cc.Class({
     shareClick: function () {
         cc.audioMgr.playBtn();
         let self = this;
-     
+
 
         wx.shareAppMessage({
             title: cc.dataMgr.getShareTitle(),
-            imageUrl: cc.dataMgr.getShareImgeUri(), 
-            
+            imageUrl: cc.dataMgr.getShareImgeUri(),
+
             success: (obj) => {
                 console.log("星星限制 分享成功回调")
                 console.log(obj);
 
-               cc.dataMgr.addStarLimit(3);
+                cc.dataMgr.addStarLimit(3);
 
 
                 let cbFadeOut = cc.callFunc(self.onFadeOutFinish, self);
@@ -108,7 +113,7 @@ cc.Class({
         //cc.eventManager.resumeTarget(this.onWho, true);
         this.node.destroy();
     },
-    
+
 
 });
 
