@@ -74,6 +74,12 @@ export default class DataMgr extends cc.Component {
             cc.sys.localStorage.setItem("coinCount", 0);
         }
 
+        //三关三星 限制变量
+
+        let sl = cc.sys.localStorage.getItem("starLimit");
+        if (!sl) {
+            cc.sys.localStorage.setItem("starLimit", 3);
+        }
 
 
         if (CC_WECHATGAME) {
@@ -91,12 +97,6 @@ export default class DataMgr extends cc.Component {
             }
 
 
-            //三关三星 限制变量
-
-            let sl = cc.sys.localStorage.getItem("starLimit");
-            if (!sl) {
-                cc.sys.localStorage.setItem("starLimit", 3);
-            }
 
             //版本比较 是否重置数据
             // this.nickName = cc.sys.localStorage.getItem("nickName");
@@ -129,51 +129,53 @@ export default class DataMgr extends cc.Component {
 
     //用于检测用户当时是否可以继续往下玩，主要根据三星的关卡数量与starLimit的关系来进行
     isCanPlay() {
-        if (CC_WECHATGAME) {
-            let jsons = cc.sys.localStorage.getItem("checkPointJsonData");
-            let jsonObj = JSON.parse(jsons);
+        //if (CC_WECHATGAME) {
+        let jsons = cc.sys.localStorage.getItem("checkPointJsonData");
+        let jsonObj = JSON.parse(jsons);
 
-            //三星 关卡数量
-            var threeStarCPCount = 0;
+        //三星 关卡数量
+        var threeStarCPCount = 0;
 
-            for (let i = 0; i < this.MAX_CHECKPOINT_COUNT; i++) {
-                let crownCount = parseInt(jsonObj[i].crownCount);
-                if (crownCount >= 3) {
-                    threeStarCPCount++;
-                }
+        for (let i = 0; i < this.MAX_CHECKPOINT_COUNT; i++) {
+            let crownCount = parseInt(jsonObj[i].crownCount);
+            if (crownCount >= 3) {
+                threeStarCPCount++;
             }
-            let sl = parseInt(cc.sys.localStorage.getItem("starLimit"));
-            //不可玩，要对照下时间来继续判断
-            if (threeStarCPCount >= sl) {
-                let slt = cc.sys.localStorage.getItem("starLimitTime");
-                if (!slt) {
-                    return false;
-                } else {
-                    let preTime = parseInt(slt);
-                    let curTime = Date.now();
-                    console.log("preTIme--> " +preTime);
-                    console.log("curTime--> " +curTime);
-                    let dt = curTime - preTime;
-                    if (dt > 5 * 60 * 1000) { //大于5分钟
-                        this.addStarLimit(3);
-                        cc.sys.localStorage.setItem("starLimitTime","");
-                        return true;
-                    } else {
-                        return false;
-                    }
-                }
+        }
+        let sl = parseInt(cc.sys.localStorage.getItem("starLimit"));
+        //不可玩，要对照下时间来继续判断
+        if (threeStarCPCount >= sl) {
+            let slt = cc.sys.localStorage.getItem("starLimitTime");
+            if (!slt) {
+                return false;
             } else {
-                return true;
+                let preTime = parseInt(slt);
+                let curTime = Date.now();
+                console.log("preTIme--> " + preTime);
+                console.log("curTime--> " + curTime);
+                let dt = curTime - preTime;
+                if (dt > 5 * 60 * 1000) { //大于5分钟
+                    this.addStarLimit(3);
+                    cc.sys.localStorage.setItem("starLimitTime", "");
+                    return true;
+                } else {
+                    return false;
+                }
             }
         } else {
+            console.log("threeStarCPCount < sl");
             return true;
         }
+        // } else {
+        //     return true;
+        // }
     };
 
     addStarLimit(count) {
         let cl = parseInt(cc.sys.localStorage.getItem("starLimit"));
         let result = cl + count;
         cc.sys.localStorage.setItem("starLimit", result);
+        cc.sys.localStorage.setItem("starLimitTime", "");
     };
 
     _setInviteCount(count) {

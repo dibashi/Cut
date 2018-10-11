@@ -14,7 +14,7 @@ cc.Class({
     properties: {
         onWho: null,//在哪个页面上面，当当前页面消失时使得那个页面可点击
 
-
+        countDownLabel: cc.Label,
     },
 
 
@@ -26,8 +26,36 @@ cc.Class({
 
         let slt = cc.sys.localStorage.getItem("starLimitTime");
         if (!slt) {
-            cc.sys.localStorage.setItem("starLimitTime",Date.now());
+            cc.sys.localStorage.setItem("starLimitTime", Date.now());
         }
+
+        this.schedule(this.countDown, 1);
+    },
+
+    countDown: function () {
+        let curTime = (5*60*1000) - parseInt(Date.now()) + parseInt(cc.sys.localStorage.getItem("starLimitTime"));
+        if(curTime<0) {
+            curTime = 0;
+        }
+        //console.log("curTime--> " + curTime);
+        let ft = this.formatTime(curTime);
+        this.countDownLabel.string = ft;
+    },
+
+    formatTime: function (inTime) {
+        let fenzhong = Math.floor(inTime / (1000 * 60));//分钟
+        //console.log("fenzhong--> " + fenzhong);
+        let miao = Math.floor((inTime - fenzhong * (1000 * 60))/1000);
+        let rf = fenzhong + "";
+        if (fenzhong < 10) {
+            rf = "0" + fenzhong;
+        }
+        let rm = miao + "";
+        if (miao < 10) {
+            rm = "0" + miao;
+        }
+
+        return rf + ":" + rm;
     },
 
     startFadeIn: function () {
