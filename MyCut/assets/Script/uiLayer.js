@@ -77,6 +77,11 @@ cc.Class({
             type: cc.Node,
         },
 
+        helpNode: {
+            default: null,
+            type: cc.Node,
+        },
+
         limitAlert: cc.Prefab,
     },
 
@@ -98,6 +103,12 @@ cc.Class({
 
         this.rankingView.active = false;
         this.initSubCanvas();
+
+        if(cc.dataMgr.isShowShare) {
+            this.helpNode.active = true;
+        } else {
+            this.helpNode.active = false;
+        }
     },
 
     initSubCanvas() {
@@ -321,12 +332,13 @@ cc.Class({
             this.coinLabel.string = "x" + cc.dataMgr.addCoinCount(-50);
             this.helpCallback();
         } else {
-            let ss = cc.instantiate(this.shareAlert);
-            ss.zIndex = 1000;
-            ss.getComponent("shareAlert").onWho = this.node;
-            ss.getComponent("shareAlert").showTips();
-            this.node.addChild(ss);
-
+            if(cc.dataMgr.isShowShare) {
+                let ss = cc.instantiate(this.shareAlert);
+                ss.zIndex = 1000;
+                ss.getComponent("shareAlert").onWho = this.node;
+                ss.getComponent("shareAlert").showTips();
+                this.node.addChild(ss);
+            }
         }
     },
 

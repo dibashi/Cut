@@ -2043,7 +2043,7 @@
       "__id__": 2
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_level": 2,
     "_components": [
       {
@@ -4527,6 +4527,9 @@
     },
     "node_content": {
       "__id__": 72
+    },
+    "shareNode": {
+      "__id__": 49
     },
     "_id": "47wqFYL5tEtpgmua0kKtay"
   }

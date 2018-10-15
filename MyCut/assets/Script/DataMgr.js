@@ -13,6 +13,9 @@ export default class DataMgr extends cc.Component {
         appwxusername: 'aaa'
     };
 
+     //分享是否开启的变量 上去先置为false，意思是不分享，然后从服务器请求 若为true则改为true，若为false改为false
+     isShowShare = false;
+
     adInfo = null;
 
     //当前玩家选择的关卡 游戏中的关卡
@@ -50,6 +53,8 @@ export default class DataMgr extends cc.Component {
         }
     };
     initData() {
+       
+
         console.log("--- initData ---");
         //标记着当前玩到哪个关卡，意味着 之前的关卡未必都过关了，当前的关卡之后的关卡都没有玩，当前关卡可以玩
         //let mc = cc.sys.localStorage.getItem("maxCheckpoint");//和最上面的变量不一样
@@ -130,6 +135,11 @@ export default class DataMgr extends cc.Component {
     //用于检测用户当时是否可以继续往下玩，主要根据三星的关卡数量与starLimit的关系来进行
     isCanPlay() {
         //if (CC_WECHATGAME) {
+        if(cc.dataMgr.isShowShare) {
+
+        } else {
+            return true;
+        }
         let jsons = cc.sys.localStorage.getItem("checkPointJsonData");
         let jsonObj = JSON.parse(jsons);
 
