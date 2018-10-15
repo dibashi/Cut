@@ -164,6 +164,10 @@ cc.Class({
                     cc.dataMgr.isShowShare = true;
                     self.shareNode.active = true;
 
+                } else {
+                    console.log("不显示分享");
+                    cc.dataMgr.isShowShare = false;
+                    self.shareNode.active = false;
                 }
 
                 // if (obj.data.showMoreGame) {
