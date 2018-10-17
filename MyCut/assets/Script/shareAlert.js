@@ -85,7 +85,11 @@ cc.Class({
         cc.audioMgr.playBtn();
         let self = this;
        
-        
+        cc.eventManager.pauseTarget(self.node, true);
+
+        let cbFadeOut = cc.callFunc(self.onFadeOutFinish, self);
+        let actionFadeOut = cc.sequence(cc.spawn(cc.fadeTo(0.3, 0), cc.scaleTo(0.3, 2.0)), cbFadeOut);
+        self.node.runAction(actionFadeOut);
       
         
        // let query_string = cc.sys.localStorage.getItem("openid");
@@ -98,26 +102,26 @@ cc.Class({
             imageUrl: cc.dataMgr.getShareImgeUri("game"), 
             query:"otherID=" + cc.sys.localStorage.getItem("openid") + "&checkpoint=" + cc.dataMgr.currentCheckPoint,
             
-            success: (obj) => {
-                console.log("分享回调成功")
-                console.log(obj);
+            // success: (obj) => {
+            //     console.log("分享回调成功")
+            //     console.log(obj);
 
-                cc.eventManager.pauseTarget(self.node, true);
-                self.onWho.getComponent("uiLayer").helpCallback();
+            //     cc.eventManager.pauseTarget(self.node, true);
+            //     self.onWho.getComponent("uiLayer").helpCallback();
 
 
-                let cbFadeOut = cc.callFunc(self.onFadeOutFinish, self);
-                let actionFadeOut = cc.sequence(cc.spawn(cc.fadeTo(0.3, 0), cc.scaleTo(0.3, 2.0)), cbFadeOut);
-                self.node.runAction(actionFadeOut);
-            },
-            fail: (obj) => {
-                console.log("分享回调失败")
-                console.log(obj);
-            },
-            complete: (obj) => {
-                console.log("分享回调默认")
-                console.log(obj);
-            }
+            //     let cbFadeOut = cc.callFunc(self.onFadeOutFinish, self);
+            //     let actionFadeOut = cc.sequence(cc.spawn(cc.fadeTo(0.3, 0), cc.scaleTo(0.3, 2.0)), cbFadeOut);
+            //     self.node.runAction(actionFadeOut);
+            // },
+            // fail: (obj) => {
+            //     console.log("分享回调失败")
+            //     console.log(obj);
+            // },
+            // complete: (obj) => {
+            //     console.log("分享回调默认")
+            //     console.log(obj);
+            // }
         });
     },
 

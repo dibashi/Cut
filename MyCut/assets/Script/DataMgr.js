@@ -135,6 +135,7 @@ export default class DataMgr extends cc.Component {
     //用于检测用户当时是否可以继续往下玩，主要根据三星的关卡数量与starLimit的关系来进行
     isCanPlay() {
         //if (CC_WECHATGAME) {
+        return true;//获得不到微信服务器回调了，也不需要让玩家分享继续玩了，直接可以玩所有关卡现在。
         if(cc.dataMgr.isShowShare) {
 
         } else {
