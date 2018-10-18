@@ -151,35 +151,35 @@ cc.Class({
             });
         }
 
+        if (CC_WECHATGAME) {
+            wx.request({
+                url: 'https://bpw.blyule.com/cutRes/cutSetting1.json',
 
-        wx.request({
-            url: 'https://bpw.blyule.com/cutRes/cutSetting1.json',
+                success: (obj, statusCode, header) => {
+                    console.log("是否显示分享的数据");
+                    console.log(obj);
+                    console.log(obj.data);
+                    if (obj.data.showShare) {
+                        console.log("显示分享");
+                        cc.dataMgr.isShowShare = true;
+                        self.shareNode.active = true;
 
-            success: (obj, statusCode, header) => {
-                console.log("是否显示分享的数据");
-                console.log(obj);
-                console.log(obj.data);
-                if (obj.data.showShare) {
-                    console.log("显示分享");
-                    cc.dataMgr.isShowShare = true;
-                    self.shareNode.active = true;
+                    } else {
+                        console.log("不显示分享");
+                        cc.dataMgr.isShowShare = false;
+                        self.shareNode.active = false;
+                    }
 
-                } else {
-                    console.log("不显示分享");
-                    cc.dataMgr.isShowShare = false;
-                    self.shareNode.active = false;
+                    // if (obj.data.showMoreGame) {
+                    //     console.log("显示更多游戏");
+
+                    //     self.moreGameNode.active = true;
+                    // }
                 }
-
-                // if (obj.data.showMoreGame) {
-                //     console.log("显示更多游戏");
-
-                //     self.moreGameNode.active = true;
-                // }
-            }
-        });
+            });
 
 
-
+        }
 
 
 

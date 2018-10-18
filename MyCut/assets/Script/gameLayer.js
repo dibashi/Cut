@@ -149,8 +149,8 @@ cc.Class({
 
 
 
-        // console.log("touchStart");
-        // console.log(this.node.convertToNodeSpaceAR(this.touchStartPoint));
+         console.log("touchStart");
+         console.log(this.node.convertToNodeSpaceAR(this.touchStartPoint));
     },
 
     onTouchMove: function (event) {
