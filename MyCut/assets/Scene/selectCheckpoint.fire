@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.32477298189312065,
-      "y": 0.32477298189312065,
+      "x": 0.19716884660217626,
+      "y": 0.19716884660217626,
       "z": 1
     },
     "_quat": {
@@ -46247,8 +46247,8 @@
     "_srcBlendFactor": 1,
     "_dstBlendFactor": 771,
     "_useOriginalSize": false,
-    "_string": "63",
-    "_N$string": "63",
+    "_string": "67",
+    "_N$string": "67",
     "_fontSize": 60,
     "_lineHeight": 60,
     "_enableWrapText": true,
