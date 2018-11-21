@@ -491,8 +491,12 @@ cc.Class({
         let point = this.touchPoint;
 
         this.ctx.clear();
-        this.ctx.moveTo(this.touchStartPoint.x - this.halfWinWidth, this.touchStartPoint.y - this.halfWinHeight);
-        this.ctx.lineTo(point.x - this.halfWinWidth, point.y - this.halfWinHeight);
+        // this.ctx.moveTo(this.touchStartPoint.x - this.halfWinWidth, this.touchStartPoint.y - this.halfWinHeight);
+        // this.ctx.lineTo(point.x - this.halfWinWidth, point.y - this.halfWinHeight);
+
+        this.ctx.moveTo(this.touchStartPoint.x, this.touchStartPoint.y);
+        this.ctx.lineTo(point.x, point.y);
+
         this.ctx.stroke();
 
         let manager = cc.director.getPhysicsManager();
