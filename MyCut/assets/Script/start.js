@@ -2,6 +2,10 @@ import DataMgr from 'DataMgr';
 
 import AudioMgr from 'AudioMgr';
 
+//一定要看，一下内容 不小心添加到稳定版了 如果以后要二次开发revert掉
+//update builder.json
+//qq play init
+//添加自豪的sdk接口
 cc.Class({
     extends: cc.Component,
 
