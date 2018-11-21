@@ -14,7 +14,7 @@ export default class DataMgr extends cc.Component {
     };
 
      //分享是否开启的变量 上去先置为false，意思是不分享，然后从服务器请求 若为true则改为true，若为false改为false
-     isShowShare = false;
+     isShowShare = true;
 
     adInfo = null;
 
@@ -96,6 +96,8 @@ export default class DataMgr extends cc.Component {
         let coinCount = cc.sys.localStorage.getItem("coinCount");
         if (!coinCount) {
             cc.sys.localStorage.setItem("coinCount", 0);
+            // console.log("打印出来");
+            // console.log(parseInt(cc.sys.localStorage.getItem("coinCount")));
         }
 
         //三关三星 限制变量
@@ -286,7 +288,12 @@ export default class DataMgr extends cc.Component {
     };
 
     getCoinCount() {
-        return parseInt(cc.sys.localStorage.getItem("coinCount"));
+        var a=  parseInt(cc.sys.localStorage.getItem("coinCount"));
+        if(!a) {
+            return 0;
+        } else {
+            return a;
+        }
     };
 
     addCoinCount(coinCount) {
