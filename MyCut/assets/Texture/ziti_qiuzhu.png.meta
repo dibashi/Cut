@@ -1,10 +1,9 @@
 {
-  "ver": "2.2.0",
+  "ver": "2.0.0",
   "uuid": "733a6b6e-8bfe-43bf-a67b-baed2475f5a8",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
-  "premultiplyAlpha": false,
   "subMetas": {
     "ziti_qiuzhu": {
       "ver": "1.0.3",
