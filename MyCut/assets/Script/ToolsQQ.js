@@ -126,22 +126,52 @@ function adQQSuccess() {
 
 //分享
 function shareQQ(type) {
+    // toolsQQ.shareType = type;
+
+    // let qqImgUrl = "https://bpw.blyule.com/qqPickCat/cat_forward.png";
+    // let summaryStr = "我家懒猫离家出走了，你能帮我找回嘛。";
+    // if (type == "friend") {
+    //     qqImgUrl = "https://bpw.blyule.com/qqPickCat/cat_friend.png";
+    //     summaryStr = "这里有一群可爱的小猫咪，一起来玩吧。";
+    // } else if (type == "reward") { //放置东西时分享 会奖励金币
+    //     qqImgUrl = "https://bpw.blyule.com/qqPickCat/cat_reward.png";
+    //     summaryStr = "勤快的小猫有吃的。";
+    // }
+    // if (CC_QQPLAY) {
+    //     BK.Share.share({
+    //         qqImgUrl: qqImgUrl,
+    //         socialPicPath: 'GameRes://localImage.png',
+    //         title: '一起学喵叫',
+    //         summary: summaryStr,
+    //         extendInfo: '',
+    //         success: function (succObj) {
+    //             BK.Console.log('分享成功', succObj.code, JSON.stringify(succObj.data));
+    //             shareQQSuccess();
+    //         },
+    //         fail: function (failObj) {
+    //             BK.Console.log('分享失败', failObj.code, JSON.stringify(failObj.msg));
+    //         },
+    //         complete: () => {
+    //             BK.Console.log('分享完成，不论成功失败');
+    //         }
+    //     });
+    // }
+
     toolsQQ.shareType = type;
 
-    let qqImgUrl = "https://bpw.blyule.com/qqPickCat/cat_forward.png";
-    let summaryStr = "我家懒猫离家出走了，你能帮我找回嘛。";
-    if (type == "friend") {
-        qqImgUrl = "https://bpw.blyule.com/qqPickCat/cat_friend.png";
-        summaryStr = "这里有一群可爱的小猫咪，一起来玩吧。";
+   
+    if (type == "gameOver") {
+        qqImgUrl = cc.dataMgr.getShareTitle("gameOver");
+        summaryStr = cc.dataMgr.getShareImgeUri("gameOver");
     } else if (type == "reward") { //放置东西时分享 会奖励金币
-        qqImgUrl = "https://bpw.blyule.com/qqPickCat/cat_reward.png";
-        summaryStr = "勤快的小猫有吃的。";
+        qqImgUrl = cc.dataMgr.getShareTitle("game");
+        summaryStr = cc.dataMgr.getShareImgeUri("game");
     }
     if (CC_QQPLAY) {
         BK.Share.share({
             qqImgUrl: qqImgUrl,
             socialPicPath: 'GameRes://localImage.png',
-            title: '一起学喵叫',
+            title: '方块切切切',
             summary: summaryStr,
             extendInfo: '',
             success: function (succObj) {
@@ -159,12 +189,12 @@ function shareQQ(type) {
 };
 
 function shareQQSuccess() {
-    if (toolsQQ.shareType == "reward") {
-        //奖励10 金币
-        let gameJs = cc.find("Canvas").getComponent("Game");
-        if (gameJs) {
-            for (let i = 0; i < 10; ++i)
-                gameJs.addOneEffect("flyGold", 1, -150 + (Math.random() - 0.5) * 20, -400 + (Math.random() - 0.5) * 20, i);
-        }
-    }
+    // if (toolsQQ.shareType == "reward") {
+    //     //奖励10 金币
+    //     let gameJs = cc.find("Canvas").getComponent("Game");
+    //     if (gameJs) {
+    //         for (let i = 0; i < 10; ++i)
+    //             gameJs.addOneEffect("flyGold", 1, -150 + (Math.random() - 0.5) * 20, -400 + (Math.random() - 0.5) * 20, i);
+    //     }
+    // }
 }

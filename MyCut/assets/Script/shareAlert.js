@@ -97,32 +97,39 @@ cc.Class({
 
 
         console.log("otherID=" + cc.sys.localStorage.getItem("openid") + "&checkpoint=" + cc.dataMgr.currentCheckPoint);
-        wx.shareAppMessage({
-            title: cc.dataMgr.getShareTitle("game"),
-            imageUrl: cc.dataMgr.getShareImgeUri("game"), 
-            query:"otherID=" + cc.sys.localStorage.getItem("openid") + "&checkpoint=" + cc.dataMgr.currentCheckPoint,
-            
-            // success: (obj) => {
-            //     console.log("分享回调成功")
-            //     console.log(obj);
+       
 
-            //     cc.eventManager.pauseTarget(self.node, true);
-            //     self.onWho.getComponent("uiLayer").helpCallback();
+        if (CC_WECHATGAME) {
 
-
-            //     let cbFadeOut = cc.callFunc(self.onFadeOutFinish, self);
-            //     let actionFadeOut = cc.sequence(cc.spawn(cc.fadeTo(0.3, 0), cc.scaleTo(0.3, 2.0)), cbFadeOut);
-            //     self.node.runAction(actionFadeOut);
-            // },
-            // fail: (obj) => {
-            //     console.log("分享回调失败")
-            //     console.log(obj);
-            // },
-            // complete: (obj) => {
-            //     console.log("分享回调默认")
-            //     console.log(obj);
-            // }
-        });
+            wx.shareAppMessage({
+                title: cc.dataMgr.getShareTitle("game"),
+                imageUrl: cc.dataMgr.getShareImgeUri("game"), 
+                query:"otherID=" + cc.sys.localStorage.getItem("openid") + "&checkpoint=" + cc.dataMgr.currentCheckPoint,
+                
+                // success: (obj) => {
+                //     console.log("分享回调成功")
+                //     console.log(obj);
+    
+                //     cc.eventManager.pauseTarget(self.node, true);
+                //     self.onWho.getComponent("uiLayer").helpCallback();
+    
+    
+                //     let cbFadeOut = cc.callFunc(self.onFadeOutFinish, self);
+                //     let actionFadeOut = cc.sequence(cc.spawn(cc.fadeTo(0.3, 0), cc.scaleTo(0.3, 2.0)), cbFadeOut);
+                //     self.node.runAction(actionFadeOut);
+                // },
+                // fail: (obj) => {
+                //     console.log("分享回调失败")
+                //     console.log(obj);
+                // },
+                // complete: (obj) => {
+                //     console.log("分享回调默认")
+                //     console.log(obj);
+                // }
+            });
+        } else if(CC_QQPLAY) {
+            shareQQ("game");
+        }
     },
 
     onCancelClick: function () {

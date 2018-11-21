@@ -382,6 +382,8 @@ cc.Class({
                 title: cc.dataMgr.getShareTitle("gameOver"),
                 imageUrl: cc.dataMgr.getShareImgeUri("gameOver")
             });
+        } else if(CC_QQPLAY) {
+            shareQQ("gameOver");
         }
     },
 
