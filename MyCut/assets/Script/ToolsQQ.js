@@ -117,6 +117,11 @@ function adQQSuccess() {
         if (pop_newCat) {
             pop_newCat.getComponent("PopNewCat").buyOneCat();
         }
+    } else if(toolsQQ == "help") {
+        let ui = cc.find("Canvas/ui");
+        if(ui) {
+            ui.getComponent('uiLayer').helpCallback();
+        }
     }
 
     //还原数据
@@ -158,15 +163,10 @@ function shareQQ(type) {
     // }
 
     toolsQQ.shareType = type;
-
+    qqImgUrl = cc.dataMgr.getShareImgeUri(type);
+    summaryStr = cc.dataMgr.getShareTitle(type);
    
-    if (type == "gameOver") {
-        qqImgUrl = cc.dataMgr.getShareTitle("gameOver");
-        summaryStr = cc.dataMgr.getShareImgeUri("gameOver");
-    } else if (type == "reward") { //放置东西时分享 会奖励金币
-        qqImgUrl = cc.dataMgr.getShareTitle("game");
-        summaryStr = cc.dataMgr.getShareImgeUri("game");
-    }
+    
     if (CC_QQPLAY) {
         BK.Share.share({
             qqImgUrl: qqImgUrl,
@@ -182,7 +182,7 @@ function shareQQ(type) {
                 BK.Console.log('分享失败', failObj.code, JSON.stringify(failObj.msg));
             },
             complete: () => {
-                BK.Console.log('分享完成，不论成功失败');
+                BK.Console.log('分享完成，不论成功失败');
             }
         });
     }
