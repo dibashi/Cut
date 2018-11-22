@@ -117,7 +117,7 @@ function adQQSuccess() {
         if (pop_newCat) {
             pop_newCat.getComponent("PopNewCat").buyOneCat();
         }
-    } else if(toolsQQ == "help") {
+    } else if(toolsQQ.adType == "help") {
         let ui = cc.find("Canvas/ui");
         if(ui) {
             ui.getComponent('uiLayer').helpCallback();
