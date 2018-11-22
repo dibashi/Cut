@@ -116,8 +116,10 @@ cc.Class({
     },
 
     drawHLine: function (p1, p2) {
-        this.ctx.moveTo(p1.x, p1.y);
-        this.ctx.lineTo(p2.x, p2.y);
+        // this.ctx.moveTo(this.touchStartPoint.x - this.halfWinWidth, this.touchStartPoint.y - this.halfWinHeight);
+        // this.ctx.lineTo(point.x - this.halfWinWidth, point.y - this.halfWinHeight);
+        this.ctx.moveTo(p1.x + this.halfWinWidth, p1.y +  this.halfWinHeight);
+        this.ctx.lineTo(p2.x + this.halfWinWidth, p2.y + this.halfWinHeight);
         this.ctx.stroke();
     },
 
