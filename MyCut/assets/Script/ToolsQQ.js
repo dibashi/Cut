@@ -1,7 +1,7 @@
 console.log("-- load ToolsQQ --");
 
 //广告相关数据
-var toolsQQ = {
+toolsQQ = {
     inAd: false, //当前正在播放广告
     adType: null, //当前广告的类型 “adDog(宝石狗免费领取),adGoldCat(观看广告可点金猫),adClean(清理奖励加倍),adGame(游戏奖励加倍),adSpeed(外出小猫时间缩短),addGold(广告加金币),freeCat(看广告得猫咪)”
 
