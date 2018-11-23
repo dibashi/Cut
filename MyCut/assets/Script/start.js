@@ -52,6 +52,15 @@ cc.Class({
             type: cc.Node,
         },
 
+        rankItem: {
+            default: null,
+            type: cc.Prefab,
+        },
+        scrollViewContent: {
+            default: null,
+            type: cc.Node,
+        }
+
 
     },
 
@@ -181,13 +190,7 @@ cc.Class({
 
         }
 
-
-
-
-
-
-
-
+       // openLog(true, true);
     },
 
 
@@ -195,11 +198,15 @@ cc.Class({
     onShareClick: function () {
         cc.audioMgr.playBtn();
 
+        if (CC_WECHATGAME) {
+            wx.shareAppMessage({
+                title: cc.dataMgr.getShareTitle(),
+                imageUrl: cc.dataMgr.getShareImgeUri()
+            });
+        } else if (CC_QQPLAY) {
+            shareQQ("hongbao");
+        }
 
-        wx.shareAppMessage({
-            title: cc.dataMgr.getShareTitle(),
-            imageUrl: cc.dataMgr.getShareImgeUri()
-        });
 
     },
 
@@ -231,6 +238,7 @@ cc.Class({
     },
 
     showFriend: function () {
+        let self = this;
         cc.audioMgr.playBtn();
         if (CC_WECHATGAME) {
             this.rankingView.active = true;
@@ -244,6 +252,72 @@ cc.Class({
             });
             this.node.runAction(cc.sequence(cc.delayTime(0.1), cc.callFunc(this.updataSubCanvas, this)));
             this.scheduleOnce(this.updataSubCanvas, 2.4);
+        } else {
+            // 当前不支持一次同时拉取多个排行榜，需要拉取多次，而且必须等上一个拉取回来后才能拉取另外一个排行榜
+            // 先拉 score 排行榜
+            var attr = "score";//使用哪一种上报数据做排行，可传入score，a1，a2等
+            var order = 1;     //排序的方法：[ 1: 从大到小(单局)，2: 从小到大(单局)，3: 由大到小(累积)]
+            var rankType = 0; //要查询的排行榜类型，0: 好友排行榜
+            // 必须配置好周期规则后，才能使用数据上报和排行榜功能
+            BK.QQ.getRankListWithoutRoom(attr, order, rankType, function (errCode, cmd, data) {
+                console.log(1, 1, "getRankListWithoutRoom callback  cmd" + cmd + " errCode:" + errCode + "  data:" + JSON.stringify(data));
+                // 返回错误码信息
+                if (errCode !== 0) {
+                    console.log(1, 1, '获取排行榜数据失败!错误码：' + errCode);
+                    return;
+                }
+                // 解析数据
+                if (data) {
+                    self.scrollViewContent.removeAllChildren();
+                    var dataLen = data.data.ranking_list.length;
+                    // for (let j = 0; j < dataLen; ++j) {
+                    //     let nodeN = cc.instantiate(self.rankItem)
+                    //     self.scrollViewContent.addChild(nodeN);
+                    // }
+                    console.log(data);
+                    for (var i = 0; i < dataLen; ++i) {
+
+                        let nodeN = cc.instantiate(self.rankItem);
+                        self.scrollViewContent.addChild(nodeN);
+
+                        nodeN.active = true;
+                        nodeN.getComponent('RankItem').init(i, data.data.ranking_list[i]);
+                        // if (data[i].avatarUrl == userData.avatarUrl) {
+                        //     self.node_myself.active = true;
+                        //     self.node_myself.getComponent('RankItem').init(i, data[i]);
+                        // }
+
+                        // var rd = data.data.ranking_list[i];
+                        // rd 的字段如下:
+                        //var rd = {
+                        //    url: '',            // 头像的 url
+                        //    nick: '',           // 昵称
+                        //    score: 1,           // 分数
+                        //    selfFlag: false,    // 是否是自己
+                        //};
+
+
+                    }
+                }
+
+                // 再拉 a1 的排行榜
+                // BK.QQ.getRankListWithoutRoom('a1', 1, rankType, function (errCode, cmd, data) {
+                //     console.log("下面是a1数据");
+                //     console.log(data);
+                // });
+
+
+            });
+
+            this.rankingView.active = true;
+            this.rankingView.getChildByName("spr_friend").active = true;
+            this.rankingView.getChildByName("spr_qun").active = false;
+            this.rankingView.getChildByName("node_myMask").active = false;
+            this.rankingView.getChildByName("node_mask1").active = false;
+            this.rankingView.getChildByName("node_mask2").active = false;
+
+
+
         }
     },
 

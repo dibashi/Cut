@@ -1937,7 +1937,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 88.7,
+      "x": 97.3,
       "y": -9.4
     },
     "_skewX": 0,
@@ -2034,7 +2034,7 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_actualFontSize": 40,
+    "_actualFontSize": 30,
     "_fontSize": 30,
     "_lineHeight": 30,
     "_enableWrapText": true,

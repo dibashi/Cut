@@ -13,8 +13,8 @@ export default class DataMgr extends cc.Component {
         appwxusername: 'aaa'
     };
 
-     //分享是否开启的变量 上去先置为false，意思是不分享，然后从服务器请求 若为true则改为true，若为false改为false
-     isShowShare = true;
+    //分享是否开启的变量 上去先置为false，意思是不分享，然后从服务器请求 若为true则改为true，若为false改为false
+    isShowShare = true;
 
     adInfo = null;
 
@@ -55,11 +55,11 @@ export default class DataMgr extends cc.Component {
         }
     };
     initData() {
-       
+
 
         console.log("--- initData ---");
         let preVersion = cc.sys.localStorage.getItem("version");
-        
+
         let cj = cc.sys.localStorage.getItem("checkPointJsonData");
         if (!cj) {
             //cc.sys.localStorage.setItem("maxCheckpoint", 52);
@@ -74,12 +74,12 @@ export default class DataMgr extends cc.Component {
             var a = JSON.stringify(checkPointJsonData);
             //   console.log(a);
             cc.sys.localStorage.setItem("checkPointJsonData", a);
-        } else if(preVersion!=this.cut_version) {
+        } else if (preVersion != this.cut_version) {
             let preCPs = JSON.parse(cj);
             var checkPointJsonData = [];
             var j = {};
             //checkPointJsonData.push({crownCount:"0"});
-            for(var k = 0; k<preCPs.length;k++) {
+            for (var k = 0; k < preCPs.length; k++) {
                 j.crownCount = preCPs[k].crownCount;
                 checkPointJsonData.push(j);
             }
@@ -157,7 +157,7 @@ export default class DataMgr extends cc.Component {
     isCanPlay() {
         //if (CC_WECHATGAME) {
         return true;//获得不到微信服务器回调了，也不需要让玩家分享继续玩了，直接可以玩所有关卡现在。
-        if(cc.dataMgr.isShowShare) {
+        if (cc.dataMgr.isShowShare) {
 
         } else {
             return true;
@@ -288,8 +288,8 @@ export default class DataMgr extends cc.Component {
     };
 
     getCoinCount() {
-        var a=  parseInt(cc.sys.localStorage.getItem("coinCount"));
-        if(!a) {
+        var a = parseInt(cc.sys.localStorage.getItem("coinCount"));
+        if (!a) {
             return 0;
         } else {
             return a;
@@ -311,6 +311,52 @@ export default class DataMgr extends cc.Component {
                 messageType: 2,
                 MAIN_MENU_NUM: "score",
                 myScore: self.currentScore()
+            });
+        } else if (CC_QQPLAY) {
+            var data = {
+                userData: [
+                    {
+                        openId: GameStatusInfo.openId,
+                        startMs: ((new Date()).getTime()).toString(),    //必填，游戏开始时间，单位为毫秒，字符串类型
+                        endMs: ((new Date()).getTime()).toString(),  //必填，游戏结束时间，单位为毫秒，字符串类型
+                        scoreInfo: {
+                            score: self.currentScore(), //分数，类型必须是整型数
+                            //a1: self.currentScore(),
+                        },
+                    },
+                ],
+                // type 描述附加属性的用途
+                // order 排序的方式，
+                // 1: 从大到小，即每次上报的分数都会与本周期的最高得分比较，如果大于最高得分则覆盖，否则忽略
+                // 2: 从小到大，即每次上报的分数都会与本周期的最低得分比较，如果低于最低得分则覆盖，否则忽略
+                // 3: 累积，即每次上报的积分都会累积到本周期已上报过的积分上（本质上是从大到小的一种特例）
+                // 4: 直接覆盖，每次上报的积分都会将本周期的得分覆盖，不管大小
+                // 如score字段对应，上个属性.
+                attr: {
+                    score: {
+                        type: 'rank',
+                        order: 4,
+                    },
+                    // a1:{
+                    //     type:'rank',
+                    //     order:4,
+                    // }
+                },
+            };
+
+            console.log(data);
+
+            // gameMode: 游戏模式，如果没有模式区分，直接填 1
+            // 必须配置好周期规则后，才能使用数据上报和排行榜功能
+            BK.QQ.uploadScoreWithoutRoom(1, data, function (errCode, cmd, data) {
+                // 返回错误码信息
+                if (errCode !== 0) {
+                    console.log(1, 1, '上传分数失败!错误码：' + errCode);
+                }
+                console.log("下面是上传成功的返回数据");
+                console.log(errCode);
+                console.log(cmd);
+                console.log(data);
             });
         }
     };
