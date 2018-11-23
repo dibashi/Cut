@@ -23,7 +23,7 @@ export default class DataMgr extends cc.Component {
     //一共关卡数
     MAX_CHECKPOINT_COUNT = 99;
 
-    cut_version = 10000002;
+    cut_version = 10000003;
 
     //根据tag设置颜色,还要根据tag来确定哪些可切，哪些不可切， 约定！！可切的tag<100 不可切的 100< tag <200
     //target tag = 102； 
@@ -62,6 +62,7 @@ export default class DataMgr extends cc.Component {
 
         let cj = cc.sys.localStorage.getItem("checkPointJsonData");
         if (!cj) {
+            console.log("执行到!cj")
             //cc.sys.localStorage.setItem("maxCheckpoint", 52);
             var checkPointJsonData = [];
             var j = {};
@@ -75,6 +76,8 @@ export default class DataMgr extends cc.Component {
             //   console.log(a);
             cc.sys.localStorage.setItem("checkPointJsonData", a);
         } else if (preVersion != this.cut_version) {
+            cc.sys.localStorage.setItem("version",this.cut_version);
+            console.log("执行到cj")
             let preCPs = JSON.parse(cj);
             var checkPointJsonData = [];
             var j = {};
