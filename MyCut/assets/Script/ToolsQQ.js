@@ -1,7 +1,7 @@
 console.log("-- load ToolsQQ --");
-
+(function() {
 //广告相关数据
-toolsQQ = {
+window.toolsQQ = {
     inAd: false, //当前正在播放广告
     adType: null, //当前广告的类型 “adDog(宝石狗免费领取),adGoldCat(观看广告可点金猫),adClean(清理奖励加倍),adGame(游戏奖励加倍),adSpeed(外出小猫时间缩短),addGold(广告加金币),freeCat(看广告得猫咪)”
 
@@ -22,7 +22,7 @@ toolsQQ = {
 };
 
 //播放激励视频
-function playQQAdVideo(adType) {
+window.playQQAdVideo = function(adType) {
     console.log("-- playQQAdVideo -- " + adType);
     if (CC_QQPLAY) {
         toolsQQ.inAd = true;
@@ -70,7 +70,7 @@ function playQQAdVideo(adType) {
 }
 
 //广告成功 开始加奖励
-function adQQSuccess() {
+window.adQQSuccess = function() {
     console.log("-- 一次广告成功 adQQSuccess -- " + toolsQQ.adType);
     console.log(toolsQQ);
     if (toolsQQ.adType == "adDog") {
@@ -130,7 +130,7 @@ function adQQSuccess() {
 };
 
 //分享
-function shareQQ(type) {
+window.shareQQ = function(type) {
     // toolsQQ.shareType = type;
 
     // let qqImgUrl = "https://bpw.blyule.com/qqPickCat/cat_forward.png";
@@ -163,8 +163,8 @@ function shareQQ(type) {
     // }
 
     toolsQQ.shareType = type;
-    qqImgUrl = cc.dataMgr.getShareImgeUri(type);
-    summaryStr = cc.dataMgr.getShareTitle(type);
+    var qqImgUrl = cc.dataMgr.getShareImgeUri(type);
+    var summaryStr = cc.dataMgr.getShareTitle(type);
    
     
     if (CC_QQPLAY) {
@@ -188,7 +188,7 @@ function shareQQ(type) {
     }
 };
 
-function shareQQSuccess() {
+window.shareQQSuccess=function () {
     // if (toolsQQ.shareType == "reward") {
     //     //奖励10 金币
     //     let gameJs = cc.find("Canvas").getComponent("Game");
@@ -198,3 +198,4 @@ function shareQQSuccess() {
     //     }
     // }
 }
+})();
