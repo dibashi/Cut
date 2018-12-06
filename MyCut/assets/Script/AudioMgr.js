@@ -29,8 +29,9 @@ export default class AudioMgr extends cc.Component {
           //  console.log("cc.audioEngine.resumeAll");
             cc.audioEngine.resumeAll();
             //若声音开启，并且 是在主菜单界面（下面能找到游戏标题图片），就开启背景声
-            if(self.isPlay() && cc.find("Canvas/home_tit")) {
-                self.playBgm();
+           // debugger;//.getComponent("start")
+            if(cc.audioMgr.isPlay() && cc.find("Canvas/home_tit")) {
+                cc.audioMgr.playBgm();
             }
         });
 
@@ -129,6 +130,7 @@ export default class AudioMgr extends cc.Component {
     }
 
     playBgm() {
+        return;
         let source = this._audioSource_o["bgm"];
         if (source) {
             cc.audioEngine.playMusic(source, true);
