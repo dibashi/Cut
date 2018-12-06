@@ -367,6 +367,8 @@ export default class DataMgr extends cc.Component {
 
 
     getShareImgeUri(tag) {
+        //qqplay 只支持http请求图片，没招。
+        return "http://staticmaterial-1251316161.cosgz.myqcloud.com/4678/gifIcon.1543309676214.gif";
 
         var str_imageUrl = null;
         if (tag && tag == "game") {
