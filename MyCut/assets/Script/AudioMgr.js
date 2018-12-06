@@ -20,6 +20,7 @@ export default class AudioMgr extends cc.Component {
 
     init() {
       //  console.log("--- onLoad AudioMgr ---")
+      var self = this;
         cc.game.on(cc.game.EVENT_HIDE, function () {
         //    console.log("cc.audioEngine.pauseAll");
             cc.audioEngine.pauseAll();
@@ -27,9 +28,11 @@ export default class AudioMgr extends cc.Component {
         cc.game.on(cc.game.EVENT_SHOW, function () {
           //  console.log("cc.audioEngine.resumeAll");
             cc.audioEngine.resumeAll();
+            //若声音开启，并且 是在主菜单界面（下面能找到游戏标题图片），就开启背景声
+            if(self.isPlay() && cc.find("Canvas/home_tit")) {
+                self.playBgm();
+            }
         });
-
-        let self = this;
 
         cc.loader.loadRes("sound/begin", cc.AudioClip, function (err, clip) {
             if (!err) {
