@@ -1,9 +1,10 @@
 {
-  "ver": "2.0.0",
+  "ver": "2.2.0",
   "uuid": "de4f3ea2-d0dc-4ae9-8dd4-5af1cc2f103c",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
+  "premultiplyAlpha": false,
   "subMetas": {
     "ziti_chenggongguoguan": {
       "ver": "1.0.3",

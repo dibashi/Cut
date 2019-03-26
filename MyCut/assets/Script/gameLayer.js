@@ -118,8 +118,8 @@ cc.Class({
     drawHLine: function (p1, p2) {
         // this.ctx.moveTo(this.touchStartPoint.x - this.halfWinWidth, this.touchStartPoint.y - this.halfWinHeight);
         // this.ctx.lineTo(point.x - this.halfWinWidth, point.y - this.halfWinHeight);
-        this.ctx.moveTo(p1.x + this.halfWinWidth, p1.y +  this.halfWinHeight);
-        this.ctx.lineTo(p2.x + this.halfWinWidth, p2.y + this.halfWinHeight);
+        this.ctx.moveTo(p1.x, p1.y );
+        this.ctx.lineTo(p2.x, p2.y);
         this.ctx.stroke();
     },
 
@@ -151,8 +151,8 @@ cc.Class({
 
 
 
-         console.log("touchStart");
-         console.log(this.node.convertToNodeSpaceAR(this.touchStartPoint));
+        //  console.log("touchStart");
+        //  console.log(this.node.convertToNodeSpaceAR(this.touchStartPoint));
     },
 
     onTouchMove: function (event) {
@@ -181,7 +181,7 @@ cc.Class({
             return;
         }
         this.singleTouchID = -1;
-        console.log("touchend");
+        //console.log("touchend");
         console.log(this.node.convertToNodeSpaceAR(this.touchPoint));
         this.touchPoint = cc.v2(event.touch.getLocation());
         this.recalcResults();
@@ -496,8 +496,8 @@ cc.Class({
         // this.ctx.moveTo(this.touchStartPoint.x - this.halfWinWidth, this.touchStartPoint.y - this.halfWinHeight);
         // this.ctx.lineTo(point.x - this.halfWinWidth, point.y - this.halfWinHeight);
 
-        this.ctx.moveTo(this.touchStartPoint.x, this.touchStartPoint.y);
-        this.ctx.lineTo(point.x, point.y);
+        this.ctx.moveTo(this.touchStartPoint.x-this.halfWinWidth, this.touchStartPoint.y-this.halfWinHeight);
+        this.ctx.lineTo(point.x-this.halfWinWidth, point.y-this.halfWinHeight);
 
         this.ctx.stroke();
 
