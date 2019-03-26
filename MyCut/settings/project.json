@@ -79,6 +79,16 @@
   "design-resolution-height": 1280,
   "design-resolution-width": 720,
   "excluded-modules": [],
+  "facebook": {
+    "appID": "",
+    "audience": {
+      "enable": false
+    },
+    "enable": false,
+    "live": {
+      "enable": false
+    }
+  },
   "fit-height": false,
   "fit-width": true,
   "group-list": [
@@ -91,6 +101,7 @@
     "indirectTarget",
     "indirectCol"
   ],
+  "last-module-event-record-time": 1553592481313,
   "simulator-orientation": false,
   "simulator-resolution": {
     "height": 640,

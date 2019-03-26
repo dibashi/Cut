@@ -1,7 +1,15 @@
 {
+  "android-instant": {
+    "REMOTE_SERVER_ROOT": "",
+    "host": "",
+    "pathPattern": "",
+    "recordPath": "",
+    "scheme": "https",
+    "skipRecord": false
+  },
   "appKey": "",
   "appSecret": "",
-  "encryptJs": true,
+  "encryptJs": false,
   "excludeScenes": [],
   "fb-instant-games": {},
   "includeAnySDK": false,
@@ -9,7 +17,7 @@
   "inlineSpriteFrames": true,
   "inlineSpriteFrames_native": true,
   "jailbreakPlatform": false,
-  "md5Cache": true,
+  "md5Cache": false,
   "mergeStartScene": false,
   "oauthLoginServer": "",
   "optimizeHotUpdate": false,
@@ -36,6 +44,5 @@
     "subContext": "SubGame"
   },
   "xxteaKey": "7247d70e-6c16-46",
-  "zipCompressJs": true,
-  "renderMode": "0"
+  "zipCompressJs": true
 }

@@ -1,0 +1,16 @@
+{
+  "certificatePath": "",
+  "deviceOrientation": "portrait",
+  "disabledMode": "disabled is-disabled",
+  "icon": "F:\\lhWorkSpace\\newGit\\Cut\\MyCut\\icon.png",
+  "logLevel": "log",
+  "minPlatformVersion": "1031",
+  "name": "方块切切切",
+  "package": "com.fkqie.cocos.kyx.nearme.gamecenter",
+  "privatePath": "",
+  "tinyPackageMode": false,
+  "tinyPackageServer": "",
+  "useDebugKey": true,
+  "versionCode": "1",
+  "versionName": "1.0"
+}
