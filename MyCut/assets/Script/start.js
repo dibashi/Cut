@@ -147,6 +147,7 @@ cc.Class({
 
 
     start() {
+        // cc.find("Canvas/adLog").getComponent(cc.Label).string = "0"
         let self = this;
         if (CC_WECHATGAME) {
             wx.showShareMenu();
@@ -189,6 +190,25 @@ cc.Class({
 
 
         }
+        
+        qg.initAdService({
+            appId: "30034720",
+            isDebug:true,
+            success: function(res) {
+              console.log("success");
+            //   cc.find("Canvas/adLog").getComponent(cc.Label).string = "success"
+            },
+            fail: function(res) {
+                // var info = "fail:" + res.code + res.msg;
+            //   console.log("fail:" + res.code + res.msg);
+                // cc.find("Canvas/adLog").getComponent(cc.Label).string = info
+            },
+            complete: function(res) {
+            //   console.log("complete");
+            //   cc.find("Canvas/adLog").getComponent(cc.Label).string = "complete"
+            }
+          })
+    
 
        // openLog(true, true);
     },

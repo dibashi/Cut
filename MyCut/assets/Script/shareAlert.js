@@ -68,9 +68,7 @@ cc.Class({
         this.node.runAction(actionFadeOut);
         console.log("观看广告获得提示按钮被点击");
 
-        if(CC_QQPLAY) {
-            playQQAdVideo("help");
-        }
+        oppoAd();
     },
 
     //广告成功，分享成功的回调，用于给用户奖励。

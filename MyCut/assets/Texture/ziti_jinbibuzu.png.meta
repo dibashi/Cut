@@ -1,10 +1,9 @@
 {
-  "ver": "2.2.0",
+  "ver": "2.0.0",
   "uuid": "e10997b8-c7a2-4134-8bb6-80ccd86fe236",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
-  "premultiplyAlpha": false,
   "subMetas": {
     "ziti_jinbibuzu": {
       "ver": "1.0.3",

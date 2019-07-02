@@ -1,10 +1,9 @@
 {
-  "ver": "2.2.0",
+  "ver": "2.0.0",
   "uuid": "6e6d3132-1dbe-4be9-9971-f43b2b26e3bb",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
-  "premultiplyAlpha": false,
   "subMetas": {
     "kuangti_yaoqing01": {
       "ver": "1.0.3",
